@@ -5,6 +5,8 @@
  */
 package battleship;
 
+import Server.Server;
+
 /**
  *
  * @author nacho
@@ -16,6 +18,7 @@ public class Battleship {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        Server.instancia();
     }
     
 }
