@@ -28,9 +28,7 @@ public class Server {
         return _instancia;
     }
     
-    public ServerWindow window = new ServerWindow();
-    
-    
+    public ServerWindow window = new ServerWindow();    
     public ArrayList<ClientListener> listeners = new ArrayList();
     
     public Server() {
