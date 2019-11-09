@@ -31,7 +31,7 @@ public class Server {
     public ServerWindow window = new ServerWindow();
     
     
-    private ArrayList<ClientListener> listeners = new ArrayList();
+    public ArrayList<ClientListener> listeners = new ArrayList();
     
     public Server() {
         ConnectionController controller = new ConnectionController();
@@ -59,5 +59,16 @@ public class Server {
             }
         }
     }
+    
+    public void enviarPaqueteA(Package paq,int id) {
+        ClientListener listener= listeners.get(id);
+        try {
+            ObjectOutputStream out = new ObjectOutputStream(listener.socket.getOutputStream());
+            out.writeObject(paq);
+        } catch (IOException ex) {
+            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     
 }

@@ -18,9 +18,14 @@ public class ClientWindow extends javax.swing.JFrame {
 
     /**
      * Creates new form ClientWindow
+     * @param c
      */
-    public ClientWindow() {
+    
+    public Client clientOwner;
+    
+    public ClientWindow(Client c) {
         initComponents();
+        this.clientOwner=c;
     }
 
     /**
@@ -90,7 +95,7 @@ public class ClientWindow extends javax.swing.JFrame {
         String msj = this.MessageInput.getText();
         this.MessageInput.setText("");
         
-        ChatPackage chat = new ChatPackage(msj);
+        ChatPackage chat = new ChatPackage("Player "+this.clientOwner.id+": "+msj);
         try {
             Client.instancia().enviarPaquete(chat);
         } catch (IOException ex) {
@@ -133,7 +138,7 @@ public class ClientWindow extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ClientWindow().setVisible(true);
+                //new ClientWindow().setVisible(true);
             }
         });
     }

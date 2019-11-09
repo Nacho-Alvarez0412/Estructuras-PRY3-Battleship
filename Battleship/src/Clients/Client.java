@@ -25,21 +25,26 @@ public class Client {
     }
     
     public Socket socket;
-    public ClientWindow window = new ClientWindow();
+    public ClientWindow window = new ClientWindow(this);
+    public int id;
     
     public Client() {
         window.setVisible(true);
     }
     
     public void conectar(String address, int port) throws IOException {
-        socket = new Socket(address, port);
-        
+        socket = new Socket(address, port); 
         ServerListener listener = new ServerListener();
+        listener.init(this);
         listener.start();
     }
     
     public void enviarPaquete(Package paq) throws IOException {
         ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
         out.writeObject(paq);
+    }
+    
+    public void setID(int id){
+        this.id = id;
     }
 }

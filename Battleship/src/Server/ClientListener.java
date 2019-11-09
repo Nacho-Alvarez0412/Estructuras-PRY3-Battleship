@@ -21,7 +21,7 @@ public class ClientListener extends Thread
 { 
     public Socket socket;
     
-    public ClientListener(Socket socket) {
+    public ClientListener(Socket socket){
         this.socket = socket;
     }
     

@@ -9,15 +9,21 @@ package Clients;
  *
  * @author sebasgamboa
  *///
+import Packages.IDPackage;
+import Server.ConnectionController;
+import battleship.Globals;
 import java.io.*; 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ClientMain 
-{
+public class ClientMain {
+    
+    //public static int cont=1;
+    
     public static void main(String args[]) {             
         try {
             Client.instancia().conectar("127.0.0.1", 5000);
+            
         } catch (IOException ex) {
             Logger.getLogger(ClientMain.class.getName()).log(Level.SEVERE, null, ex);
         }
