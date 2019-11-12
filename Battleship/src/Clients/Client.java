@@ -27,6 +27,7 @@ public class Client {
     public Socket socket;
     public ClientWindow window = new ClientWindow(this);
     public int id;
+    public int money=4000;
     
     public Client() {
         window.setVisible(true);
