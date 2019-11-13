@@ -353,7 +353,7 @@
             <Component class="javax.swing.JLabel" name="connector1x1">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Images/connector1.png"/>
+                  <Image iconType="3" name="/Images/connector-25.jpg"/>
                 </Property>
               </Properties>
             </Component>

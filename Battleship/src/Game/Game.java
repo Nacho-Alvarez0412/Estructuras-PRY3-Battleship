@@ -11,6 +11,8 @@ package Game;
  */
 public class Game {
     
+    public int turn=1;
+    
     public int[][] LogicBoardPlayer1=new int[20][20];
     public int[][] LogicBoardPlayer2=new int[20][20];
     public int[][] LogicBoardPlayer3=new int[20][20];

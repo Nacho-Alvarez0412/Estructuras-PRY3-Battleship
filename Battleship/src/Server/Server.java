@@ -5,6 +5,7 @@
  */
 package Server;
 
+import Game.Game;
 import Packages.Package;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -30,13 +31,14 @@ public class Server {
     
     public ServerWindow window = new ServerWindow();    
     public ArrayList<ClientListener> listeners = new ArrayList();
+    public Game game;
     
     public Server() {
+        game=new Game();
         ConnectionController controller = new ConnectionController();
         controller.start();
         window.setVisible(true);
         window.getTextArea().append("Servidor activo, esperando clientes...\n");
-    
     }
     
     public void addClient(ClientListener listener) {

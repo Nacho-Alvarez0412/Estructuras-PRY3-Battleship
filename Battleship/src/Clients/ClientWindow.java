@@ -6,15 +6,20 @@
 package Clients;
 
 import Packages.ChatPackage;
-import java.awt.datatransfer.Clipboard;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.geom.Line2D;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.TransferHandler;
 
 /**
@@ -36,117 +41,162 @@ public class ClientWindow extends javax.swing.JFrame {
 
     public ClientWindow(Client c) {
         initComponents();
+        
         this.clientOwner=c;
         //Clipboard clip=new Clipboard();
-        MouseListener mouse;
-        mouse = new MouseListener() {
+        
+        MouseListener toolsMouseListener = new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
+            
+            @Override
+            public void mouseReleased(MouseEvent e){ }
 
+            @Override
+            public void mouseEntered(MouseEvent e){  }
+
+            @Override
+            public void mouseExited(MouseEvent e){  }   
+            
             @Override
             public void mousePressed(MouseEvent e) {
-                //JComponent jc = (JComponent)e.getSource();
-                //TransferHandler th = jc.getTransferHandler();
-                //th.exportAsDrag(jc, e, TransferHandler.COPY);
-                //th.exportToClipboard(jc, clip, TransferHandler.COPY);
-                
-                
-                if(currentImage==null){
-                    JLabel im = (JLabel)e.getSource();
-                    if(im.equals(armory2x1)){
-                        currentImage2=new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/ArmoryIzquierda.png");
-                    }
-                    else if(im.equals(mine2x1)){
-                        currentImage2=new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/GoldmineIzquierda.jpg");
-                    }
-                    else if(im.equals(temple2x1)){
-                        currentImage2=new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/TempleIzquierda.png");
-                    }
-                    else if(im.equals(mercado2x1)){
-                        currentImage2=new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/MarketDerecha.jpg");
-                    }
-                    else if(im.equals(energysource2x2)){
-                        currentImage2=new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/GoldmineIzquierda.jpg");
-                    }
-                    currentImage=(ImageIcon) im.getIcon();
+                toolPressed(e);
+            }
+        };
+
+        MouseListener boardMouseListener = new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            }
+            
+            @Override
+            public void mouseReleased(MouseEvent e){ }
+
+            @Override
+            public void mouseEntered(MouseEvent e){  }
+
+            @Override
+            public void mouseExited(MouseEvent e){  }   
+            
+            @Override
+            public void mousePressed(MouseEvent e) {
+                if (false) {
+                    addConnector(e);
+                } else {
+                    addNewUnit(e);
                 }
-                else{
-                    JLabel im = (JLabel)e.getSource();
-                    im.setIcon(currentImage);
-                    System.out.println(e.getXOnScreen());
-                    System.out.println(e.getYOnScreen());
-                    int posx=e.getXOnScreen()-170;
-                    int posy=e.getYOnScreen()-52;
-                    if(currentImage.equals(armory2x1.getIcon())){
-                        board[(posx/25)+1][posy/25].setIcon(currentImage2);
-                    }
-                    else if(currentImage.equals(mine2x1.getIcon())){
-                        board[(posx/25)+1][posy/25].setIcon(currentImage2);
-                    }
-                    else if(currentImage.equals(temple2x1.getIcon())){
-                        board[(posx/25)+1][posy/25].setIcon(currentImage2);
-                    }
-                    else if(currentImage.equals(mercado2x1.getIcon())){
-                        board[(posx/25)+1][posy/25].setIcon(currentImage2);
-                    }
-                    else if(currentImage.equals(energysource2x2.getIcon())){
-                        board[(posx/25)+1][posy/25].setIcon(currentImage2);
-                    }
-                    
-                    currentImage=null;
-                    currentImage2=null;
-                    currentImage3=null;
-                    currentImage4=null;
-                }
-                
             }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-            }
-
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }   
         };
         
+        this.OceanPanel = new OceanPanel();
+        Rectangle boardRect = this.BoardField.getBounds();
+        this.OceanPanel.setBounds(boardRect.x, boardRect.y, boardRect.width, boardRect.height);
+        this.BoardField.getParent().add(this.OceanPanel);
+        this.BoardField.setBackground(new Color(0, 0, 0, 0));
+        this.BoardField.setOpaque(true);
+        
+        ImageIcon tileIcon = new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/tile.png");
         
         for(int i=0;i<20;i++){
             for(int j=0;j<20;j++){
-                board[i][j]=new JLabel();
-                this.BoardField.add(board[i][j]);
-                board[i][j].setBounds(i*25, j*25, 25, 25);
-                ImageIcon icon = new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/tile.png");
-                board[i][j].setIcon(icon);
-                board[i][j].addMouseListener(mouse);
-                board[i][j].setTransferHandler(new TransferHandler("icon"));
+                JLabel tileLabel = new JLabel();
+                this.OceanPanel.add(tileLabel);
+                tileLabel.setBounds(i*25, j*25, 25, 25);
+                tileLabel.setTransferHandler(new TransferHandler("icon"));
+                tileLabel.setIcon(tileIcon);
+                
+                JLabel boardLabel = new BoardLabel(i, j);
+                this.BoardField.add(boardLabel);
+                boardLabel.setBounds(i*25, j*25, 25, 25);
+                boardLabel.addMouseListener(boardMouseListener);
+                boardLabel.setTransferHandler(new TransferHandler("icon"));
+                board[i][j] = boardLabel;
             }
         }
+        pack();
         
-        
-        this.armory2x1.addMouseListener(mouse);
-        this.connector1x1.addMouseListener(mouse);
-        this.energysource2x2.addMouseListener(mouse);
-        this.mercado2x1.addMouseListener(mouse);
-        this.mine2x1.addMouseListener(mouse);
-        this.temple2x1.addMouseListener(mouse);
-        
-        /*this.armory2x1.setTransferHandler(new TransferHandler("icon"));
-        this.connector1x1.setTransferHandler(new TransferHandler("icon"));
-        this.energysource2x2.setTransferHandler(new TransferHandler("icon"));
-        this.mercado2x1.setTransferHandler(new TransferHandler("icon"));
-        this.mine2x1.setTransferHandler(new TransferHandler("icon"));
-        this.temple2x1.setTransferHandler(new TransferHandler("icon"));*/
+        this.armory2x1.addMouseListener(toolsMouseListener);
+        this.connector1x1.addMouseListener(toolsMouseListener);
+        this.energysource2x2.addMouseListener(toolsMouseListener);
+        this.mercado2x1.addMouseListener(toolsMouseListener);
+        this.mine2x1.addMouseListener(toolsMouseListener);
+        this.temple2x1.addMouseListener(toolsMouseListener);
     }
     
+    private void toolPressed(MouseEvent e) {
+        JLabel label = (JLabel) e.getSource();
+        currentImage = (ImageIcon) label.getIcon();
+
+        if(label.equals(armory2x1)){
+            currentImage2=new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/ArmoryIzquierda.png");
+        }
+        else if(label.equals(mine2x1)){
+            currentImage2=new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/GoldmineIzquierda.jpg");
+        }
+        else if(label.equals(temple2x1)){
+            currentImage2=new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/TempleIzquierda.png");
+        }
+        else if(label.equals(mercado2x1)){
+            currentImage2=new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/MarketDerecha.jpg");
+        }
+        else if(label.equals(energysource2x2)){
+            currentImage2=new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/energy downL.jpeg");
+            currentImage3=new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/energy downR.jpeg");
+            currentImage4=new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/energy upR.jpeg");
+        }
+        
+        connectionStart = null;
+    }
+    
+    
+    private BoardLabel connectionStart = null;
+    
+    private void addConnector(MouseEvent e) {
+        BoardLabel clickedLabel = (BoardLabel) e.getSource();
+        
+        if (clickedLabel.getIcon()==null) return;
+        
+        if (connectionStart == null) {
+            connectionStart = clickedLabel;
+        } else if (clickedLabel.getIcon().equals(connector1x1.getIcon())
+                || connectionStart.getIcon().equals(connector1x1)) {
+            
+            // Hacer conexion
+            
+     
+            connectionStart = null;
+        }
+    }
+    
+    private void addNewUnit(MouseEvent e) {
+        if(currentImage == null) return;
+
+        BoardLabel targetLabel = (BoardLabel) e.getSource();
+        targetLabel.setIcon(currentImage);
+
+        int i = targetLabel.i;
+        int j = targetLabel.j;
+
+        if(currentImage.equals(armory2x1.getIcon())){
+            board[i+1][j].setIcon(currentImage2);
+        }
+        else if(currentImage.equals(mine2x1.getIcon())){
+            board[i+1][j].setIcon(currentImage2);
+        }
+        else if(currentImage.equals(temple2x1.getIcon())){
+            board[i+1][j].setIcon(currentImage2);
+        }
+        else if(currentImage.equals(mercado2x1.getIcon())){
+            board[i+1][j].setIcon(currentImage2);
+        }
+        else if(currentImage.equals(energysource2x2.getIcon())){
+            board[i][j+1].setIcon(currentImage2);
+            board[i+1][j+1].setIcon(currentImage3);
+            board[i+1][j].setIcon(currentImage4);
+        }
+    }
+ 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -222,7 +272,7 @@ public class ClientWindow extends javax.swing.JFrame {
 
         Mercado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MarketDisplay.jpg"))); // NOI18N
 
-        connector1x1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/connector1.png"))); // NOI18N
+        connector1x1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/connector-25.jpg"))); // NOI18N
 
         energysource2x2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/energy upL.jpeg"))); // NOI18N
 
@@ -589,6 +639,8 @@ public class ClientWindow extends javax.swing.JFrame {
             }
         });
     }
+    
+    private javax.swing.JPanel OceanPanel;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Armery;

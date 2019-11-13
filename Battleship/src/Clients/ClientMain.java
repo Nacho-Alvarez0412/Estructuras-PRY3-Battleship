@@ -9,9 +9,6 @@ package Clients;
  *
  * @author sebasgamboa
  *///
-import Packages.IDPackage;
-import Server.ConnectionController;
-import battleship.Globals;
 import java.io.*; 
 import java.util.logging.Level;
 import java.util.logging.Logger;

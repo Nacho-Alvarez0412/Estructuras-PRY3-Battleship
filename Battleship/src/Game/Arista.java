@@ -12,4 +12,8 @@ package Game;
 public class Arista {
     public int dato;
     public int peso;
+    public int startX;
+    public int startY;
+    public int endX;
+    public int endY;
 }
