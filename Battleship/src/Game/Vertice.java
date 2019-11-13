@@ -12,21 +12,23 @@ import java.util.ArrayList;
  * @author sebasgamboa
  */
 
-
-
     /*
-
     1=connector
     2=mine
     3=armory
     4=temple
     5=market
     6=energy source
-
-
     */
 
 public class Vertice {
     public int dato;
     public ArrayList<Arista> aristas=new ArrayList<>();
+    public boolean vivo;
+    
+    public Vertice(int dato){
+        this.dato=dato;
+        this.vivo=true;
+    }
+     
 }

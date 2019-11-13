@@ -5,6 +5,7 @@
  */
 package Clients;
 
+import Game.Grafo;
 import Packages.Package;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -28,6 +29,8 @@ public class Client {
     public ClientWindow window = new ClientWindow(this);
     public int id;
     public int money=4000;
+    public int[][] LogicBoard=new int[20][20];
+    public Grafo grafo;
     
     public Client() {
         window.setVisible(true);

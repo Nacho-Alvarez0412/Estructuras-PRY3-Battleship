@@ -5,6 +5,9 @@
  */
 package Clients;
 
+import Game.Arista;
+import Game.Grafo;
+import Game.Vertice;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -20,6 +23,8 @@ import javax.swing.JPanel;
  */
 public class OceanPanel extends JPanel {
     
+    public Grafo grafo;
+    
     public OceanPanel() {
         super();
         setOpaque(true);
@@ -30,6 +35,11 @@ public class OceanPanel extends JPanel {
     public Dimension getPreferredSize() {
         return new Dimension(500, 500);
     }
+
+    public void setGrafo(Grafo grafo) {
+        this.grafo = grafo;
+    }
+    
     
     @Override
     public void paint(Graphics g) {
@@ -43,17 +53,16 @@ public class OceanPanel extends JPanel {
         
         // for recorriendo el grafo pintando aristas
         
-        int x1 = 4;
-        int y1 = 5;
+        for(Vertice vertice:grafo.grafo){
+            for(Arista a:vertice.aristas){
+                g2.drawLine(
+                    a.startX * TILE_SIZE + (TILE_SIZE  / 2),
+                    a.startY * TILE_SIZE + (TILE_SIZE  / 2),
+                    a.endX * TILE_SIZE + (TILE_SIZE  / 2),
+                    a.endY * TILE_SIZE + (TILE_SIZE  / 2)
+                );
+            }
+        }
         
-        int x2 = 7;
-        int y2 = 8;
-       
-        g2.drawLine(
-            x1 * TILE_SIZE + (TILE_SIZE  / 2),
-            y1 * TILE_SIZE + (TILE_SIZE  / 2),
-            x2 * TILE_SIZE + (TILE_SIZE  / 2),
-            y2 * TILE_SIZE + (TILE_SIZE  / 2)
-        );
     }
 }

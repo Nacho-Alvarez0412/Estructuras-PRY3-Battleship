@@ -16,4 +16,12 @@ public class Arista {
     public int startY;
     public int endX;
     public int endY;
+    
+    public Arista(int dato,int sX,int sY,int eX,int eY){
+        this.dato=dato;
+        this.startX=sX;
+        this.startY=sY;
+        this.endX=eX;
+        this.endY=eY;
+    }
 }

@@ -5,6 +5,8 @@
  */
 package Clients;
 
+import Game.Arista;
+import Game.Vertice;
 import Packages.ChatPackage;
 import java.awt.Color;
 import java.awt.Component;
@@ -33,17 +35,17 @@ public class ClientWindow extends javax.swing.JFrame {
      */
     
     public Client clientOwner;
-    public JLabel[][] board=new JLabel[20][20];
+    public BoardLabel[][] board=new BoardLabel[20][20];
     public ImageIcon currentImage=null;
     public ImageIcon currentImage2=null;
     public ImageIcon currentImage3=null;
     public ImageIcon currentImage4=null;
+    public boolean connectionModeState=false;
 
     public ClientWindow(Client c) {
         initComponents();
         
         this.clientOwner=c;
-        //Clipboard clip=new Clipboard();
         
         MouseListener toolsMouseListener = new MouseListener() {
             @Override
@@ -81,7 +83,8 @@ public class ClientWindow extends javax.swing.JFrame {
             
             @Override
             public void mousePressed(MouseEvent e) {
-                if (false) {
+                
+                if (connectionModeState) {
                     addConnector(e);
                 } else {
                     addNewUnit(e);
@@ -106,7 +109,7 @@ public class ClientWindow extends javax.swing.JFrame {
                 tileLabel.setTransferHandler(new TransferHandler("icon"));
                 tileLabel.setIcon(tileIcon);
                 
-                JLabel boardLabel = new BoardLabel(i, j);
+                BoardLabel boardLabel = new BoardLabel(i, j);
                 this.BoardField.add(boardLabel);
                 boardLabel.setBounds(i*25, j*25, 25, 25);
                 boardLabel.addMouseListener(boardMouseListener);
@@ -162,7 +165,15 @@ public class ClientWindow extends javax.swing.JFrame {
         } else if (clickedLabel.getIcon().equals(connector1x1.getIcon())
                 || connectionStart.getIcon().equals(connector1x1)) {
             
+            
             // Hacer conexion
+            for(Vertice vertice: this.clientOwner.grafo.grafo){
+                if(vertice.dato==(connectionStart.verticeName)){
+                    vertice.aristas.add(new Arista(clickedLabel.verticeName,connectionStart.i,
+                    connectionStart.j,clickedLabel.i,clickedLabel.j));
+                    break;
+                }
+            }
             
      
             connectionStart = null;
@@ -174,26 +185,77 @@ public class ClientWindow extends javax.swing.JFrame {
 
         BoardLabel targetLabel = (BoardLabel) e.getSource();
         targetLabel.setIcon(currentImage);
+        
 
         int i = targetLabel.i;
         int j = targetLabel.j;
 
         if(currentImage.equals(armory2x1.getIcon())){
             board[i+1][j].setIcon(currentImage2);
+            board[i+1][j].verticeName=3;
+            board[i][j].verticeName=3;
+            
+            this.clientOwner.LogicBoard[i][j]=3;
+            this.clientOwner.LogicBoard[i+1][j]=3;
+            
+            Vertice currentVertice = new Vertice(3);
+            this.clientOwner.grafo.grafo.add(currentVertice);
         }
         else if(currentImage.equals(mine2x1.getIcon())){
             board[i+1][j].setIcon(currentImage2);
+            board[i+1][j].verticeName=2;
+            board[i][j].verticeName=2;
+            
+            this.clientOwner.LogicBoard[i][j]=2;
+            this.clientOwner.LogicBoard[i+1][j]=2;
+            
+            Vertice currentVertice = new Vertice(2);
+            this.clientOwner.grafo.grafo.add(currentVertice);
         }
         else if(currentImage.equals(temple2x1.getIcon())){
             board[i+1][j].setIcon(currentImage2);
+            board[i+1][j].verticeName=4;
+            board[i][j].verticeName=4;
+            
+            this.clientOwner.LogicBoard[i][j]=4;
+            this.clientOwner.LogicBoard[i+1][j]=4;
+            
+            Vertice currentVertice = new Vertice(4);
+            this.clientOwner.grafo.grafo.add(currentVertice);
         }
         else if(currentImage.equals(mercado2x1.getIcon())){
             board[i+1][j].setIcon(currentImage2);
+            board[i+1][j].verticeName=5;
+            board[i][j].verticeName=5;
+            
+            this.clientOwner.LogicBoard[i][j]=5;
+            this.clientOwner.LogicBoard[i+1][j]=5;
+            
+            Vertice currentVertice = new Vertice(5);
+            this.clientOwner.grafo.grafo.add(currentVertice);
         }
         else if(currentImage.equals(energysource2x2.getIcon())){
             board[i][j+1].setIcon(currentImage2);
             board[i+1][j+1].setIcon(currentImage3);
             board[i+1][j].setIcon(currentImage4);
+            board[i][j+1].verticeName=6;
+            board[i+1][j+1].verticeName=6;
+            board[i+1][j].verticeName=6;
+            board[i][j].verticeName=6;
+            
+            this.clientOwner.LogicBoard[i][j]=6;
+            this.clientOwner.LogicBoard[i][j+1]=6;
+            this.clientOwner.LogicBoard[i+1][j+1]=6;
+            this.clientOwner.LogicBoard[i+1][j]=6;
+            
+            Vertice currentVertice = new Vertice(6);
+            this.clientOwner.grafo.grafo.add(currentVertice);
+        }
+        else if(currentImage.equals(connector1x1.getIcon())){
+            this.clientOwner.LogicBoard[i][j]=1;
+            Vertice currentVertice = new Vertice(1);
+            this.clientOwner.grafo.grafo.add(currentVertice);
+            targetLabel.verticeName=1;
         }
     }
  
@@ -246,6 +308,7 @@ public class ClientWindow extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         Money = new javax.swing.JLabel();
+        ConnectionMode = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -481,6 +544,18 @@ public class ClientWindow extends javax.swing.JFrame {
 
         Money.setText("0");
 
+        ConnectionMode.setText("Connections");
+        ConnectionMode.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                ConnectionModeStateChanged(evt);
+            }
+        });
+        ConnectionMode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConnectionModeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
         panelLayout.setHorizontalGroup(
@@ -488,36 +563,41 @@ public class ClientWindow extends javax.swing.JFrame {
             .addGroup(panelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(Container, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19)
-                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(BoardField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panelLayout.createSequentialGroup()
-                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelLayout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(ReadyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Money)
-                                .addGap(32, 32, 32)))
-                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1)
-                            .addComponent(MessageInput))))
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelLayout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(EnemyBoard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(19, 19, 19)
+                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(BoardField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panelLayout.createSequentialGroup()
+                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(panelLayout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addComponent(ReadyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(Money)
+                                        .addGap(32, 32, 32)))
+                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane1)
+                                    .addComponent(MessageInput))))
+                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelLayout.createSequentialGroup()
+                                .addGap(37, 37, 37)
+                                .addComponent(EnemyBoard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panelLayout.createSequentialGroup()
+                                .addGap(54, 54, 54)
+                                .addComponent(jButton1)
+                                .addGap(47, 47, 47)
+                                .addComponent(jButton2)
+                                .addGap(33, 33, 33)
+                                .addComponent(jButton3)
+                                .addGap(44, 44, 44)
+                                .addComponent(jButton4))))
                     .addGroup(panelLayout.createSequentialGroup()
-                        .addGap(54, 54, 54)
-                        .addComponent(jButton1)
-                        .addGap(47, 47, 47)
-                        .addComponent(jButton2)
-                        .addGap(33, 33, 33)
-                        .addComponent(jButton3)
-                        .addGap(44, 44, 44)
-                        .addComponent(jButton4)))
+                        .addGap(18, 18, 18)
+                        .addComponent(ConnectionMode)))
                 .addContainerGap(144, Short.MAX_VALUE))
         );
         panelLayout.setVerticalGroup(
@@ -530,7 +610,9 @@ public class ClientWindow extends javax.swing.JFrame {
                         .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(EnemyBoard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(BoardField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(77, 77, 77)
+                        .addGap(18, 18, 18)
+                        .addComponent(ConnectionMode)
+                        .addGap(29, 29, 29)
                         .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(panelLayout.createSequentialGroup()
                                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -599,6 +681,15 @@ public class ClientWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void ConnectionModeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConnectionModeActionPerformed
+        // TODO add your handling code here:
+        this.connectionModeState=!this.connectionModeState;
+    }//GEN-LAST:event_ConnectionModeActionPerformed
+
+    private void ConnectionModeStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_ConnectionModeStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ConnectionModeStateChanged
+
     
    
     
@@ -645,6 +736,7 @@ public class ClientWindow extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Armery;
     private javax.swing.JPanel BoardField;
+    private javax.swing.JToggleButton ConnectionMode;
     private javax.swing.JLabel Connector;
     private javax.swing.JPanel Container;
     private javax.swing.JPanel EnemyBoard;

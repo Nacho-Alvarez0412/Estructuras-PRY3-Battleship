@@ -15,11 +15,17 @@ public class BoardLabel extends JLabel {
     
     public int i;
     public int j;
+    public int verticeName;
     
     public BoardLabel(int i, int j) {
         super();
         this.i = i;
         this.j = j;
+        
     }
-    
+
+    public void setVerticeName(int verticeName) {
+        this.verticeName = verticeName;
+    }
+       
 }
