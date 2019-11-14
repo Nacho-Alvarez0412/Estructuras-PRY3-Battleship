@@ -33,8 +33,9 @@ public class Server {
     public ArrayList<ClientListener> listeners = new ArrayList();
     public Game game;
     
+    
     public Server() {
-        game=new Game();
+        game=new Game(this);
         ConnectionController controller = new ConnectionController();
         controller.start();
         window.setVisible(true);

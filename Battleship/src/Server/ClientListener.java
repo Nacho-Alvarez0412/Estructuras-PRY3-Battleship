@@ -10,6 +10,8 @@ package Server;
  * @author sebasgamboa
  */// 
 
+import Packages.GrafoPackage;
+import Packages.LogicBoardPackage;
 import java.net.*; 
 import java.io.*; 
 import Packages.Package;
@@ -29,9 +31,50 @@ public class ClientListener extends Thread
                 ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
                 Package paq = (Package) in.readObject();
                 switch (paq.tipo) {
-                    case "chat": {
+                    case "chat": 
                         Server.instancia().enviarPaquete(paq);
-                    } break;
+                        break;
+                    
+                    case "Grafo":
+                        GrafoPackage grafo= (GrafoPackage) paq;
+                        if(grafo.id==1){
+                            Server.instancia().game.grafoP1=grafo.grafo;
+                        }
+                        else if(grafo.id==2){
+                            Server.instancia().game.grafoP2=grafo.grafo;
+                        }
+                        else if(grafo.id==3){
+                            Server.instancia().game.grafoP3=grafo.grafo;
+                        }
+                        else if(grafo.id==4){
+                            Server.instancia().game.grafoP4=grafo.grafo;
+                        }
+                        break;
+                        
+                    case "LogicBoard":
+                        LogicBoardPackage LB= (LogicBoardPackage) paq;
+                        if(LB.id==1){
+                            Server.instancia().game.LogicBoardPlayer1=LB.board;
+                        }
+                        else if(LB.id==2){
+                            Server.instancia().game.LogicBoardPlayer2=LB.board;
+                        }
+                        else if(LB.id==3){
+                            Server.instancia().game.LogicBoardPlayer3=LB.board;
+                        }
+                        else if(LB.id==4){
+                            Server.instancia().game.LogicBoardPlayer4=LB.board;
+                        }
+                        break;
+                        
+                        
+                    case "Turn":
+                        Server.instancia().game.userTurn=false;
+                        break;
+                        
+                    case "Attack":
+                        System.out.println("me atacan");
+                        break;
                 }
             }
             catch(IOException | ClassNotFoundException e) { 

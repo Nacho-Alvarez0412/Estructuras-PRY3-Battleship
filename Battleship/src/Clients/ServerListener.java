@@ -8,6 +8,7 @@ package Clients;
 import Packages.Package;
 import Packages.ChatPackage;
 import Packages.IDPackage;
+import Packages.TurnPackage;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.logging.Level;
@@ -44,6 +45,13 @@ public class ServerListener extends Thread {
                         this.client.setID(ID.id);
                         break;
                         
+                    case "Turn":
+                        TurnPackage turn = (TurnPackage) paq;
+                        if(turn.turn==this.client.id){
+                            System.out.println("es mi turno");
+                            this.client.window.getEndTurn().setEnabled(true);
+                        }
+                    
                 }
             }
         } catch (IOException ex) {

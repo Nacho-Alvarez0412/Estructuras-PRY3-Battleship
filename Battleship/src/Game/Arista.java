@@ -5,11 +5,13 @@
  */
 package Game;
 
+import java.io.Serializable;
+
 /**
  *
  * @author sebasgamboa
  */
-public class Arista {
+public class Arista implements Serializable{
     public int dato;
     public int peso;
     public int startX;

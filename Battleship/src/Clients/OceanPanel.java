@@ -24,27 +24,25 @@ import javax.swing.JPanel;
 public class OceanPanel extends JPanel {
     
     public Grafo grafo;
+    public Client clientOwner;
     
-    public OceanPanel() {
+    public OceanPanel(Client c) {
         super();
         setOpaque(true);
         setLayout(new GridLayout(20, 20, 0, 0));
+        this.clientOwner=c;
+        this.grafo=clientOwner.grafo;
     }
     
     @Override
     public Dimension getPreferredSize() {
         return new Dimension(500, 500);
     }
-
-    public void setGrafo(Grafo grafo) {
-        this.grafo = grafo;
-    }
-    
     
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        
+        this.grafo=this.clientOwner.grafo;
         int TILE_SIZE = 25;
         
         Graphics2D g2 = (Graphics2D) g;
@@ -65,4 +63,21 @@ public class OceanPanel extends JPanel {
         }
         
     }
+
+    public void setGrafo(Grafo grafo) {
+        this.grafo = grafo;
+    }
+    
+    public Grafo getGrafo() {
+        return grafo;
+    }
+
+    public Client getClientOwner() {
+        return clientOwner;
+    }
+
+    public void setClientOwner(Client clientOwner) {
+        this.clientOwner = clientOwner;
+    }
+    
 }

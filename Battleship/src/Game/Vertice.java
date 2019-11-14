@@ -5,6 +5,7 @@
  */
 package Game;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -21,7 +22,7 @@ import java.util.ArrayList;
     6=energy source
     */
 
-public class Vertice {
+public class Vertice implements Serializable{
     public int dato;
     public ArrayList<Arista> aristas=new ArrayList<>();
     public boolean vivo;

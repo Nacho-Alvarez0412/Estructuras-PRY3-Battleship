@@ -30,7 +30,7 @@ public class Client {
     public int id;
     public int money=4000;
     public int[][] LogicBoard=new int[20][20];
-    public Grafo grafo;
+    public Grafo grafo=new Grafo();
     
     public Client() {
         window.setVisible(true);

@@ -3,15 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Game;
-
-import java.io.Serializable;
-import java.util.ArrayList;
+package Packages;
 
 /**
  *
  * @author sebasgamboa
  */
-public class Grafo implements Serializable{
-    public ArrayList<Vertice> grafo=new ArrayList<>();
+public class TurnPackage extends Package{
+    public int turn;
+    
+    public TurnPackage(int turn) {
+        super("Turn");
+        this.turn = turn;
+    }
 }

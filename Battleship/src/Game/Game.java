@@ -5,6 +5,11 @@
  */
 package Game;
 
+import Packages.TurnPackage;
+import Server.Server;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author sebasgamboa
@@ -23,7 +28,7 @@ package Game;
     6=energy source
     */
 
-public class Game {
+public class Game extends Thread{
     
     public int turn=1;
     
@@ -36,7 +41,21 @@ public class Game {
     public Grafo grafoP2;
     public Grafo grafoP3;
     public Grafo grafoP4;
+    public Server server;
+    public boolean userTurn;
 
+    public Game(Server server) {
+        this.server = server;
+        userTurn = false;
+    }
+    
+    public void changeTurn(){
+        turn++;
+        
+        if(turn > server.listeners.size())
+            turn = 1;
+    }
+    
     public int getTurn() {
         return turn;
     }
@@ -71,6 +90,23 @@ public class Game {
 
     public Grafo getGrafoP4() {
         return grafoP4;
+    }
+    
+    public void run(){
+        while(true){
+            server.enviarPaquete(new TurnPackage(this.turn));
+            userTurn = true;
+            while(userTurn){
+                
+                try {
+                    sleep(1000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            changeTurn();            
+        }
+        
     }
     
     
