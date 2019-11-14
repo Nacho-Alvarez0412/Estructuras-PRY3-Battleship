@@ -7,6 +7,8 @@ package Game;
 
 import Packages.TurnPackage;
 import Server.Server;
+import java.awt.Point;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -92,6 +94,33 @@ public class Game extends Thread{
         return grafoP4;
     }
     
+    public void Attack(ArrayList<Point> points,int target){
+        switch (target) {
+            case 1:
+                for(Point p:points){
+                    if(this.LogicBoardPlayer1[p.x][p.y]!=0){
+                        System.out.println("me pegaron");
+                    }
+                }
+                break;
+            case 2:
+                System.out.println("sss");
+                for(Point p:points){
+                    if(this.LogicBoardPlayer2[p.x][p.y]!=0){
+                        System.out.println("me pegaron");
+                    }
+                }
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            default:
+                break;
+        }
+    }
+    
+    @Override
     public void run(){
         while(true){
             server.enviarPaquete(new TurnPackage(this.turn));

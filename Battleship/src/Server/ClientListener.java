@@ -10,6 +10,7 @@ package Server;
  * @author sebasgamboa
  */// 
 
+import Packages.AttackPackage;
 import Packages.GrafoPackage;
 import Packages.LogicBoardPackage;
 import java.net.*; 
@@ -74,6 +75,8 @@ public class ClientListener extends Thread
                         
                     case "Attack":
                         System.out.println("me atacan");
+                        AttackPackage AT=(AttackPackage) paq;
+                        Server.instancia().game.Attack(AT.attacks, AT.target);
                         break;
                 }
             }
