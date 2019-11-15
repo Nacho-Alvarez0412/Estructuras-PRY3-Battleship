@@ -23,6 +23,7 @@ import java.awt.event.MouseListener;
 import java.awt.geom.Line2D;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -49,6 +50,9 @@ public class ClientWindow extends javax.swing.JFrame {
     public ImageIcon currentImage4=null;
     public boolean connectionModeState=false;
     public boolean torpedoState=false;
+    public boolean multiState=false;
+    public boolean bombState=false;
+    public boolean trumpedoState=false;
     public int enemyTarget;
 
     public ClientWindow(Client c) {
@@ -120,6 +124,15 @@ public class ClientWindow extends javax.swing.JFrame {
             public void mousePressed(MouseEvent e) {
                 if(clientOwner.window.torpedoState){
                     sendTorpedo(e);
+                }
+                else if(clientOwner.window.multiState){
+                    sendMulti(e);
+                }
+                else if(clientOwner.window.bombState){
+                    sendBomb(e);
+                }
+                else if(clientOwner.window.trumpedoState){
+                    sendTrumpedo(e);
                 }
             }
         };
@@ -307,13 +320,92 @@ public class ClientWindow extends javax.swing.JFrame {
         ArrayList<Point> points=new ArrayList<>();
         Point p=new Point(clickedLabel.i,clickedLabel.j);
         points.add(p);
-        AttackPackage paq=new AttackPackage(points,this.enemyTarget);
+        AttackPackage paq=new AttackPackage(points,this.enemyTarget,"torpedo");
         try {
             Client.instancia().enviarPaquete(paq);
         } catch (IOException ex) {
             Logger.getLogger(ClientWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void sendMulti(MouseEvent e){
+        BoardLabel clickedLabel = (BoardLabel) e.getSource();
+        ArrayList<Point> points=new ArrayList<>();
+        Point p=new Point(clickedLabel.i,clickedLabel.j);
+        points.add(p);
+        AttackPackage paq=new AttackPackage(points,this.enemyTarget,"multi");
+        try {
+            Client.instancia().enviarPaquete(paq);
+        } catch (IOException ex) {
+            Logger.getLogger(ClientWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
+    public ArrayList<BoardLabel> clicks = new ArrayList<>();
+    
+    
+    public void sendBomb(MouseEvent e){
+        BoardLabel clickedLabel = (BoardLabel) e.getSource();
+        clicks.add(clickedLabel);
+        if(clicks.size()==3){
+            ArrayList<Point> points=new ArrayList<>();
+            for(BoardLabel bl:clicks){
+                Point p=new Point(bl.i,bl.j);
+                points.add(p);
+                Random r=new Random();
+                int rand=r.nextInt(4);
+                if(rand==0){
+                    Point p2=new Point(bl.i+1,bl.j);
+                    points.add(p2);
+                }
+                else if(rand==1){
+                    Point p2=new Point(bl.i-1,bl.j);
+                    points.add(p2);
+                }
+                else if(rand==3){
+                    Point p2=new Point(bl.i,bl.j+1);
+                    points.add(p2);
+                }
+                else if(rand==4){
+                    Point p2=new Point(bl.i,bl.j-1);
+                    points.add(p2);
+                }
+                
+            }
+            clicks.clear();
+            System.out.println("sending bombs");
+            AttackPackage paq=new AttackPackage(points,this.enemyTarget,"bomb");
+            try {
+                Client.instancia().enviarPaquete(paq);
+            } catch (IOException ex) {
+                Logger.getLogger(ClientWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
+    public ArrayList<BoardLabel> clicksT = new ArrayList<>();
+    
+    public void sendTrumpedo(MouseEvent e){
+        BoardLabel clickedLabel = (BoardLabel) e.getSource();
+        clicksT.add(clickedLabel);
+        if(clicksT.size()==10){
+            ArrayList<Point> points=new ArrayList<>();
+            for(BoardLabel bl:clicksT){
+                Point p=new Point(bl.i,bl.j);
+                points.add(p);
+            }
+            clicksT.clear();
+            System.out.println("sending Trumpedos");
+            AttackPackage paq=new AttackPackage(points,this.enemyTarget,"Trumpedo");
+            try {
+                Client.instancia().enviarPaquete(paq);
+            } catch (IOException ex) {
+                Logger.getLogger(ClientWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
  
     /**
      * This method is called from within the constructor to initialize the form.
@@ -369,6 +461,17 @@ public class ClientWindow extends javax.swing.JFrame {
         TorpedoAttack = new javax.swing.JToggleButton();
         jButton5 = new javax.swing.JButton();
         TorpedoAmount = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        Bitacora = new javax.swing.JTextArea();
+        jToggleButton1 = new javax.swing.JToggleButton();
+        jButton6 = new javax.swing.JButton();
+        MultiAmount = new javax.swing.JLabel();
+        jToggleButton2 = new javax.swing.JToggleButton();
+        jButton7 = new javax.swing.JButton();
+        BombAmount = new javax.swing.JLabel();
+        jToggleButton3 = new javax.swing.JToggleButton();
+        jButton8 = new javax.swing.JButton();
+        TrumpedoAmount = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -650,6 +753,43 @@ public class ClientWindow extends javax.swing.JFrame {
 
         TorpedoAmount.setText("0");
 
+        Bitacora.setColumns(20);
+        Bitacora.setRows(5);
+        jScrollPane2.setViewportView(Bitacora);
+
+        jToggleButton1.setText("Multi-shot");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton6.setText("buy");
+
+        MultiAmount.setText("0");
+
+        jToggleButton2.setText("Bombs");
+        jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton7.setText("buy");
+
+        BombAmount.setText("0");
+
+        jToggleButton3.setText("Trumpedo");
+        jToggleButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton8.setText("buy");
+
+        TrumpedoAmount.setText("0");
+
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
         panelLayout.setHorizontalGroup(
@@ -660,58 +800,80 @@ public class ClientWindow extends javax.swing.JFrame {
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelLayout.createSequentialGroup()
                         .addGap(19, 19, 19)
-                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(BoardField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(panelLayout.createSequentialGroup()
-                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(panelLayout.createSequentialGroup()
-                                        .addGap(6, 6, 6)
-                                        .addComponent(ReadyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(Money)
-                                        .addGap(32, 32, 32)))
-                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane1)
-                                    .addComponent(MessageInput))))
-                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelLayout.createSequentialGroup()
-                                .addGap(54, 54, 54)
-                                .addComponent(jButton1)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton2)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton3)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(EndTurn)
-                                .addGap(36, 36, 36))
-                            .addGroup(panelLayout.createSequentialGroup()
-                                .addGap(37, 37, 37)
-                                .addComponent(EnemyBoard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(TorpedoAttack)
-                                    .addGroup(panelLayout.createSequentialGroup()
-                                        .addGap(19, 19, 19)
-                                        .addComponent(jButton5)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(TorpedoAmount)))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(BoardField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(ConnectionMode)
-                        .addContainerGap())))
+                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelLayout.createSequentialGroup()
+                                .addComponent(ReadyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(24, 24, 24)
+                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(MessageInput, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(ConnectionMode)
+                            .addGroup(panelLayout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(Money)))))
+                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelLayout.createSequentialGroup()
+                        .addGap(54, 54, 54)
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton3)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 147, Short.MAX_VALUE)
+                        .addComponent(EndTurn)
+                        .addGap(36, 36, 36))
+                    .addGroup(panelLayout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane2)
+                            .addComponent(EnemyBoard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelLayout.createSequentialGroup()
+                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(panelLayout.createSequentialGroup()
+                                        .addGap(34, 34, 34)
+                                        .addComponent(jButton6)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(MultiAmount))
+                                    .addGroup(panelLayout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jToggleButton3)
+                                            .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addGroup(panelLayout.createSequentialGroup()
+                                                    .addGap(19, 19, 19)
+                                                    .addComponent(jButton5)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                    .addComponent(TorpedoAmount))
+                                                .addComponent(jToggleButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(TorpedoAttack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(jToggleButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(panelLayout.createSequentialGroup()
+                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(panelLayout.createSequentialGroup()
+                                        .addGap(34, 34, 34)
+                                        .addComponent(jButton7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(BombAmount))
+                                    .addGroup(panelLayout.createSequentialGroup()
+                                        .addGap(34, 34, 34)
+                                        .addComponent(jButton8)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(TrumpedoAmount)))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Container, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelLayout.createSequentialGroup()
                         .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -723,29 +885,55 @@ public class ClientWindow extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(TorpedoAmount))))
+                                    .addComponent(TorpedoAmount))
+                                .addGap(25, 25, 25)
+                                .addComponent(jToggleButton1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(MultiAmount))
+                                .addGap(18, 18, 18)
+                                .addComponent(jToggleButton2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(BombAmount))
+                                .addGap(22, 22, 22)
+                                .addComponent(jToggleButton3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(TrumpedoAmount))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(ConnectionMode)
-                        .addGap(44, 44, 44)
                         .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(panelLayout.createSequentialGroup()
-                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jButton3)
-                                        .addComponent(jButton4)
-                                        .addComponent(jButton2)
-                                        .addComponent(jButton1)
-                                        .addComponent(EndTurn))
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(MessageInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panelLayout.createSequentialGroup()
-                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(Money)
-                                    .addComponent(jLabel1))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ReadyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap())
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jButton3)
+                                    .addComponent(jButton4)
+                                    .addComponent(jButton2)
+                                    .addComponent(jButton1)
+                                    .addComponent(EndTurn))
+                                .addGap(83, 83, 83))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel1)
+                                    .addComponent(Money))
+                                .addGap(18, 18, 18)
+                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(ReadyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(panelLayout.createSequentialGroup()
+                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(MessageInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(72, 72, 72))))
+                    .addGroup(panelLayout.createSequentialGroup()
+                        .addComponent(Container, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
 
         Container.getAccessibleContext().setAccessibleDescription("");
@@ -754,9 +942,7 @@ public class ClientWindow extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 34, Short.MAX_VALUE))
+            .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -802,8 +988,6 @@ public class ClientWindow extends javax.swing.JFrame {
     private void ConnectionModeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConnectionModeActionPerformed
         // TODO add your handling code here:
         this.connectionModeState=!this.connectionModeState;
-        
-        
     }//GEN-LAST:event_ConnectionModeActionPerformed
 
     private void ConnectionModeStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_ConnectionModeStateChanged
@@ -842,11 +1026,28 @@ public class ClientWindow extends javax.swing.JFrame {
         this.enemyTarget=4;
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        // TODO add your handling code here:
+        this.multiState=!this.multiState;
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
+
+    private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
+        // TODO add your handling code here:
+        this.bombState=!this.bombState;
+    }//GEN-LAST:event_jToggleButton2ActionPerformed
+
+    private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
+        // TODO add your handling code here:
+        this.trumpedoState=!this.trumpedoState;
+    }//GEN-LAST:event_jToggleButton3ActionPerformed
+
     public JButton getEndTurn() {
         return EndTurn;
     }
 
-    
+    public void setBitacoraText(String s){
+        this.Bitacora.append(s+"\n");
+    }
    
     
     public void addMessage(String mes){
@@ -891,7 +1092,9 @@ public class ClientWindow extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Armery;
+    private javax.swing.JTextArea Bitacora;
     private javax.swing.JPanel BoardField;
+    private javax.swing.JLabel BombAmount;
     private javax.swing.JToggleButton ConnectionMode;
     private javax.swing.JLabel Connector;
     private javax.swing.JPanel Container;
@@ -903,10 +1106,12 @@ public class ClientWindow extends javax.swing.JFrame {
     private javax.swing.JTextArea Messages;
     private javax.swing.JLabel Mine;
     private javax.swing.JLabel Money;
+    private javax.swing.JLabel MultiAmount;
     private javax.swing.JButton ReadyButton;
     private javax.swing.JLabel Temple;
     private javax.swing.JLabel TorpedoAmount;
     private javax.swing.JToggleButton TorpedoAttack;
+    private javax.swing.JLabel TrumpedoAmount;
     private javax.swing.JLabel armory1x2;
     private javax.swing.JLabel armory2x1;
     private javax.swing.JLabel connector1x1;
@@ -916,6 +1121,9 @@ public class ClientWindow extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -928,6 +1136,10 @@ public class ClientWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JToggleButton jToggleButton1;
+    private javax.swing.JToggleButton jToggleButton2;
+    private javax.swing.JToggleButton jToggleButton3;
     private javax.swing.JLabel mercado1x2;
     private javax.swing.JLabel mercado2x1;
     private javax.swing.JLabel mine1x2;

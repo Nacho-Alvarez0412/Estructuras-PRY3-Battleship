@@ -9,12 +9,11 @@ package Packages;
  *
  * @author sebasgamboa
  */
-public class ChatPackage extends Package {
+public class TurnMesagePackage extends Package{
+    public int turn;
     
-    public String mensaje;
-    
-    public ChatPackage(String mensaje) {
-        super("chat");
-        this.mensaje = mensaje;
-    }   
+    public TurnMesagePackage(int t){
+        super("TurnMessage");
+        this.turn=t;
+    }
 }

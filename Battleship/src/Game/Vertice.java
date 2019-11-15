@@ -5,6 +5,7 @@
  */
 package Game;
 
+import java.awt.Point;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -24,6 +25,7 @@ import java.util.ArrayList;
 
 public class Vertice implements Serializable{
     public int dato;
+    public Point point;
     public ArrayList<Arista> aristas=new ArrayList<>();
     public boolean vivo;
     

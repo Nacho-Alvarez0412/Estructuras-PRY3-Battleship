@@ -5,6 +5,7 @@
  */
 package Server;
 
+import Packages.TurnMesagePackage;
 import javax.swing.JComboBox;
 import javax.swing.JTextArea;
 
@@ -116,6 +117,8 @@ public class ServerWindow extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         Server.instancia().game.start();
+        int i=1;
+        //Server.instancia().enviarPaquete(new TurnMesagePackage(i));
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

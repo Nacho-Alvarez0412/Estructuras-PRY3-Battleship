@@ -11,6 +11,7 @@ package Server;
  */// 
 
 import Packages.AttackPackage;
+import Packages.AttackReceivedPackage;
 import Packages.GrafoPackage;
 import Packages.LogicBoardPackage;
 import java.net.*; 
@@ -76,7 +77,9 @@ public class ClientListener extends Thread
                     case "Attack":
                         System.out.println("me atacan");
                         AttackPackage AT=(AttackPackage) paq;
-                        Server.instancia().game.Attack(AT.attacks, AT.target);
+                        Server.instancia().game.Attack(AT.attacks, AT.target,AT.type);
+                        AttackReceivedPackage paq2=new AttackReceivedPackage(AT.attacks,AT.target,"Attack to player "+AT.target);
+                        Server.instancia().enviarPaquete(paq2);
                         break;
                 }
             }

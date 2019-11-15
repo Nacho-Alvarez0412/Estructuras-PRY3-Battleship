@@ -5,10 +5,13 @@
  */
 package Game;
 
+import Packages.AttackReceivedPackage;
+import Packages.TurnMesagePackage;
 import Packages.TurnPackage;
 import Server.Server;
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -94,26 +97,91 @@ public class Game extends Thread{
         return grafoP4;
     }
     
-    public void Attack(ArrayList<Point> points,int target){
+    public void Attack(ArrayList<Point> points,int target,String tipo){
         switch (target) {
             case 1:
                 for(Point p:points){
                     if(this.LogicBoardPlayer1[p.x][p.y]!=0){
                         System.out.println("me pegaron");
+                        this.LogicBoardPlayer1[p.x][p.y]=0;
+                        if(tipo=="multi"){
+                            ArrayList<Point> points2=new ArrayList<>();
+                            for(int i=0;i<4;i++){
+                                Random randomGenerator = new Random();
+                                int x = randomGenerator.nextInt(20);
+                                int y = randomGenerator.nextInt(20);
+                                points2.add(new Point(x,y));
+                            }
+                            
+                            this.Attack(points2, target, tipo);
+                            AttackReceivedPackage paq2=new AttackReceivedPackage(points2,target,"Attack to player "+target);
+                            server.enviarPaquete(paq2);
+                        }
                     }
                 }
                 break;
             case 2:
-                System.out.println("sss");
                 for(Point p:points){
                     if(this.LogicBoardPlayer2[p.x][p.y]!=0){
                         System.out.println("me pegaron");
+                        this.LogicBoardPlayer2[p.x][p.y]=0;
+                        if("multi".equals(tipo)){
+                            ArrayList<Point> points2=new ArrayList<>();
+                            for(int i=0;i<4;i++){
+                                Random randomGenerator = new Random();
+                                int x = randomGenerator.nextInt(20);
+                                int y = randomGenerator.nextInt(20);
+                                points2.add(new Point(x,y));
+                            }
+                            
+                            this.Attack(points2, target, tipo); 
+                            AttackReceivedPackage paq2=new AttackReceivedPackage(points2,target,"Attack to player "+target);
+                            server.enviarPaquete(paq2);
+                        }
                     }
                 }
                 break;
             case 3:
+                 for(Point p:points){
+                    if(this.LogicBoardPlayer3[p.x][p.y]!=0){
+                        System.out.println("me pegaron");
+                        this.LogicBoardPlayer3[p.x][p.y]=0;
+                        if(tipo=="multi"){
+                            ArrayList<Point> points2=new ArrayList<>();
+                            for(int i=0;i<4;i++){
+                                Random randomGenerator = new Random();
+                                int x = randomGenerator.nextInt(20);
+                                int y = randomGenerator.nextInt(20);
+                                points2.add(new Point(x,y));
+                            }
+                            
+                            this.Attack(points2, target, tipo);
+                            AttackReceivedPackage paq2=new AttackReceivedPackage(points2,target,"Attack to player "+target);
+                            server.enviarPaquete(paq2);
+                        }
+                    }
+                }
                 break;
             case 4:
+                 for(Point p:points){
+                    if(this.LogicBoardPlayer4[p.x][p.y]!=0){
+                        System.out.println("me pegaron");
+                        this.LogicBoardPlayer4[p.x][p.y]=0;
+                        if(tipo=="multi"){
+                            ArrayList<Point> points2=new ArrayList<>();
+                            for(int i=0;i<4;i++){
+                                Random randomGenerator = new Random();
+                                int x = randomGenerator.nextInt(20);
+                                int y = randomGenerator.nextInt(20);
+                                points2.add(new Point(x,y));
+                            }
+                             
+                            this.Attack(points2, target, tipo);
+                            AttackReceivedPackage paq2=new AttackReceivedPackage(points2,target,"Attack to player "+target);
+                            server.enviarPaquete(paq2);
+                        }
+                    }
+                }
                 break;
             default:
                 break;
@@ -123,6 +191,8 @@ public class Game extends Thread{
     @Override
     public void run(){
         while(true){
+            TurnMesagePackage t=new TurnMesagePackage(turn);
+            server.enviarPaquete(t);     
             server.enviarPaquete(new TurnPackage(this.turn));
             userTurn = true;
             while(userTurn){
@@ -133,7 +203,7 @@ public class Game extends Thread{
                     Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            changeTurn();            
+            changeTurn();       
         }
         
     }
