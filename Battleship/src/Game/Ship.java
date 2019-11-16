@@ -5,17 +5,10 @@
  */
 package Game;
 
-import Clients.BoardLabel;
-import Clients.Client;
-import Clients.ClientWindow;
-import Packages.ShipPackage;
 import Server.Server;
-import java.awt.Point;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ImageIcon;
 
 /**
  *

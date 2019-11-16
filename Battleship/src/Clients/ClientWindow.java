@@ -9,6 +9,7 @@ import Game.Arista;
 import Game.ArmoryThread;
 import Game.MineThread;
 import Game.Ship;
+import Game.TempleThread;
 import Game.Vertice;
 import Packages.AttackPackage;
 import Packages.ChatPackage;
@@ -70,6 +71,7 @@ public class ClientWindow extends javax.swing.JFrame {
     public ClientWindow(Client c) {
         initComponents();
         this.EndTurn.setEnabled(false);
+        this.Comodin.setEnabled(false);
         this.clientOwner=c;
         
         MouseListener toolsMouseListener = new MouseListener() {
@@ -350,6 +352,11 @@ public class ClientWindow extends javax.swing.JFrame {
             board[i+1][j].verticeName=4;
             board[i][j].verticeName=4;
             
+            TempleThread TThread=new TempleThread(this.clientOwner);
+            board[i+1][j].temple=TThread;
+            board[i][j].temple=TThread;
+            TThread.start();
+            
             this.clientOwner.LogicBoard[i][j]=4;
             this.clientOwner.LogicBoard[i+1][j]=4;
             
@@ -480,6 +487,11 @@ public class ClientWindow extends javax.swing.JFrame {
             targetLabel.setIcon(currentImage);
             board[i][j].verticeName=4;
             board[i][j+1].verticeName=4;
+            
+            TempleThread TThread=new TempleThread(this.clientOwner);
+            board[i][j].temple=TThread;
+            board[i][j+1].temple=TThread;
+            TThread.start();
             
             this.clientOwner.LogicBoard[i][j]=4;
             this.clientOwner.LogicBoard[i][j+1]=4;
@@ -622,6 +634,12 @@ public class ClientWindow extends javax.swing.JFrame {
     public void setAcero(){
         this.AceroAmount.setText(Integer.toString(this.clientOwner.acero));
     }
+
+    public JButton getComodin() {
+        return Comodin;
+    }
+    
+    
     
  
     /**
@@ -695,6 +713,7 @@ public class ClientWindow extends javax.swing.JFrame {
         ShipAmount = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         AceroAmount = new javax.swing.JLabel();
+        Comodin = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -1071,6 +1090,13 @@ public class ClientWindow extends javax.swing.JFrame {
 
         AceroAmount.setText("0");
 
+        Comodin.setText("Comodin");
+        Comodin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComodinActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
         panelLayout.setHorizontalGroup(
@@ -1084,7 +1110,7 @@ public class ClientWindow extends javax.swing.JFrame {
                         .addComponent(BoardField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(panelLayout.createSequentialGroup()
                                 .addComponent(ReadyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(24, 24, 24)
@@ -1098,13 +1124,17 @@ public class ClientWindow extends javax.swing.JFrame {
                                         .addComponent(jLabel1)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(Money)))
-                                .addGap(26, 26, 26)
                                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(panelLayout.createSequentialGroup()
+                                        .addGap(26, 26, 26)
                                         .addComponent(jLabel2)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(AceroAmount))
-                                    .addComponent(jButton9))))))
+                                    .addGroup(panelLayout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jButton9)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(Comodin)))))))
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelLayout.createSequentialGroup()
                         .addGap(54, 54, 54)
@@ -1211,7 +1241,8 @@ public class ClientWindow extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(ConnectionMode)
-                            .addComponent(jButton9))
+                            .addComponent(jButton9)
+                            .addComponent(Comodin))
                         .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(panelLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1453,6 +1484,14 @@ public class ClientWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton10ActionPerformed
 
+    private void ComodinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComodinActionPerformed
+        // TODO add your handling code here:
+        if(this.clientOwner.canComodin){
+            this.clientOwner.comodinOn=true;
+            this.clientOwner.canComodin=false;
+        }
+    }//GEN-LAST:event_ComodinActionPerformed
+
     public JButton getEndTurn() {
         return EndTurn;
     }
@@ -1508,6 +1547,7 @@ public class ClientWindow extends javax.swing.JFrame {
     private javax.swing.JTextArea Bitacora;
     private javax.swing.JPanel BoardField;
     private javax.swing.JLabel BombAmount;
+    private javax.swing.JButton Comodin;
     private javax.swing.JToggleButton ConnectionMode;
     private javax.swing.JLabel Connector;
     private javax.swing.JPanel Container;

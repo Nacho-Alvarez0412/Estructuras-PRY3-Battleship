@@ -42,6 +42,8 @@ public class Client implements Serializable{
     public boolean bombsE=false;
     public boolean trumpedosE=false;
     public boolean shipsE=false;
+    public boolean canComodin=false;  
+    public boolean comodinOn=false;
     public int[][] LogicBoard=new int[20][20];
     public Grafo grafo=new Grafo();
     public ArrayList<Point> hitsP1=new ArrayList<>();
