@@ -12,19 +12,15 @@ import java.util.ArrayList;
  *
  * @author sebasgamboa
  */
-public class AttackReceivedPackage extends Package {
-    public ArrayList<Point> attacks;
+public class hitsPackage extends Package{
+    public ArrayList<Point> points;
     public int target;
-    public String message;
     public int origin;
-    public boolean hitLanded;
     
-    public AttackReceivedPackage(ArrayList<Point> attacks,int t,String mes,int o,boolean h){
-        super("AttackReceived");
-        this.attacks=attacks;
+    public hitsPackage(ArrayList<Point> p,int t,int o){
+        super("hits");
+        this.points=p;
         this.target=t;
-        this.message=mes;
         this.origin=o;
-        this.hitLanded=h;
     }
 }

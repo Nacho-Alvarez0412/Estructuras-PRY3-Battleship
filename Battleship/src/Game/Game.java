@@ -107,6 +107,7 @@ public class Game extends Thread implements Serializable{
     }
     
     public void Attack(ArrayList<Point> points,int target,String tipo,int origen){
+        boolean hitLanded=false;
         switch (target) {
             case 1:
                 for(Point p:points){
@@ -127,11 +128,12 @@ public class Game extends Thread implements Serializable{
                             rAttacks.add(new Point(x2,y2));
                             rAttacks.add(new Point(x3,y3));
                             this.Attack(rAttacks, origen, tipo,target);
-                            AttackReceivedPackage paq2=new AttackReceivedPackage(rAttacks,origen,"Attack to player "+origen);
+                            AttackReceivedPackage paq2=new AttackReceivedPackage(rAttacks,origen,"Attack to player "+origen,origen,hitLanded);
                             server.enviarPaquete(paq2);
                         }else{
                             System.out.println("me pegaron");
                             this.LogicBoardPlayer1[p.x][p.y]=0;
+                            hitLanded=true;
                             if(tipo=="multi"){
                                 ArrayList<Point> points2=new ArrayList<>();
                                 for(int i=0;i<4;i++){
@@ -142,7 +144,7 @@ public class Game extends Thread implements Serializable{
                                 }
 
                                 this.Attack(points2, target, tipo,origen);
-                                AttackReceivedPackage paq2=new AttackReceivedPackage(points2,target,"Attack to player "+target);
+                                AttackReceivedPackage paq2=new AttackReceivedPackage(points2,target,"Attack to player "+target,origen,hitLanded);
                                 server.enviarPaquete(paq2);
                             }
                         }
@@ -166,11 +168,12 @@ public class Game extends Thread implements Serializable{
                             rAttacks.add(new Point(x2,y2));
                             rAttacks.add(new Point(x3,y3));
                             this.Attack(rAttacks, origen, tipo,target);
-                            AttackReceivedPackage paq2=new AttackReceivedPackage(rAttacks,origen,"Attack to player "+origen);
+                            AttackReceivedPackage paq2=new AttackReceivedPackage(rAttacks,origen,"Attack to player "+origen,target,hitLanded);
                             server.enviarPaquete(paq2);
                         }else{
                             System.out.println("me pegaron");
                             this.LogicBoardPlayer2[p.x][p.y]=0;
+                            hitLanded=true;
                             if(tipo=="multi"){
                                 ArrayList<Point> points2=new ArrayList<>();
                                 for(int i=0;i<4;i++){
@@ -181,7 +184,7 @@ public class Game extends Thread implements Serializable{
                                 }
 
                                 this.Attack(points2, target, tipo,origen);
-                                AttackReceivedPackage paq2=new AttackReceivedPackage(points2,target,"Attack to player "+target);
+                                AttackReceivedPackage paq2=new AttackReceivedPackage(points2,target,"Attack to player "+target,origen,hitLanded);
                                 server.enviarPaquete(paq2);
                             }
                         }
@@ -205,11 +208,12 @@ public class Game extends Thread implements Serializable{
                             rAttacks.add(new Point(x2,y2));
                             rAttacks.add(new Point(x3,y3));
                             this.Attack(rAttacks, origen, tipo,target);
-                            AttackReceivedPackage paq2=new AttackReceivedPackage(rAttacks,origen,"Attack to player "+origen);
+                            AttackReceivedPackage paq2=new AttackReceivedPackage(rAttacks,origen,"Attack to player "+origen,target,hitLanded);
                             server.enviarPaquete(paq2);
                         }else{
                             System.out.println("me pegaron");
                             this.LogicBoardPlayer3[p.x][p.y]=0;
+                            hitLanded=true;
                             if(tipo=="multi"){
                                 ArrayList<Point> points2=new ArrayList<>();
                                 for(int i=0;i<4;i++){
@@ -220,7 +224,7 @@ public class Game extends Thread implements Serializable{
                                 }
 
                                 this.Attack(points2, target, tipo,origen);
-                                AttackReceivedPackage paq2=new AttackReceivedPackage(points2,target,"Attack to player "+target);
+                                AttackReceivedPackage paq2=new AttackReceivedPackage(points2,target,"Attack to player "+target,origen,hitLanded);
                                 server.enviarPaquete(paq2);
                             }
                         }
@@ -244,11 +248,12 @@ public class Game extends Thread implements Serializable{
                             rAttacks.add(new Point(x2,y2));
                             rAttacks.add(new Point(x3,y3));
                             this.Attack(rAttacks, origen, tipo,target);
-                            AttackReceivedPackage paq2=new AttackReceivedPackage(rAttacks,origen,"Attack to player "+origen);
+                            AttackReceivedPackage paq2=new AttackReceivedPackage(rAttacks,origen,"Attack to player "+origen,target,hitLanded);
                             server.enviarPaquete(paq2);
                         }else{
                             System.out.println("me pegaron");
                             this.LogicBoardPlayer4[p.x][p.y]=0;
+                            hitLanded=true;
                             if(tipo=="multi"){
                                 ArrayList<Point> points2=new ArrayList<>();
                                 for(int i=0;i<4;i++){
@@ -259,7 +264,7 @@ public class Game extends Thread implements Serializable{
                                 }
 
                                 this.Attack(points2, target, tipo,origen);
-                                AttackReceivedPackage paq2=new AttackReceivedPackage(points2,target,"Attack to player "+target);
+                                AttackReceivedPackage paq2=new AttackReceivedPackage(points2,target,"Attack to player "+target,origen,hitLanded);
                                 server.enviarPaquete(paq2);
                             }
                         }

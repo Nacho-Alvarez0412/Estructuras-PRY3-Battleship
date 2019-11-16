@@ -7,10 +7,12 @@ package Clients;
 
 import Game.Grafo;
 import Packages.Package;
+import java.awt.Point;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.net.Socket;
+import java.util.ArrayList;
 
 /**
  *
@@ -31,6 +33,10 @@ public class Client implements Serializable{
     public int money=4000;
     public int[][] LogicBoard=new int[20][20];
     public Grafo grafo=new Grafo();
+    public ArrayList<Point> hitsP1=new ArrayList<>();
+    public ArrayList<Point> hitsP2=new ArrayList<>();
+    public ArrayList<Point> hitsP3=new ArrayList<>();
+    public ArrayList<Point> hitsP4=new ArrayList<>();
     public ClientWindow window = new ClientWindow(this);
     
     

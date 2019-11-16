@@ -434,6 +434,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/Images/connector.png"/>
                 </Property>
+                <Property name="toolTipText" type="java.lang.String" value="Cost: 100"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="EnergySource">
@@ -441,6 +442,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/Images/energy display.jpeg"/>
                 </Property>
+                <Property name="toolTipText" type="java.lang.String" value="Cost: 12000"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="Mine">
@@ -448,6 +450,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/Images/GoldmineDisplay.jpg"/>
                 </Property>
+                <Property name="toolTipText" type="java.lang.String" value="Cost: 1000"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="Armery">
@@ -455,6 +458,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/Images/ArmoryDisplay.png"/>
                 </Property>
+                <Property name="toolTipText" type="java.lang.String" value="Cost: 1500"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="Temple">
@@ -462,6 +466,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/Images/TempleDisplay.png"/>
                 </Property>
+                <Property name="toolTipText" type="java.lang.String" value="Cost: 2500"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="Mercado">
@@ -469,6 +474,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/Images/MarketDisplay.jpg"/>
                 </Property>
+                <Property name="toolTipText" type="java.lang.String" value="Cost: 2000"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="connector1x1">
@@ -495,14 +501,14 @@
             <Component class="javax.swing.JLabel" name="mine1x2">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Images/Mercado 1.jpeg"/>
+                  <Image iconType="3" name="/Images/MineUp.jpeg"/>
                 </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="armory1x2">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Images/Mercado 1.jpeg"/>
+                  <Image iconType="3" name="/Images/Armoryup.jpeg"/>
                 </Property>
               </Properties>
             </Component>
@@ -523,7 +529,7 @@
             <Component class="javax.swing.JLabel" name="temple1x2">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Images/Mercado 1.jpeg"/>
+                  <Image iconType="3" name="/Images/TempleUp.jpeg"/>
                 </Property>
               </Properties>
             </Component>
@@ -537,7 +543,7 @@
             <Component class="javax.swing.JLabel" name="mercado1x2">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Images/Mercado 1.jpeg"/>
+                  <Image iconType="3" name="/Images/MarketDown.jpeg"/>
                 </Property>
               </Properties>
             </Component>

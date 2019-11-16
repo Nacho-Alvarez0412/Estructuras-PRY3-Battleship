@@ -202,6 +202,11 @@ public class ClientWindow extends javax.swing.JFrame {
         this.mercado2x1.addMouseListener(toolsMouseListener);
         this.mine2x1.addMouseListener(toolsMouseListener);
         this.temple2x1.addMouseListener(toolsMouseListener);
+        
+        this.armory1x2.addMouseListener(toolsMouseListener);
+        this.mercado1x2.addMouseListener(toolsMouseListener);
+        this.mine1x2.addMouseListener(toolsMouseListener);
+        this.temple1x2.addMouseListener(toolsMouseListener);
     }
         
         
@@ -230,6 +235,18 @@ public class ClientWindow extends javax.swing.JFrame {
             currentImage2=new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/energy downL.jpeg");
             currentImage3=new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/energy downR.jpeg");
             currentImage4=new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/energy upR.jpeg");
+        }
+        else if(label.equals(mine1x2)){
+            currentImage2=new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/MineDown.jpeg");
+        }
+        else if(label.equals(temple1x2)){
+            currentImage2=new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/TempleDown.jpeg");
+        }
+        else if(label.equals(mercado1x2)){
+            currentImage2=new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/MarketUp.jpeg");
+        }
+        else if(label.equals(armory1x2)){
+            currentImage2=new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/Armorydown.jpeg");
         }
         
         connectionStart = null;
@@ -265,18 +282,20 @@ public class ClientWindow extends javax.swing.JFrame {
         }
     }
     
+    public boolean firstEnergy=true;
+    
     private void addNewUnit(MouseEvent e) {
         if(currentImage == null) return;
 
         BoardLabel targetLabel = (BoardLabel) e.getSource();
-        targetLabel.setIcon(currentImage);
         
 
         int i = targetLabel.i;
         int j = targetLabel.j;
 
-        if(currentImage.equals(armory2x1.getIcon())){
+        if(currentImage.equals(armory2x1.getIcon())&&this.clientOwner.money>=1500){
             board[i+1][j].setIcon(currentImage2);
+            targetLabel.setIcon(currentImage);
             board[i+1][j].verticeName=3;
             board[i][j].verticeName=3;
             
@@ -288,9 +307,13 @@ public class ClientWindow extends javax.swing.JFrame {
             p.add(new Point(i+1,j));
             Vertice currentVertice = new Vertice(3,p);
             this.clientOwner.grafo.grafo.add(currentVertice);
+            
+            this.clientOwner.money-=1500;
+            this.clientOwner.window.Money.setText(Integer.toString(this.clientOwner.money));
         }
-        else if(currentImage.equals(mine2x1.getIcon())){
+        else if(currentImage.equals(mine2x1.getIcon())&&this.clientOwner.money>=1000){
             board[i+1][j].setIcon(currentImage2);
+            targetLabel.setIcon(currentImage);
             board[i+1][j].verticeName=2;
             board[i][j].verticeName=2;
             
@@ -302,9 +325,13 @@ public class ClientWindow extends javax.swing.JFrame {
             p.add(new Point(i+1,j));
             Vertice currentVertice = new Vertice(2,p);
             this.clientOwner.grafo.grafo.add(currentVertice);
+            
+            this.clientOwner.money-=1000;
+            this.clientOwner.window.Money.setText(Integer.toString(this.clientOwner.money));
         }
-        else if(currentImage.equals(temple2x1.getIcon())){
+        else if(currentImage.equals(temple2x1.getIcon())&&this.clientOwner.money>=2500){
             board[i+1][j].setIcon(currentImage2);
+            targetLabel.setIcon(currentImage);
             board[i+1][j].verticeName=4;
             board[i][j].verticeName=4;
             
@@ -316,9 +343,14 @@ public class ClientWindow extends javax.swing.JFrame {
             p.add(new Point(i+1,j));
             Vertice currentVertice = new Vertice(4,p);
             this.clientOwner.grafo.grafo.add(currentVertice);
+            
+            this.clientOwner.money-=1500;
+            this.clientOwner.window.Money.setText(Integer.toString(this.clientOwner.money));
+
         }
-        else if(currentImage.equals(mercado2x1.getIcon())){
+        else if(currentImage.equals(mercado2x1.getIcon())&&this.clientOwner.money>=2000){
             board[i+1][j].setIcon(currentImage2);
+            targetLabel.setIcon(currentImage);
             board[i+1][j].verticeName=5;
             board[i][j].verticeName=5;
             
@@ -330,12 +362,17 @@ public class ClientWindow extends javax.swing.JFrame {
             p.add(new Point(i+1,j));
             Vertice currentVertice = new Vertice(5,p);
             this.clientOwner.grafo.grafo.add(currentVertice);
+            
+            this.clientOwner.money-=2000;
+            this.clientOwner.window.Money.setText(Integer.toString(this.clientOwner.money));
+
         }
-        else if(currentImage.equals(energysource2x2.getIcon())){
+        else if(currentImage.equals(energysource2x2.getIcon())&&(this.clientOwner.money>=12000||this.firstEnergy)){
             
             board[i][j+1].setIcon(currentImage2);
             board[i+1][j+1].setIcon(currentImage3);
             board[i+1][j].setIcon(currentImage4);
+            targetLabel.setIcon(currentImage);
             board[i][j+1].verticeName=6;
             board[i+1][j+1].verticeName=6;
             board[i+1][j].verticeName=6;
@@ -353,16 +390,101 @@ public class ClientWindow extends javax.swing.JFrame {
             p.add(new Point(i,j+1));
             Vertice currentVertice = new Vertice(6,p);
             this.clientOwner.grafo.grafo.add(currentVertice);
+            
+            if(!this.firstEnergy){
+                this.clientOwner.money-=12000;
+                this.clientOwner.window.Money.setText(Integer.toString(this.clientOwner.money));
+
+            }
+            this.firstEnergy=false;
         }
-        else if(currentImage.equals(connector1x1.getIcon())){
+        else if(currentImage.equals(connector1x1.getIcon())&&this.clientOwner.money>=100){
             
             this.clientOwner.LogicBoard[i][j]=1;
+            targetLabel.setIcon(currentImage);
             
             ArrayList<Point> p=new ArrayList<>();
             p.add(new Point(i,j));
             Vertice currentVertice = new Vertice(1,p);
             this.clientOwner.grafo.grafo.add(currentVertice);
             targetLabel.verticeName=1;
+            
+            this.clientOwner.money-=100;
+            this.clientOwner.window.Money.setText(Integer.toString(this.clientOwner.money));
+
+        }else if(currentImage.equals(armory1x2.getIcon())&&this.clientOwner.money>=1500){
+            board[i][j+1].setIcon(currentImage2);
+            targetLabel.setIcon(currentImage);
+            board[i][j+1].verticeName=3;
+            board[i][j].verticeName=3;
+            
+            this.clientOwner.LogicBoard[i][j]=3;
+            this.clientOwner.LogicBoard[i][j+1]=3;
+            
+            ArrayList<Point> p=new ArrayList<>();
+            p.add(new Point(i,j));
+            p.add(new Point(i,j+1));
+            Vertice currentVertice = new Vertice(3,p);
+            this.clientOwner.grafo.grafo.add(currentVertice);
+            
+            this.clientOwner.money-=1500;
+            this.clientOwner.window.Money.setText(Integer.toString(this.clientOwner.money));
+        }
+        else if(currentImage.equals(mine1x2.getIcon())&&this.clientOwner.money>=1000){
+            board[i][j+1].setIcon(currentImage2);
+            targetLabel.setIcon(currentImage);
+            board[i][j+1].verticeName=2;
+            board[i][j].verticeName=2;
+            
+            this.clientOwner.LogicBoard[i][j]=2;
+            this.clientOwner.LogicBoard[i][j+1]=2;
+            
+            ArrayList<Point> p=new ArrayList<>();
+            p.add(new Point(i,j));
+            p.add(new Point(i,j+1));
+            Vertice currentVertice = new Vertice(2,p);
+            this.clientOwner.grafo.grafo.add(currentVertice);
+            
+            this.clientOwner.money-=1000;
+            this.clientOwner.window.Money.setText(Integer.toString(this.clientOwner.money));
+        }
+        else if(currentImage.equals(temple1x2.getIcon())&&this.clientOwner.money>=2500){
+            board[i][j+1].setIcon(currentImage2);
+            targetLabel.setIcon(currentImage);
+            board[i][j].verticeName=4;
+            board[i][j+1].verticeName=4;
+            
+            this.clientOwner.LogicBoard[i][j]=4;
+            this.clientOwner.LogicBoard[i][j+1]=4;
+            
+            ArrayList<Point> p=new ArrayList<>();
+            p.add(new Point(i,j));
+            p.add(new Point(i,j+1));
+            Vertice currentVertice = new Vertice(4,p);
+            this.clientOwner.grafo.grafo.add(currentVertice);
+            
+            this.clientOwner.money-=1500;
+            this.clientOwner.window.Money.setText(Integer.toString(this.clientOwner.money));
+
+        }
+        else if(currentImage.equals(mercado1x2.getIcon())&&this.clientOwner.money>=2000){
+            board[i][j+1].setIcon(currentImage2);
+            targetLabel.setIcon(currentImage);
+            board[i][j+1].verticeName=5;
+            board[i][j].verticeName=5;
+            
+            this.clientOwner.LogicBoard[i][j]=5;
+            this.clientOwner.LogicBoard[i][j+1]=5;
+            
+            ArrayList<Point> p=new ArrayList<>();
+            p.add(new Point(i,j));
+            p.add(new Point(i,j+1));
+            Vertice currentVertice = new Vertice(5,p);
+            this.clientOwner.grafo.grafo.add(currentVertice);
+            
+            this.clientOwner.money-=2000;
+            this.clientOwner.window.Money.setText(Integer.toString(this.clientOwner.money));
+
         }
     }
     
@@ -555,16 +677,22 @@ public class ClientWindow extends javax.swing.JFrame {
         jScrollPane1.setViewportView(Messages);
 
         Connector.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/connector.png"))); // NOI18N
+        Connector.setToolTipText("Cost: 100");
 
         EnergySource.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/energy display.jpeg"))); // NOI18N
+        EnergySource.setToolTipText("Cost: 12000");
 
         Mine.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/GoldmineDisplay.jpg"))); // NOI18N
+        Mine.setToolTipText("Cost: 1000");
 
         Armery.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ArmoryDisplay.png"))); // NOI18N
+        Armery.setToolTipText("Cost: 1500");
 
         Temple.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/TempleDisplay.png"))); // NOI18N
+        Temple.setToolTipText("Cost: 2500");
 
         Mercado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MarketDisplay.jpg"))); // NOI18N
+        Mercado.setToolTipText("Cost: 2000");
 
         connector1x1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/connector-25.jpg"))); // NOI18N
 
@@ -572,19 +700,19 @@ public class ClientWindow extends javax.swing.JFrame {
 
         armory2x1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ArmoryDerecha.png"))); // NOI18N
 
-        mine1x2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Mercado 1.jpeg"))); // NOI18N
+        mine1x2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MineUp.jpeg"))); // NOI18N
 
-        armory1x2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Mercado 1.jpeg"))); // NOI18N
+        armory1x2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Armoryup.jpeg"))); // NOI18N
 
         temple2x1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/TempleDerecha.png"))); // NOI18N
 
         mine2x1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Goldmine Derecha.jpg"))); // NOI18N
 
-        temple1x2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Mercado 1.jpeg"))); // NOI18N
+        temple1x2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/TempleUp.jpeg"))); // NOI18N
 
         mercado2x1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MarketIzquierda.jpg"))); // NOI18N
 
-        mercado1x2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Mercado 1.jpeg"))); // NOI18N
+        mercado1x2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MarketDown.jpeg"))); // NOI18N
 
         jLabel11.setText("1x1");
 
@@ -1090,6 +1218,17 @@ public class ClientWindow extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         this.enemyTarget=1;
+        for(int i=0;i<20;i++){
+            for(int j=0;j<20;j++){
+                this.enemyBoard[j][i].setIcon( new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/tile.png"));
+            }
+        }
+        for(Point p:this.clientOwner.hitsP1){
+            this.enemyBoard[p.x][p.y].setIcon(new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/explosion2.png"));
+            //this.enemyBoard[p.x][p.y].repaint();
+            //System.out.println("hit");
+        }
+        //this.EnemyBoard.repaint();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void ConnectionModeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConnectionModeActionPerformed
@@ -1121,16 +1260,47 @@ public class ClientWindow extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         this.enemyTarget=2;
+        for(int i=0;i<20;i++){
+            for(int j=0;j<20;j++){
+                this.enemyBoard[j][i].setIcon( new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/tile.png"));
+            }
+        }
+        for(Point p:this.clientOwner.hitsP2){
+            this.enemyBoard[p.x][p.y].setIcon(new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/explosion2.png"));
+            //this.enemyBoard[p.x][p.y].repaint();
+        }
+        //this.EnemyBoard.repaint();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         this.enemyTarget=3;
+        for(int i=0;i<20;i++){
+            for(int j=0;j<20;j++){
+                
+                this.enemyBoard[j][i].setIcon( new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/tile.png"));
+            }
+        }
+        for(Point p:this.clientOwner.hitsP3){
+            this.enemyBoard[p.x][p.y].setIcon(new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/explosion2.png"));
+            //this.enemyBoard[p.x][p.y].repaint();
+        }
+        //this.EnemyBoard.repaint();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         this.enemyTarget=4;
+        for(int i=0;i<20;i++){
+            for(int j=0;j<20;j++){
+                this.enemyBoard[j][i].setIcon( new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/tile.png"));
+            }
+        }
+        for(Point p:this.clientOwner.hitsP4){
+            this.enemyBoard[p.x][p.y].setIcon(new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/explosion2.png"));
+            //this.enemyBoard[p.x][p.y].repaint();
+        }
+        //this.EnemyBoard.repaint();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed

@@ -27,7 +27,8 @@ public class Vertice implements Serializable{
     public int dato;
     public ArrayList<Point> point;
     public ArrayList<Arista> aristas=new ArrayList<>();
-    public boolean vivo;
+    public boolean vivo=true;
+    public int hits=0;
     
     public Vertice(int dato,ArrayList<Point> p){
         this.dato=dato;

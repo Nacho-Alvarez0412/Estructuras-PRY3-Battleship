@@ -19,6 +19,8 @@ import java.net.*;
 import java.io.*; 
 import Packages.Package;
 import Packages.ShipPackage;
+import Packages.hitsPackage;
+import java.awt.Point;
 
 public class ClientListener extends Thread
 { 
@@ -78,9 +80,10 @@ public class ClientListener extends Thread
                         
                     case "Attack":
                         System.out.println("me atacan");
+                        boolean f=true;
                         AttackPackage AT=(AttackPackage) paq;
                         Server.instancia().game.Attack(AT.attacks, AT.target,AT.type,AT.origin);
-                        AttackReceivedPackage paq2=new AttackReceivedPackage(AT.attacks,AT.target,"Attack to player "+AT.target);
+                        AttackReceivedPackage paq2=new AttackReceivedPackage(AT.attacks,AT.target,"Attack to player "+AT.target,AT.origin,f);
                         Server.instancia().enviarPaquete(paq2);
                         break;
                         
@@ -104,6 +107,23 @@ public class ClientListener extends Thread
                         ShipPackage sh=(ShipPackage) paq;
                         sh.discoveries=Server.instancia().getDiscoveries(sh.point, sh.target);
                         Server.instancia().enviarPaquete(sh);
+                        break;
+                        
+                    case "hits":
+                        hitsPackage AR=(hitsPackage) paq;
+                        if(AR.origin==1){
+                            Server.instancia().enviarPaqueteA(AR, 0);
+                        }
+                        else if(AR.origin==2){
+                            Server.instancia().enviarPaqueteA(AR, 1);
+                        }
+                        else if(AR.origin==3){
+                            Server.instancia().enviarPaqueteA(AR, 2);
+                        }
+                        else if(AR.origin==4){
+                            Server.instancia().enviarPaqueteA(AR, 3);
+                        }
+                        break;
                 }
             }
             catch(IOException | ClassNotFoundException e) { 
