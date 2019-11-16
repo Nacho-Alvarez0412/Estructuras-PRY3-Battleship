@@ -5,6 +5,8 @@
  */
 package Clients;
 
+import Game.ArmoryThread;
+import Game.MineThread;
 import javax.swing.JLabel;
 
 /**
@@ -16,6 +18,8 @@ public class BoardLabel extends JLabel {
     public int i;
     public int j;
     public int verticeName;
+    public MineThread mine;
+    public ArmoryThread armory;
     
     public BoardLabel(int i, int j) {
         super();

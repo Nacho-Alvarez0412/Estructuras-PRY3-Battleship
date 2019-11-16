@@ -6,6 +6,8 @@
 package Clients;
 
 import Game.Arista;
+import Game.ArmoryThread;
+import Game.MineThread;
 import Game.Ship;
 import Game.Vertice;
 import Packages.AttackPackage;
@@ -29,6 +31,7 @@ import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.TransferHandler;
 
 /**
@@ -131,19 +134,19 @@ public class ClientWindow extends javax.swing.JFrame {
             
             @Override
             public void mousePressed(MouseEvent e) {
-                if(clientOwner.window.torpedoState){
+                if(clientOwner.window.torpedoState&&clientOwner.torpedos>0){
                     sendTorpedo(e);
                 }
-                else if(clientOwner.window.multiState){
+                else if(clientOwner.window.multiState&&clientOwner.multi>0){
                     sendMulti(e);
                 }
-                else if(clientOwner.window.bombState){
+                else if(clientOwner.window.bombState&&clientOwner.bombs>0){
                     sendBomb(e);
                 }
-                else if(clientOwner.window.trumpedoState){
+                else if(clientOwner.window.trumpedoState&&clientOwner.trumpedos>0){
                     sendTrumpedo(e);
                 }
-                else if(clientOwner.window.shipState){
+                else if(clientOwner.window.shipState&&clientOwner.ships>0){
                     try {
                         sendShip(e);
                     } catch (IOException | InterruptedException ex) {
@@ -294,10 +297,17 @@ public class ClientWindow extends javax.swing.JFrame {
         int j = targetLabel.j;
 
         if(currentImage.equals(armory2x1.getIcon())&&this.clientOwner.money>=1500){
+            String Weapon=JOptionPane.showInputDialog("Enter a weapon to fabricate:");
+            System.out.println(Weapon);
             board[i+1][j].setIcon(currentImage2);
             targetLabel.setIcon(currentImage);
             board[i+1][j].verticeName=3;
             board[i][j].verticeName=3;
+            
+            ArmoryThread aThread=new ArmoryThread(this.clientOwner,Weapon);
+            board[i+1][j].armory=aThread;
+            board[i][j].armory=aThread;
+            aThread.start();
             
             this.clientOwner.LogicBoard[i][j]=3;
             this.clientOwner.LogicBoard[i+1][j]=3;
@@ -316,6 +326,11 @@ public class ClientWindow extends javax.swing.JFrame {
             targetLabel.setIcon(currentImage);
             board[i+1][j].verticeName=2;
             board[i][j].verticeName=2;
+            
+            MineThread aThread=new MineThread(this.clientOwner);
+            board[i+1][j].mine=aThread;
+            board[i][j].mine=aThread;
+            aThread.start();
             
             this.clientOwner.LogicBoard[i][j]=2;
             this.clientOwner.LogicBoard[i+1][j]=2;
@@ -413,10 +428,17 @@ public class ClientWindow extends javax.swing.JFrame {
             this.clientOwner.window.Money.setText(Integer.toString(this.clientOwner.money));
 
         }else if(currentImage.equals(armory1x2.getIcon())&&this.clientOwner.money>=1500){
+            String Weapon=JOptionPane.showInputDialog(this, "Enter a weapon to fabricate:");
+            System.out.println(Weapon);
             board[i][j+1].setIcon(currentImage2);
             targetLabel.setIcon(currentImage);
             board[i][j+1].verticeName=3;
             board[i][j].verticeName=3;
+            
+            ArmoryThread aThread=new ArmoryThread(this.clientOwner,Weapon);
+            board[i][j+1].armory=aThread;
+            board[i][j].armory=aThread;
+            aThread.start();
             
             this.clientOwner.LogicBoard[i][j]=3;
             this.clientOwner.LogicBoard[i][j+1]=3;
@@ -435,6 +457,11 @@ public class ClientWindow extends javax.swing.JFrame {
             targetLabel.setIcon(currentImage);
             board[i][j+1].verticeName=2;
             board[i][j].verticeName=2;
+            
+            MineThread aThread=new MineThread(this.clientOwner);
+            board[i][j+1].mine=aThread;
+            board[i][j].mine=aThread;
+            aThread.start();
             
             this.clientOwner.LogicBoard[i][j]=2;
             this.clientOwner.LogicBoard[i][j+1]=2;
@@ -592,6 +619,10 @@ public class ClientWindow extends javax.swing.JFrame {
         this.clientOwner.enviarPaquete(paq);
     }
     
+    public void setAcero(){
+        this.AceroAmount.setText(Integer.toString(this.clientOwner.acero));
+    }
+    
  
     /**
      * This method is called from within the constructor to initialize the form.
@@ -662,6 +693,8 @@ public class ClientWindow extends javax.swing.JFrame {
         jToggleButton4 = new javax.swing.JToggleButton();
         jButton10 = new javax.swing.JButton();
         ShipAmount = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        AceroAmount = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -946,6 +979,12 @@ public class ClientWindow extends javax.swing.JFrame {
         });
 
         jButton5.setText("buy");
+        jButton5.setToolTipText("Cost: 500 Kg");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         TorpedoAmount.setText("0");
 
@@ -961,6 +1000,12 @@ public class ClientWindow extends javax.swing.JFrame {
         });
 
         jButton6.setText("buy");
+        jButton6.setToolTipText("Cost: 1000 Kg");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         MultiAmount.setText("0");
 
@@ -972,6 +1017,12 @@ public class ClientWindow extends javax.swing.JFrame {
         });
 
         jButton7.setText("buy");
+        jButton7.setToolTipText("Cost: 2000 Kg");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         BombAmount.setText("0");
 
@@ -983,6 +1034,12 @@ public class ClientWindow extends javax.swing.JFrame {
         });
 
         jButton8.setText("buy");
+        jButton8.setToolTipText("Cost: 5000 Kg");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
         TrumpedoAmount.setText("0");
 
@@ -1001,8 +1058,18 @@ public class ClientWindow extends javax.swing.JFrame {
         });
 
         jButton10.setText("buy");
+        jButton10.setToolTipText("Cost: 2500 Kg");
+        jButton10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton10ActionPerformed(evt);
+            }
+        });
 
         ShipAmount.setText("0");
+
+        jLabel2.setText("Acero:");
+
+        AceroAmount.setText("0");
 
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
@@ -1025,13 +1092,19 @@ public class ClientWindow extends javax.swing.JFrame {
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(MessageInput, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(panelLayout.createSequentialGroup()
-                                .addComponent(ConnectionMode)
+                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(ConnectionMode)
+                                    .addGroup(panelLayout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(Money)))
                                 .addGap(26, 26, 26)
-                                .addComponent(jButton9))
-                            .addGroup(panelLayout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Money)))))
+                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(panelLayout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(AceroAmount))
+                                    .addComponent(jButton9))))))
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelLayout.createSequentialGroup()
                         .addGap(54, 54, 54)
@@ -1155,7 +1228,9 @@ public class ClientWindow extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel1)
-                                    .addComponent(Money))
+                                    .addComponent(Money)
+                                    .addComponent(jLabel2)
+                                    .addComponent(AceroAmount))
                                 .addGap(18, 18, 18)
                                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(ReadyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1328,6 +1403,56 @@ public class ClientWindow extends javax.swing.JFrame {
         this.shipState=!this.shipState;
     }//GEN-LAST:event_jToggleButton4ActionPerformed
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        if(this.clientOwner.acero>=500&&this.clientOwner.torpedosE){
+            this.clientOwner.torpedos+=1;
+            this.TorpedoAmount.setText(Integer.toString(this.clientOwner.torpedos));
+            this.clientOwner.acero-=500;
+            this.AceroAmount.setText(Integer.toString(this.clientOwner.acero));
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        if(this.clientOwner.acero>=1000&&this.clientOwner.multiE){
+            this.clientOwner.multi+=1;
+            this.MultiAmount.setText(Integer.toString(this.clientOwner.multi));
+            this.clientOwner.acero-=1000;
+            this.AceroAmount.setText(Integer.toString(this.clientOwner.acero));
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        if(this.clientOwner.acero>=2000&&this.clientOwner.bombsE){
+            this.clientOwner.bombs+=1;
+            this.BombAmount.setText(Integer.toString(this.clientOwner.bombs));
+            this.clientOwner.acero-=2000;
+            this.AceroAmount.setText(Integer.toString(this.clientOwner.acero));
+        }
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+        if(this.clientOwner.acero>=5000&&this.clientOwner.trumpedosE){
+            this.clientOwner.trumpedos+=1;
+            this.TrumpedoAmount.setText(Integer.toString(this.clientOwner.trumpedos));
+            this.clientOwner.acero-=5000;
+            this.AceroAmount.setText(Integer.toString(this.clientOwner.acero));
+        }
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        // TODO add your handling code here:
+        if(this.clientOwner.acero>=2500&&this.clientOwner.shipsE){
+            this.clientOwner.ships+=1;
+            this.ShipAmount.setText(Integer.toString(this.clientOwner.ships));
+            this.clientOwner.acero-=2500;
+            this.AceroAmount.setText(Integer.toString(this.clientOwner.acero));
+        }
+    }//GEN-LAST:event_jButton10ActionPerformed
+
     public JButton getEndTurn() {
         return EndTurn;
     }
@@ -1378,6 +1503,7 @@ public class ClientWindow extends javax.swing.JFrame {
     private javax.swing.JPanel OceanPanel;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel AceroAmount;
     private javax.swing.JLabel Armery;
     private javax.swing.JTextArea Bitacora;
     private javax.swing.JPanel BoardField;
@@ -1424,6 +1550,7 @@ public class ClientWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

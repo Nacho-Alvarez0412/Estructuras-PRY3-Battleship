@@ -31,6 +31,17 @@ public class Client implements Serializable{
     public Socket socket;
     public int id;
     public int money=4000;
+    public int acero=0;
+    public int torpedos=0;
+    public int multi=0;
+    public int bombs=0;
+    public int trumpedos=0;
+    public int ships=0;
+    public boolean torpedosE=false;
+    public boolean multiE=false;
+    public boolean bombsE=false;
+    public boolean trumpedosE=false;
+    public boolean shipsE=false;
     public int[][] LogicBoard=new int[20][20];
     public Grafo grafo=new Grafo();
     public ArrayList<Point> hitsP1=new ArrayList<>();

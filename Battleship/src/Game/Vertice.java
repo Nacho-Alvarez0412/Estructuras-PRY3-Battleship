@@ -28,12 +28,22 @@ public class Vertice implements Serializable{
     public ArrayList<Point> point;
     public ArrayList<Arista> aristas=new ArrayList<>();
     public boolean vivo=true;
-    public int hits=0;
+    public int hits;
+    
     
     public Vertice(int dato,ArrayList<Point> p){
         this.dato=dato;
         this.vivo=true;
         this.point=p;
+        if(this.dato==1) {
+            this.hits=1;
+        } 
+        else if(this.dato==6){
+            this.hits=4;
+        }
+        else{
+            this.hits=2;
+        }
     }
      
 }
