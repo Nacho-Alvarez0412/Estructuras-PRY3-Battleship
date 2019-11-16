@@ -25,13 +25,14 @@ import java.util.ArrayList;
 
 public class Vertice implements Serializable{
     public int dato;
-    public Point point;
+    public ArrayList<Point> point;
     public ArrayList<Arista> aristas=new ArrayList<>();
     public boolean vivo;
     
-    public Vertice(int dato){
+    public Vertice(int dato,ArrayList<Point> p){
         this.dato=dato;
         this.vivo=true;
+        this.point=p;
     }
      
 }

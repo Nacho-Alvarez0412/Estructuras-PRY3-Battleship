@@ -9,13 +9,14 @@ import Game.Grafo;
 import Packages.Package;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.net.Socket;
 
 /**
  *
  * @author sebasgamboa
  */
-public class Client {
+public class Client implements Serializable{
     
     private static Client _instancia = null;
     public static Client instancia() {
@@ -26,13 +27,15 @@ public class Client {
     }
     
     public Socket socket;
-    public ClientWindow window = new ClientWindow(this);
     public int id;
     public int money=4000;
     public int[][] LogicBoard=new int[20][20];
     public Grafo grafo=new Grafo();
+    public ClientWindow window = new ClientWindow(this);
+    
     
     public Client() {
+        //this.window.setRemolinos();
         window.setVisible(true);
     }
     

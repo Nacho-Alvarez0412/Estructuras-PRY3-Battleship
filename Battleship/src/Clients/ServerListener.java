@@ -9,6 +9,7 @@ import Packages.AttackReceivedPackage;
 import Packages.Package;
 import Packages.ChatPackage;
 import Packages.IDPackage;
+import Packages.ShipPackage;
 import Packages.TurnMesagePackage;
 import Packages.TurnPackage;
 import java.awt.Point;
@@ -16,6 +17,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 /**
@@ -60,7 +62,7 @@ public class ServerListener extends Thread {
                         AttackReceivedPackage AR=(AttackReceivedPackage) paq;
                         if(AR.target==this.client.id){
                             for(Point p:AR.attacks){
-                                if(this.client.LogicBoard[p.x][p.y]!=0){
+                                if(this.client.LogicBoard[p.x][p.y]!=0&&this.client.LogicBoard[p.x][p.y]!=7){
                                     this.client.window.board[p.x][p.y].setIcon(
                                             new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/explosion2.png"));
                                 }
@@ -73,6 +75,18 @@ public class ServerListener extends Thread {
                         TurnMesagePackage T=(TurnMesagePackage) paq;
                         this.client.window.setBitacoraText("Es el turno de Player "+T.turn);
                         break;
+                        
+                    case "ship":
+                        ShipPackage s=(ShipPackage) paq;
+                        if(s.origin==this.client.id){
+                            for(BoardLabel bl:s.discoveries){
+                                //System.out.println("si");
+                                if(bl.getIcon()!=null){
+                                    this.client.window.enemyBoard[bl.i][bl.j].setIcon(bl.getIcon());
+                                }
+                            }
+                            this.client.window.enemyBoard[s.point.x][s.point.y].setIcon(new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/ship.png") {});
+                        }
                 }
             }
         } catch (IOException | ClassNotFoundException ex) {

@@ -13,10 +13,12 @@ package Server;
 import Packages.AttackPackage;
 import Packages.AttackReceivedPackage;
 import Packages.GrafoPackage;
+import Packages.LabelsPackage;
 import Packages.LogicBoardPackage;
 import java.net.*; 
 import java.io.*; 
 import Packages.Package;
+import Packages.ShipPackage;
 
 public class ClientListener extends Thread
 { 
@@ -77,10 +79,31 @@ public class ClientListener extends Thread
                     case "Attack":
                         System.out.println("me atacan");
                         AttackPackage AT=(AttackPackage) paq;
-                        Server.instancia().game.Attack(AT.attacks, AT.target,AT.type);
+                        Server.instancia().game.Attack(AT.attacks, AT.target,AT.type,AT.origin);
                         AttackReceivedPackage paq2=new AttackReceivedPackage(AT.attacks,AT.target,"Attack to player "+AT.target);
                         Server.instancia().enviarPaquete(paq2);
                         break;
+                        
+                    case "labels":
+                        LabelsPackage L= (LabelsPackage) paq;
+                        if(L.id==1){
+                            Server.instancia().game.LabelsP1=L.board;
+                        }
+                        else if(L.id==2){
+                            Server.instancia().game.LabelsP2=L.board;
+                        }
+                        else if(L.id==3){
+                            Server.instancia().game.LabelsP3=L.board;
+                        }
+                        else if(L.id==4){
+                            Server.instancia().game.LabelsP4=L.board;
+                        }
+                        break;
+                        
+                    case "ship":
+                        ShipPackage sh=(ShipPackage) paq;
+                        sh.discoveries=Server.instancia().getDiscoveries(sh.point, sh.target);
+                        Server.instancia().enviarPaquete(sh);
                 }
             }
             catch(IOException | ClassNotFoundException e) { 

@@ -6,6 +6,7 @@
 package Server;
 
 import Packages.TurnMesagePackage;
+import java.io.Serializable;
 import javax.swing.JComboBox;
 import javax.swing.JTextArea;
 
@@ -13,7 +14,7 @@ import javax.swing.JTextArea;
  *
  * @author sebasgamboa
  */
-public class ServerWindow extends javax.swing.JFrame {
+public class ServerWindow extends javax.swing.JFrame implements Serializable{
 
     /**
      * Creates new form ServerWindow

@@ -5,6 +5,8 @@
  */
 package Packages;
 
+import Clients.BoardLabel;
+import Game.Ship;
 import java.awt.Point;
 import java.util.ArrayList;
 
@@ -12,18 +14,19 @@ import java.util.ArrayList;
  *
  * @author sebasgamboa
  */
-public class AttackPackage extends Package {
-    
-    public ArrayList<Point> attacks;
+public class ShipPackage extends Package{
     public int target;
-    public String type;
     public int origin;
+    public Point point;
+    public ArrayList<BoardLabel> discoveries;
+    public Ship ship;
     
-    public AttackPackage(ArrayList<Point> attacks,int t,String tipo,int o){
-        super("Attack");
-        this.attacks=attacks;
+    public ShipPackage(int t,int o,Point p,ArrayList<BoardLabel> d,Ship s){
+        super("ship");
         this.target=t;
-        this.type=tipo;
         this.origin=o;
+        this.point=p;
+        this.discoveries=d;
+        this.ship=s;
     }
 }
