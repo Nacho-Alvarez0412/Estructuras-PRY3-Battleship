@@ -5,7 +5,6 @@
  */
 package Server;
 
-import Clients.Client;
 import Packages.IDPackage;
 import java.io.IOException;
 import java.net.ServerSocket;
