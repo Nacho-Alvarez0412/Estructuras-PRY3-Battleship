@@ -12,6 +12,8 @@ import Packages.DeadPackage;
 import Packages.GrafoPackage;
 import Packages.IDPackage;
 import Packages.ShipPackage;
+import Packages.TradeAcceptPackage;
+import Packages.TradeClass;
 import Packages.TurnMesagePackage;
 import Packages.TurnPackage;
 import Packages.hitsPackage;
@@ -21,6 +23,7 @@ import java.io.ObjectInputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -50,6 +53,7 @@ public class ServerListener extends Thread {
                     case "ID":
                         IDPackage ID = (IDPackage) paq;
                         this.client.setID(ID.id);
+                        this.client.window.setTitle("Player " +ID.id);
                         break;
                         
                     case "Turn":
@@ -61,7 +65,6 @@ public class ServerListener extends Thread {
                         break;
                         
                     case "AttackReceived":
-                        
                         AttackReceivedPackage AR=(AttackReceivedPackage) paq;
                         String res=AR.message;
                         if(AR.target==this.client.id){
@@ -138,11 +141,77 @@ public class ServerListener extends Thread {
                             }
                         }
                         break;
+                        
+                    case "trade":
+                        TradeClass TC=(TradeClass) paq;
+                        int input = JOptionPane.showConfirmDialog(this.client.window, TC.weapon+" for $"+TC.price+" from Player "+TC.origin+"?");
+                        if(input==0){
+                            if(null!=TC.weapon)switch (TC.weapon) {
+                                case "torpedo":
+                                    this.client.torpedos+=1;
+                                    this.client.window.getTorpedoAmount().setText(Integer.toString(this.client.torpedos));
+                                    break;
+                                case "multi":
+                                    this.client.multi+=1;
+                                    this.client.window.getMultiAmount().setText(Integer.toString(this.client.multi));
+                                    break;
+                                case "bomb":
+                                    this.client.bombs+=1;
+                                    this.client.window.getBombAmount().setText(Integer.toString(this.client.bombs));
+                                    break;
+                                case "trumpedo":
+                                    this.client.trumpedos+=1;
+                                    this.client.window.getTrumpedoAmount().setText(Integer.toString(this.client.trumpedos));
+                                    break;
+                                case "ship":
+                                    this.client.ships+=1;
+                                    this.client.window.getShipAmount().setText(Integer.toString(this.client.ships));
+                                    break;
+                                default:
+                                    break;
+                            }
+                            this.client.money-=TC.price;
+                            this.client.window.getMoney().setText(Integer.toString(this.client.money));
+                            TradeAcceptPackage tap=new TradeAcceptPackage(TC.weapon,TC.price,TC.origin);
+                            this.client.enviarPaquete(tap);
+                        }
+                        break;
+                        
+                    case "tradeAccept":
+                        TradeAcceptPackage TA=(TradeAcceptPackage) paq;
+                        this.client.money+=TA.price;
+                        System.out.println(TA.price);
+                        this.client.window.getMoney().setText(Integer.toString(this.client.money));
+                        
+                        if(null!=TA.weapon)switch (TA.weapon) {
+                                case "torpedo":
+                                    this.client.torpedos-=1;
+                                    this.client.window.getTorpedoAmount().setText(Integer.toString(this.client.torpedos));
+                                    break;
+                                case "multi":
+                                    this.client.multi-=1;
+                                    this.client.window.getMultiAmount().setText(Integer.toString(this.client.multi));
+                                    break;
+                                case "bomb":
+                                    this.client.bombs-=1;
+                                    this.client.window.getBombAmount().setText(Integer.toString(this.client.bombs));
+                                    break;
+                                case "trumpedo":
+                                    this.client.trumpedos-=1;
+                                    this.client.window.getTrumpedoAmount().setText(Integer.toString(this.client.trumpedos));
+                                    break;
+                                case "ship":
+                                    this.client.ships-=1;
+                                    this.client.window.getShipAmount().setText(Integer.toString(this.client.ships));
+                                    break;
+                                default:
+                                    break;
+                            }
+                        break;
                 }
             }
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(ServerListener.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
 }

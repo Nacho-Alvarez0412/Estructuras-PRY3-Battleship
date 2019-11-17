@@ -20,6 +20,8 @@ import java.net.*;
 import java.io.*; 
 import Packages.Package;
 import Packages.ShipPackage;
+import Packages.TradeAcceptPackage;
+import Packages.TradeClass;
 import Packages.hitsPackage;
 import javax.swing.JOptionPane;
 
@@ -131,18 +133,29 @@ public class ClientListener extends Thread
                         Server.instancia().game.deadUsers.add(d.id);
                         if((Server.instancia().listeners.size()-1)==(Server.instancia().game.deadUsers.size())){
                             if(!Server.instancia().game.deadUsers.contains(1)){
-                                JOptionPane.showMessageDialog(null,"Gano el jugador 1");
+                                JOptionPane.showMessageDialog(Server.instancia().window,"Gano el jugador 1");
                             }
                             else if(!Server.instancia().game.deadUsers.contains(2)){
-                                JOptionPane.showMessageDialog(null,"Gano el jugador 2");
+                                JOptionPane.showMessageDialog(Server.instancia().window,"Gano el jugador 2");
                             }
                             else if(!Server.instancia().game.deadUsers.contains(3)){
-                                JOptionPane.showMessageDialog(null,"Gano el jugador 3");
+                                JOptionPane.showMessageDialog(Server.instancia().window,"Gano el jugador 3");
                             }
                             else if(!Server.instancia().game.deadUsers.contains(4)){
-                                JOptionPane.showMessageDialog(null,"Gano el jugador 4");
+                                JOptionPane.showMessageDialog(Server.instancia().window,"Gano el jugador 4");
                             }
                         }
+                        break;
+                        
+                    case "trade":
+                        TradeClass TC=(TradeClass) paq;
+                        Server.instancia().enviarPaqueteA(TC, TC.player-1);
+                        break;
+                        
+                    case "tradeAccept":
+                        TradeAcceptPackage tap=(TradeAcceptPackage) paq;
+                        Server.instancia().enviarPaqueteA(tap, tap.player-1);
+                        break;
                 }
             }
             catch(IOException | ClassNotFoundException e) { 
@@ -150,6 +163,4 @@ public class ClientListener extends Thread
             }
         }
     }
-
-} 
-
+}

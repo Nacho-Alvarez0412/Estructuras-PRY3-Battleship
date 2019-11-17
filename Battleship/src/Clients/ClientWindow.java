@@ -17,6 +17,7 @@ import Packages.GrafoPackage;
 import Packages.LabelsPackage;
 import Packages.LogicBoardPackage;
 import Packages.ShipPackage;
+import Packages.TradeClass;
 import Packages.TurnPackage;
 import java.awt.Color;
 import java.awt.Point;
@@ -72,6 +73,7 @@ public class ClientWindow extends javax.swing.JFrame {
         initComponents();
         this.EndTurn.setEnabled(false);
         this.Comodin.setEnabled(false);
+        this.trade.setEnabled(false);
         this.clientOwner=c;
         
         MouseListener toolsMouseListener = new MouseListener() {
@@ -178,8 +180,6 @@ public class ClientWindow extends javax.swing.JFrame {
                 tileLabel.setTransferHandler(new TransferHandler("icon"));
                 if((x1==i&&y1==j)||(x2==i&&y2==j)){
                     tileLabel.setIcon(remIcon);
-                    //this.clientOwner.LogicBoard[i][j]=7;
-                    //System.out.println("rem added");
                 }else{
                     tileLabel.setIcon(tileIcon);
                 }
@@ -394,7 +394,7 @@ public class ClientWindow extends javax.swing.JFrame {
             
             this.clientOwner.money-=2000;
             this.clientOwner.window.Money.setText(Integer.toString(this.clientOwner.money));
-
+            this.trade.setEnabled(true);
         }
         else if(currentImage.equals(energysource2x2.getIcon())&&(this.clientOwner.money>=12000||this.firstEnergy)){
             
@@ -521,6 +521,7 @@ public class ClientWindow extends javax.swing.JFrame {
 
         }
         else if(currentImage.equals(mercado1x2.getIcon())&&this.clientOwner.money>=2000){
+            
             board[i][j+1].setIcon(currentImage2);
             targetLabel.setIcon(currentImage);
             
@@ -538,6 +539,7 @@ public class ClientWindow extends javax.swing.JFrame {
             
             this.clientOwner.money-=2000;
             this.clientOwner.window.Money.setText(Integer.toString(this.clientOwner.money));
+            this.trade.setEnabled(true);
 
         }
     }
@@ -551,6 +553,8 @@ public class ClientWindow extends javax.swing.JFrame {
         AttackPackage paq=new AttackPackage(points,this.enemyTarget,"torpedo",this.clientOwner.id);
         try {
             Client.instancia().enviarPaquete(paq);
+            this.clientOwner.torpedos-=1;
+            this.clientOwner.window.TorpedoAmount.setText(Integer.toString(this.clientOwner.torpedos));
             
         } catch (IOException ex) {
             Logger.getLogger(ClientWindow.class.getName()).log(Level.SEVERE, null, ex);
@@ -565,6 +569,8 @@ public class ClientWindow extends javax.swing.JFrame {
         AttackPackage paq=new AttackPackage(points,this.enemyTarget,"multi",this.clientOwner.id);
         try {
             Client.instancia().enviarPaquete(paq);
+            this.clientOwner.multi-=1;
+            this.clientOwner.window.MultiAmount.setText(Integer.toString(this.clientOwner.multi));
         } catch (IOException ex) {
             Logger.getLogger(ClientWindow.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -607,6 +613,8 @@ public class ClientWindow extends javax.swing.JFrame {
             AttackPackage paq=new AttackPackage(points,this.enemyTarget,"bomb",this.clientOwner.id);
             try {
                 Client.instancia().enviarPaquete(paq);
+                this.clientOwner.bombs-=1;
+            this.clientOwner.window.BombAmount.setText(Integer.toString(this.clientOwner.bombs));
             } catch (IOException ex) {
                 Logger.getLogger(ClientWindow.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -629,6 +637,8 @@ public class ClientWindow extends javax.swing.JFrame {
             AttackPackage paq=new AttackPackage(points,this.enemyTarget,"Trumpedo",this.clientOwner.id);
             try {
                 Client.instancia().enviarPaquete(paq);
+                this.clientOwner.trumpedos-=1;
+                this.clientOwner.window.TrumpedoAmount.setText(Integer.toString(this.clientOwner.trumpedos));
             } catch (IOException ex) {
                 Logger.getLogger(ClientWindow.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -644,6 +654,8 @@ public class ClientWindow extends javax.swing.JFrame {
         sleep(3000);
         ShipPackage paq=new ShipPackage(this.enemyTarget,this.clientOwner.id,new Point(clickedLabel.i,clickedLabel.j),null,s);
         this.clientOwner.enviarPaquete(paq);
+        this.clientOwner.ships-=1;
+        this.clientOwner.window.ShipAmount.setText(Integer.toString(this.clientOwner.ships));
     }
     
     public void setAcero(){
@@ -729,6 +741,7 @@ public class ClientWindow extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         AceroAmount = new javax.swing.JLabel();
         Comodin = new javax.swing.JButton();
+        trade = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -1112,6 +1125,13 @@ public class ClientWindow extends javax.swing.JFrame {
             }
         });
 
+        trade.setText("Trade");
+        trade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tradeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
         panelLayout.setHorizontalGroup(
@@ -1139,17 +1159,18 @@ public class ClientWindow extends javax.swing.JFrame {
                                         .addComponent(jLabel1)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(Money)))
-                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGap(18, 18, 18)
+                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(panelLayout.createSequentialGroup()
-                                        .addGap(26, 26, 26)
                                         .addComponent(jLabel2)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(AceroAmount))
                                     .addGroup(panelLayout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
                                         .addComponent(jButton9)
                                         .addGap(18, 18, 18)
-                                        .addComponent(Comodin)))))))
+                                        .addComponent(Comodin, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(trade, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelLayout.createSequentialGroup()
                         .addGap(54, 54, 54)
@@ -1254,10 +1275,12 @@ public class ClientWindow extends javax.swing.JFrame {
                                     .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(ShipAmount))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(ConnectionMode)
-                            .addComponent(jButton9)
-                            .addComponent(Comodin))
+                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(ConnectionMode)
+                                .addComponent(jButton9)
+                                .addComponent(Comodin))
+                            .addComponent(trade))
                         .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(panelLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1507,10 +1530,47 @@ public class ClientWindow extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_ComodinActionPerformed
 
+    private void tradeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tradeActionPerformed
+        // TODO add your handling code here:
+        String[] options = {"Player 4", "Player 3", "Player 2", "Player 1"};
+        int x = JOptionPane.showOptionDialog(null, "Pick the player for the negotiation",
+                "Click a button",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[3]);
+        switch (x) {
+            case 3:
+                x=1;
+                break;
+            case 2:
+                x=2;
+                break;
+            case 1:
+                x=3;
+                break;
+            case 0:
+                x=4;
+                break;
+            default:
+                break;
+        }
+        System.out.println(x);
+        String weapon=JOptionPane.showInputDialog("What do you want to sell?");
+        String price=JOptionPane.showInputDialog("How much do you want for this?");
+        int input = JOptionPane.showConfirmDialog(this, weapon+" for $"+price+" to Player "+x+"?");
+        if(input==0){
+            System.out.println("si");
+        }
+        TradeClass t=new TradeClass(weapon,Integer.parseInt(price),x,this.clientOwner.id);
+        try {
+            this.clientOwner.enviarPaquete(t);
+        } catch (IOException ex) {
+            Logger.getLogger(ClientWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_tradeActionPerformed
+
     public JButton getEndTurn() {
         return EndTurn;
     }
-
+    
     public void setBitacoraText(String s){
         this.Bitacora.append(s+"\n");
     }
@@ -1553,6 +1613,36 @@ public class ClientWindow extends javax.swing.JFrame {
             }
         });
     }
+
+    public JLabel getAceroAmount() {
+        return AceroAmount;
+    }
+
+    public JLabel getBombAmount() {
+        return BombAmount;
+    }
+
+    public JLabel getMultiAmount() {
+        return MultiAmount;
+    }
+
+    public JLabel getShipAmount() {
+        return ShipAmount;
+    }
+
+    public JLabel getTorpedoAmount() {
+        return TorpedoAmount;
+    }
+
+    public JLabel getTrumpedoAmount() {
+        return TrumpedoAmount;
+    }
+
+    public JLabel getMoney() {
+        return Money;
+    }
+    
+    
     
     private javax.swing.JPanel OceanPanel;
 
@@ -1620,5 +1710,6 @@ public class ClientWindow extends javax.swing.JFrame {
     private javax.swing.JPanel panel;
     private javax.swing.JLabel temple1x2;
     private javax.swing.JLabel temple2x1;
+    private javax.swing.JButton trade;
     // End of variables declaration//GEN-END:variables
 }

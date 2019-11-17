@@ -56,20 +56,24 @@ public class ArmoryThread extends Thread implements Serializable{
                 Logger.getLogger(ArmoryThread.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        if(tipo=="torpedo"){
-            this.client.torpedosE=false;
-        }
-        else if(tipo=="bomb"){
-            this.client.bombsE=false;
-        }
-        else if(tipo=="multi"){
-            this.client.multiE=false;
-        }
-        else if(tipo=="trumpedo"){
-            this.client.trumpedosE=false;
-        }
-        else if(tipo=="ships"){
-            this.client.shipsE=false;
+        if(null!=tipo)switch (tipo) {
+            case "torpedo":
+                this.client.torpedosE=false;
+                break;
+            case "bomb":
+                this.client.bombsE=false;
+                break;
+            case "multi":
+                this.client.multiE=false;
+                break;
+            case "trumpedo":
+                this.client.trumpedosE=false;
+                break;
+            case "ships":
+                this.client.shipsE=false;
+                break;
+            default:
+                break;
         }
     }
     
