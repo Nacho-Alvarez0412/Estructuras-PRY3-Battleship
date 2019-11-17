@@ -6,6 +6,7 @@
 package Game;
 
 import Clients.Client;
+import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -13,7 +14,7 @@ import java.util.logging.Logger;
  *
  * @author sebasgamboa
  */
-public class ArmoryThread extends Thread{
+public class ArmoryThread extends Thread implements Serializable{
     public Client client;
     public boolean vivo=true;
     public String tipo;

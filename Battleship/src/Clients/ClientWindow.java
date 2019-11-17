@@ -274,8 +274,8 @@ public class ClientWindow extends javax.swing.JFrame {
             // Hacer conexion
             for(Vertice vertice: this.clientOwner.grafo.grafo){
                 System.out.println(vertice.dato);
-                if(vertice.dato==(connectionStart.verticeName)){
-                    vertice.aristas.add(new Arista(clickedLabel.verticeName,connectionStart.i,
+                if(vertice==(connectionStart.verticeName)){
+                    vertice.aristas.add(new Arista(clickedLabel.verticeName.dato,connectionStart.i,
                     connectionStart.j,clickedLabel.i,clickedLabel.j));
                     this.BoardField.getParent().repaint();
                     break;
@@ -303,12 +303,12 @@ public class ClientWindow extends javax.swing.JFrame {
             System.out.println(Weapon);
             board[i+1][j].setIcon(currentImage2);
             targetLabel.setIcon(currentImage);
-            board[i+1][j].verticeName=3;
-            board[i][j].verticeName=3;
+            
             
             ArmoryThread aThread=new ArmoryThread(this.clientOwner,Weapon);
-            board[i+1][j].armory=aThread;
-            board[i][j].armory=aThread;
+            this.clientOwner.armory.add(aThread);
+            board[i+1][j].armory=this.clientOwner.armory.size()-1;
+            board[i][j].armory=this.clientOwner.armory.size()-1;
             aThread.start();
             
             this.clientOwner.LogicBoard[i][j]=3;
@@ -319,6 +319,8 @@ public class ClientWindow extends javax.swing.JFrame {
             p.add(new Point(i+1,j));
             Vertice currentVertice = new Vertice(3,p);
             this.clientOwner.grafo.grafo.add(currentVertice);
+            board[i+1][j].verticeName=currentVertice;
+            board[i][j].verticeName=currentVertice;
             
             this.clientOwner.money-=1500;
             this.clientOwner.window.Money.setText(Integer.toString(this.clientOwner.money));
@@ -326,12 +328,12 @@ public class ClientWindow extends javax.swing.JFrame {
         else if(currentImage.equals(mine2x1.getIcon())&&this.clientOwner.money>=1000){
             board[i+1][j].setIcon(currentImage2);
             targetLabel.setIcon(currentImage);
-            board[i+1][j].verticeName=2;
-            board[i][j].verticeName=2;
+            
             
             MineThread aThread=new MineThread(this.clientOwner);
-            board[i+1][j].mine=aThread;
-            board[i][j].mine=aThread;
+            this.clientOwner.mine.add(aThread);
+            board[i+1][j].mine=this.clientOwner.mine.size()-1;
+            board[i][j].mine=this.clientOwner.mine.size()-1;
             aThread.start();
             
             this.clientOwner.LogicBoard[i][j]=2;
@@ -342,6 +344,8 @@ public class ClientWindow extends javax.swing.JFrame {
             p.add(new Point(i+1,j));
             Vertice currentVertice = new Vertice(2,p);
             this.clientOwner.grafo.grafo.add(currentVertice);
+            board[i+1][j].verticeName=currentVertice;
+            board[i][j].verticeName=currentVertice;
             
             this.clientOwner.money-=1000;
             this.clientOwner.window.Money.setText(Integer.toString(this.clientOwner.money));
@@ -349,12 +353,12 @@ public class ClientWindow extends javax.swing.JFrame {
         else if(currentImage.equals(temple2x1.getIcon())&&this.clientOwner.money>=2500){
             board[i+1][j].setIcon(currentImage2);
             targetLabel.setIcon(currentImage);
-            board[i+1][j].verticeName=4;
-            board[i][j].verticeName=4;
+            
             
             TempleThread TThread=new TempleThread(this.clientOwner);
-            board[i+1][j].temple=TThread;
-            board[i][j].temple=TThread;
+            this.clientOwner.temple.add(TThread);
+            board[i+1][j].temple=this.clientOwner.temple.size()-1;
+            board[i][j].temple=this.clientOwner.temple.size()-1;
             TThread.start();
             
             this.clientOwner.LogicBoard[i][j]=4;
@@ -365,6 +369,8 @@ public class ClientWindow extends javax.swing.JFrame {
             p.add(new Point(i+1,j));
             Vertice currentVertice = new Vertice(4,p);
             this.clientOwner.grafo.grafo.add(currentVertice);
+            board[i+1][j].verticeName=currentVertice;
+            board[i][j].verticeName=currentVertice;
             
             this.clientOwner.money-=1500;
             this.clientOwner.window.Money.setText(Integer.toString(this.clientOwner.money));
@@ -373,8 +379,7 @@ public class ClientWindow extends javax.swing.JFrame {
         else if(currentImage.equals(mercado2x1.getIcon())&&this.clientOwner.money>=2000){
             board[i+1][j].setIcon(currentImage2);
             targetLabel.setIcon(currentImage);
-            board[i+1][j].verticeName=5;
-            board[i][j].verticeName=5;
+            
             
             this.clientOwner.LogicBoard[i][j]=5;
             this.clientOwner.LogicBoard[i+1][j]=5;
@@ -384,6 +389,8 @@ public class ClientWindow extends javax.swing.JFrame {
             p.add(new Point(i+1,j));
             Vertice currentVertice = new Vertice(5,p);
             this.clientOwner.grafo.grafo.add(currentVertice);
+            board[i+1][j].verticeName=currentVertice;
+            board[i][j].verticeName=currentVertice;
             
             this.clientOwner.money-=2000;
             this.clientOwner.window.Money.setText(Integer.toString(this.clientOwner.money));
@@ -395,10 +402,7 @@ public class ClientWindow extends javax.swing.JFrame {
             board[i+1][j+1].setIcon(currentImage3);
             board[i+1][j].setIcon(currentImage4);
             targetLabel.setIcon(currentImage);
-            board[i][j+1].verticeName=6;
-            board[i+1][j+1].verticeName=6;
-            board[i+1][j].verticeName=6;
-            board[i][j].verticeName=6;
+            
             
             this.clientOwner.LogicBoard[i][j]=6;
             this.clientOwner.LogicBoard[i][j+1]=6;
@@ -412,6 +416,10 @@ public class ClientWindow extends javax.swing.JFrame {
             p.add(new Point(i,j+1));
             Vertice currentVertice = new Vertice(6,p);
             this.clientOwner.grafo.grafo.add(currentVertice);
+            board[i][j+1].verticeName=currentVertice;
+            board[i+1][j+1].verticeName=currentVertice;
+            board[i+1][j].verticeName=currentVertice;
+            board[i][j].verticeName=currentVertice;
             
             if(!this.firstEnergy){
                 this.clientOwner.money-=12000;
@@ -429,7 +437,7 @@ public class ClientWindow extends javax.swing.JFrame {
             p.add(new Point(i,j));
             Vertice currentVertice = new Vertice(1,p);
             this.clientOwner.grafo.grafo.add(currentVertice);
-            targetLabel.verticeName=1;
+            targetLabel.verticeName=currentVertice;
             
             this.clientOwner.money-=100;
             this.clientOwner.window.Money.setText(Integer.toString(this.clientOwner.money));
@@ -439,12 +447,12 @@ public class ClientWindow extends javax.swing.JFrame {
             System.out.println(Weapon);
             board[i][j+1].setIcon(currentImage2);
             targetLabel.setIcon(currentImage);
-            board[i][j+1].verticeName=3;
-            board[i][j].verticeName=3;
+            
             
             ArmoryThread aThread=new ArmoryThread(this.clientOwner,Weapon);
-            board[i][j+1].armory=aThread;
-            board[i][j].armory=aThread;
+            this.clientOwner.armory.add(aThread);
+            board[i][j+1].armory=this.clientOwner.armory.size()-1;
+            board[i][j].armory=this.clientOwner.armory.size()-1;
             aThread.start();
             
             this.clientOwner.LogicBoard[i][j]=3;
@@ -455,6 +463,8 @@ public class ClientWindow extends javax.swing.JFrame {
             p.add(new Point(i,j+1));
             Vertice currentVertice = new Vertice(3,p);
             this.clientOwner.grafo.grafo.add(currentVertice);
+            board[i][j+1].verticeName=currentVertice;
+            board[i][j].verticeName=currentVertice;
             
             this.clientOwner.money-=1500;
             this.clientOwner.window.Money.setText(Integer.toString(this.clientOwner.money));
@@ -462,12 +472,12 @@ public class ClientWindow extends javax.swing.JFrame {
         else if(currentImage.equals(mine1x2.getIcon())&&this.clientOwner.money>=1000){
             board[i][j+1].setIcon(currentImage2);
             targetLabel.setIcon(currentImage);
-            board[i][j+1].verticeName=2;
-            board[i][j].verticeName=2;
+            
             
             MineThread aThread=new MineThread(this.clientOwner);
-            board[i][j+1].mine=aThread;
-            board[i][j].mine=aThread;
+            this.clientOwner.mine.add(aThread);
+            board[i][j+1].mine=this.clientOwner.mine.size()-1;
+            board[i][j].mine=this.clientOwner.mine.size()-1;
             aThread.start();
             
             this.clientOwner.LogicBoard[i][j]=2;
@@ -478,6 +488,8 @@ public class ClientWindow extends javax.swing.JFrame {
             p.add(new Point(i,j+1));
             Vertice currentVertice = new Vertice(2,p);
             this.clientOwner.grafo.grafo.add(currentVertice);
+            board[i][j+1].verticeName=currentVertice;
+            board[i][j].verticeName=currentVertice;
             
             this.clientOwner.money-=1000;
             this.clientOwner.window.Money.setText(Integer.toString(this.clientOwner.money));
@@ -485,12 +497,12 @@ public class ClientWindow extends javax.swing.JFrame {
         else if(currentImage.equals(temple1x2.getIcon())&&this.clientOwner.money>=2500){
             board[i][j+1].setIcon(currentImage2);
             targetLabel.setIcon(currentImage);
-            board[i][j].verticeName=4;
-            board[i][j+1].verticeName=4;
+            
             
             TempleThread TThread=new TempleThread(this.clientOwner);
-            board[i][j].temple=TThread;
-            board[i][j+1].temple=TThread;
+            this.clientOwner.temple.add(TThread);
+            board[i][j+1].temple=this.clientOwner.temple.size()-1;
+            board[i][j].temple=this.clientOwner.temple.size()-1;
             TThread.start();
             
             this.clientOwner.LogicBoard[i][j]=4;
@@ -501,6 +513,8 @@ public class ClientWindow extends javax.swing.JFrame {
             p.add(new Point(i,j+1));
             Vertice currentVertice = new Vertice(4,p);
             this.clientOwner.grafo.grafo.add(currentVertice);
+            board[i][j+1].verticeName=currentVertice;
+            board[i][j].verticeName=currentVertice;
             
             this.clientOwner.money-=1500;
             this.clientOwner.window.Money.setText(Integer.toString(this.clientOwner.money));
@@ -509,8 +523,7 @@ public class ClientWindow extends javax.swing.JFrame {
         else if(currentImage.equals(mercado1x2.getIcon())&&this.clientOwner.money>=2000){
             board[i][j+1].setIcon(currentImage2);
             targetLabel.setIcon(currentImage);
-            board[i][j+1].verticeName=5;
-            board[i][j].verticeName=5;
+            
             
             this.clientOwner.LogicBoard[i][j]=5;
             this.clientOwner.LogicBoard[i][j+1]=5;
@@ -520,6 +533,8 @@ public class ClientWindow extends javax.swing.JFrame {
             p.add(new Point(i,j+1));
             Vertice currentVertice = new Vertice(5,p);
             this.clientOwner.grafo.grafo.add(currentVertice);
+            board[i][j+1].verticeName=currentVertice;
+            board[i][j].verticeName=currentVertice;
             
             this.clientOwner.money-=2000;
             this.clientOwner.window.Money.setText(Integer.toString(this.clientOwner.money));

@@ -5,7 +5,10 @@
  */
 package Clients;
 
+import Game.ArmoryThread;
 import Game.Grafo;
+import Game.MineThread;
+import Game.TempleThread;
 import Packages.Package;
 import java.awt.Point;
 import java.io.IOException;
@@ -29,6 +32,9 @@ public class Client implements Serializable{
     }
     
     public Socket socket;
+    public ArrayList<MineThread> mine=new ArrayList<>();
+    public ArrayList<ArmoryThread> armory=new ArrayList<>();
+    public ArrayList<TempleThread> temple=new ArrayList<>();
     public int id;
     public int money=4000;
     public int acero=0;
@@ -46,10 +52,12 @@ public class Client implements Serializable{
     public boolean comodinOn=false;
     public int[][] LogicBoard=new int[20][20];
     public Grafo grafo=new Grafo();
+    public int verticesDead=0;
     public ArrayList<Point> hitsP1=new ArrayList<>();
     public ArrayList<Point> hitsP2=new ArrayList<>();
     public ArrayList<Point> hitsP3=new ArrayList<>();
     public ArrayList<Point> hitsP4=new ArrayList<>();
+    public boolean UsusarioVivo=true;
     public ClientWindow window = new ClientWindow(this);
     
     

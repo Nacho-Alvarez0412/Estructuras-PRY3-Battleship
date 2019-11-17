@@ -39,6 +39,8 @@ import java.util.logging.Logger;
 public class Game extends Thread implements Serializable{
     
     public int turn=1;
+    public ArrayList<Integer> deadUsers=new ArrayList<>();
+    public boolean game=true;
     
     public int[][] LogicBoardPlayer1=new int[20][20];
     public int[][] LogicBoardPlayer2=new int[20][20];
@@ -133,6 +135,7 @@ public class Game extends Thread implements Serializable{
                         }else{
                             System.out.println("me pegaron");
                             this.LogicBoardPlayer1[p.x][p.y]=0;
+                            
                             hitLanded=true;
                             if(tipo=="multi"){
                                 ArrayList<Point> points2=new ArrayList<>();
@@ -278,7 +281,7 @@ public class Game extends Thread implements Serializable{
     
     @Override
     public void run(){
-        while(true){
+        while(game){
             TurnMesagePackage t=new TurnMesagePackage(turn);
             server.enviarPaquete(t);     
             server.enviarPaquete(new TurnPackage(this.turn));
@@ -293,7 +296,7 @@ public class Game extends Thread implements Serializable{
             }
             changeTurn();       
         }
-        
+        System.out.println("se termino");
     }
     
     

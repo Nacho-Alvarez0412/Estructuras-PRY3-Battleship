@@ -12,6 +12,7 @@ package Server;
 
 import Packages.AttackPackage;
 import Packages.AttackReceivedPackage;
+import Packages.DeadPackage;
 import Packages.GrafoPackage;
 import Packages.LabelsPackage;
 import Packages.LogicBoardPackage;
@@ -20,7 +21,7 @@ import java.io.*;
 import Packages.Package;
 import Packages.ShipPackage;
 import Packages.hitsPackage;
-import java.awt.Point;
+import javax.swing.JOptionPane;
 
 public class ClientListener extends Thread
 { 
@@ -124,6 +125,24 @@ public class ClientListener extends Thread
                             Server.instancia().enviarPaqueteA(AR, 3);
                         }
                         break;
+                        
+                    case "dead":
+                        DeadPackage d=(DeadPackage) paq;
+                        Server.instancia().game.deadUsers.add(d.id);
+                        if((Server.instancia().listeners.size()-1)==(Server.instancia().game.deadUsers.size())){
+                            if(!Server.instancia().game.deadUsers.contains(1)){
+                                JOptionPane.showMessageDialog(null,"Gano el jugador 1");
+                            }
+                            else if(!Server.instancia().game.deadUsers.contains(2)){
+                                JOptionPane.showMessageDialog(null,"Gano el jugador 2");
+                            }
+                            else if(!Server.instancia().game.deadUsers.contains(3)){
+                                JOptionPane.showMessageDialog(null,"Gano el jugador 3");
+                            }
+                            else if(!Server.instancia().game.deadUsers.contains(4)){
+                                JOptionPane.showMessageDialog(null,"Gano el jugador 4");
+                            }
+                        }
                 }
             }
             catch(IOException | ClassNotFoundException e) { 

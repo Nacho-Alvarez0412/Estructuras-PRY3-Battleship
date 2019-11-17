@@ -8,6 +8,8 @@ package Clients;
 import Packages.AttackReceivedPackage;
 import Packages.Package;
 import Packages.ChatPackage;
+import Packages.DeadPackage;
+import Packages.GrafoPackage;
 import Packages.IDPackage;
 import Packages.ShipPackage;
 import Packages.TurnMesagePackage;
@@ -39,8 +41,7 @@ public class ServerListener extends Thread {
             while (true) {
                 ObjectInputStream in = new ObjectInputStream(Client.instancia().socket.getInputStream());
                 Package paq = (Package) in.readObject();                
-                switch (paq.tipo) {
-                    
+                switch (paq.tipo) {                    
                     case "chat": 
                         ChatPackage chat = (ChatPackage) paq;
                         Client.instancia().window.addMessage(chat.mensaje);
@@ -72,6 +73,19 @@ public class ServerListener extends Thread {
                                     AR.hitLanded=true;
                                     hitsPackage paq2=new hitsPackage(AR.attacks,AR.target,AR.origin);
                                     this.client.enviarPaquete(paq2);
+                                    this.client.window.board[p.x][p.y].verticeName.hits-=1;
+                                    if(this.client.window.board[p.x][p.y].verticeName.hits==0){
+                                        this.client.window.board[p.x][p.y].verticeName.vivo=false;
+                                        System.out.println("ded");
+                                        this.client.verticesDead+=1;
+                                    }
+                                    GrafoPackage gr=new GrafoPackage(this.client.grafo,this.client.id);
+                                    this.client.enviarPaquete(gr);
+                                    if(this.client.verticesDead==this.client.grafo.grafo.size()){
+                                        this.client.UsusarioVivo=false;
+                                        DeadPackage dead=new DeadPackage(this.client.id);
+                                        client.enviarPaquete(dead);
+                                    }
                                 }
                                 else{
                                     res+=" en ("+p.x+","+p.y+") fallido";
