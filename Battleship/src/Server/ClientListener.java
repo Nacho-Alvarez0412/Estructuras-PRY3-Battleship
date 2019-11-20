@@ -10,6 +10,7 @@ package Server;
  * @author sebasgamboa
  */// 
 
+import Packages.AristasPackage;
 import Packages.AttackPackage;
 import Packages.AttackReceivedPackage;
 import Packages.DeadPackage;
@@ -155,6 +156,11 @@ public class ClientListener extends Thread
                     case "tradeAccept":
                         TradeAcceptPackage tap=(TradeAcceptPackage) paq;
                         Server.instancia().enviarPaqueteA(tap, tap.player-1);
+                        break;
+                        
+                    case "aristas":
+                        AristasPackage AP = (AristasPackage) paq;
+                        Server.instancia().enviarPaqueteA(AP, AP.target-1);
                         break;
                 }
             }

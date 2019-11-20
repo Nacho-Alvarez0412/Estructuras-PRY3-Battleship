@@ -8,6 +8,7 @@ package Game;
 import java.awt.Point;
 import java.io.Serializable;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -26,23 +27,27 @@ import java.util.ArrayList;
 public class Vertice implements Serializable{
     public int dato;
     public ArrayList<Point> point;
+    public ArrayList<ImageIcon> images;
     public ArrayList<Arista> aristas=new ArrayList<>();
     public boolean vivo=true;
     public int hits;
     
     
-    public Vertice(int dato,ArrayList<Point> p){
+    public Vertice(int dato,ArrayList<Point> p,ArrayList<ImageIcon> II){
         this.dato=dato;
         this.vivo=true;
         this.point=p;
-        if(this.dato==1) {
-            this.hits=1;
-        } 
-        else if(this.dato==6){
-            this.hits=4;
-        }
-        else{
-            this.hits=2;
+        this.images=II;
+        switch (this.dato) {
+            case 1:
+                this.hits=1;
+                break;
+            case 6:
+                this.hits=4;
+                break;
+            default:
+                this.hits=2;
+                break;
         }
     }
      

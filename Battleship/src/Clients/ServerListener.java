@@ -5,6 +5,9 @@
  */
 package Clients;
 
+import Game.Arista;
+import Game.Vertice;
+import Packages.AristasPackage;
 import Packages.AttackReceivedPackage;
 import Packages.Package;
 import Packages.ChatPackage;
@@ -20,6 +23,7 @@ import Packages.hitsPackage;
 import java.awt.Point;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -81,6 +85,14 @@ public class ServerListener extends Thread {
                                         this.client.window.board[p.x][p.y].verticeName.vivo=false;
                                         System.out.println("ded");
                                         this.client.verticesDead+=1;
+                                        if(this.client.window.board[p.x][p.y].verticeName.dato==1){
+                                            ArrayList<Vertice> v=new ArrayList<>();
+                                            for(Arista a:this.client.window.board[p.x][p.y].verticeName.aristas){
+                                                v.add(a.dato);
+                                            }
+                                            AristasPackage arpaq = new AristasPackage(v,AR.origin,this.client.id);
+                                            this.client.enviarPaquete(arpaq);
+                                        }
                                     }
                                     GrafoPackage gr=new GrafoPackage(this.client.grafo,this.client.id);
                                     this.client.enviarPaquete(gr);
@@ -207,6 +219,24 @@ public class ServerListener extends Thread {
                                 default:
                                     break;
                             }
+                        break;
+                        
+                    case "aristas":
+                        AristasPackage AP = (AristasPackage) paq;
+                        for(Vertice v:AP.vertices){
+                            if(AP.origin==1){
+                                this.client.disconexosP1.add(v);
+                            }
+                            else if(AP.origin==2){
+                                this.client.disconexosP2.add(v);
+                            }
+                            else if(AP.origin==3){
+                                this.client.disconexosP3.add(v);
+                            }
+                            else if(AP.origin==4){
+                                this.client.disconexosP4.add(v);
+                            }
+                        }
                         break;
                 }
             }

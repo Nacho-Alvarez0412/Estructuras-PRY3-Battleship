@@ -275,7 +275,7 @@ public class ClientWindow extends javax.swing.JFrame {
             for(Vertice vertice: this.clientOwner.grafo.grafo){
                 System.out.println(vertice.dato);
                 if(vertice==(connectionStart.verticeName)){
-                    vertice.aristas.add(new Arista(clickedLabel.verticeName.dato,connectionStart.i,
+                    vertice.aristas.add(new Arista(clickedLabel.verticeName,connectionStart.i,
                     connectionStart.j,clickedLabel.i,clickedLabel.j));
                     this.BoardField.getParent().repaint();
                     break;
@@ -315,9 +315,12 @@ public class ClientWindow extends javax.swing.JFrame {
             this.clientOwner.LogicBoard[i+1][j]=3;
             
             ArrayList<Point> p=new ArrayList<>();
+            ArrayList<ImageIcon> I=new ArrayList<>();
             p.add(new Point(i,j));
             p.add(new Point(i+1,j));
-            Vertice currentVertice = new Vertice(3,p);
+            I.add(currentImage);
+            I.add(currentImage2);
+            Vertice currentVertice = new Vertice(3,p,I);
             this.clientOwner.grafo.grafo.add(currentVertice);
             board[i+1][j].verticeName=currentVertice;
             board[i][j].verticeName=currentVertice;
@@ -340,9 +343,12 @@ public class ClientWindow extends javax.swing.JFrame {
             this.clientOwner.LogicBoard[i+1][j]=2;
             
             ArrayList<Point> p=new ArrayList<>();
+            ArrayList<ImageIcon> I=new ArrayList<>();
             p.add(new Point(i,j));
             p.add(new Point(i+1,j));
-            Vertice currentVertice = new Vertice(2,p);
+            I.add(currentImage);
+            I.add(currentImage2);
+            Vertice currentVertice = new Vertice(2,p,I);
             this.clientOwner.grafo.grafo.add(currentVertice);
             board[i+1][j].verticeName=currentVertice;
             board[i][j].verticeName=currentVertice;
@@ -365,9 +371,12 @@ public class ClientWindow extends javax.swing.JFrame {
             this.clientOwner.LogicBoard[i+1][j]=4;
             
             ArrayList<Point> p=new ArrayList<>();
+            ArrayList<ImageIcon> I=new ArrayList<>();
             p.add(new Point(i,j));
             p.add(new Point(i+1,j));
-            Vertice currentVertice = new Vertice(4,p);
+            I.add(currentImage);
+            I.add(currentImage2);
+            Vertice currentVertice = new Vertice(4,p,I);
             this.clientOwner.grafo.grafo.add(currentVertice);
             board[i+1][j].verticeName=currentVertice;
             board[i][j].verticeName=currentVertice;
@@ -385,9 +394,12 @@ public class ClientWindow extends javax.swing.JFrame {
             this.clientOwner.LogicBoard[i+1][j]=5;
             
             ArrayList<Point> p=new ArrayList<>();
+            ArrayList<ImageIcon> I=new ArrayList<>();
             p.add(new Point(i,j));
             p.add(new Point(i+1,j));
-            Vertice currentVertice = new Vertice(5,p);
+            I.add(currentImage);
+            I.add(currentImage2);
+            Vertice currentVertice = new Vertice(5,p,I);
             this.clientOwner.grafo.grafo.add(currentVertice);
             board[i+1][j].verticeName=currentVertice;
             board[i][j].verticeName=currentVertice;
@@ -410,11 +422,16 @@ public class ClientWindow extends javax.swing.JFrame {
             this.clientOwner.LogicBoard[i+1][j]=6;
             
             ArrayList<Point> p=new ArrayList<>();
+            ArrayList<ImageIcon> I=new ArrayList<>();
             p.add(new Point(i,j));
             p.add(new Point(i+1,j));
             p.add(new Point(i+1,j+1));
             p.add(new Point(i,j+1));
-            Vertice currentVertice = new Vertice(6,p);
+            I.add(currentImage);
+            I.add(currentImage4);
+            I.add(currentImage3);
+            I.add(currentImage2);
+            Vertice currentVertice = new Vertice(6,p,I);
             this.clientOwner.grafo.grafo.add(currentVertice);
             board[i][j+1].verticeName=currentVertice;
             board[i+1][j+1].verticeName=currentVertice;
@@ -434,8 +451,10 @@ public class ClientWindow extends javax.swing.JFrame {
             targetLabel.setIcon(currentImage);
             
             ArrayList<Point> p=new ArrayList<>();
+            ArrayList<ImageIcon> I=new ArrayList<>();
             p.add(new Point(i,j));
-            Vertice currentVertice = new Vertice(1,p);
+            I.add(currentImage);
+            Vertice currentVertice = new Vertice(1,p,I);
             this.clientOwner.grafo.grafo.add(currentVertice);
             targetLabel.verticeName=currentVertice;
             
@@ -459,9 +478,12 @@ public class ClientWindow extends javax.swing.JFrame {
             this.clientOwner.LogicBoard[i][j+1]=3;
             
             ArrayList<Point> p=new ArrayList<>();
+            ArrayList<ImageIcon> I=new ArrayList<>();
+            I.add(currentImage);
+            I.add(currentImage2);
             p.add(new Point(i,j));
             p.add(new Point(i,j+1));
-            Vertice currentVertice = new Vertice(3,p);
+            Vertice currentVertice = new Vertice(3,p,I);
             this.clientOwner.grafo.grafo.add(currentVertice);
             board[i][j+1].verticeName=currentVertice;
             board[i][j].verticeName=currentVertice;
@@ -484,9 +506,12 @@ public class ClientWindow extends javax.swing.JFrame {
             this.clientOwner.LogicBoard[i][j+1]=2;
             
             ArrayList<Point> p=new ArrayList<>();
+            ArrayList<ImageIcon> I=new ArrayList<>();
+            I.add(currentImage);
+            I.add(currentImage2);
             p.add(new Point(i,j));
             p.add(new Point(i,j+1));
-            Vertice currentVertice = new Vertice(2,p);
+            Vertice currentVertice = new Vertice(2,p,I);
             this.clientOwner.grafo.grafo.add(currentVertice);
             board[i][j+1].verticeName=currentVertice;
             board[i][j].verticeName=currentVertice;
@@ -509,9 +534,13 @@ public class ClientWindow extends javax.swing.JFrame {
             this.clientOwner.LogicBoard[i][j+1]=4;
             
             ArrayList<Point> p=new ArrayList<>();
+            ArrayList<ImageIcon> I=new ArrayList<>();
+            I.add(currentImage);
+            I.add(currentImage2);
+
             p.add(new Point(i,j));
             p.add(new Point(i,j+1));
-            Vertice currentVertice = new Vertice(4,p);
+            Vertice currentVertice = new Vertice(4,p,I);
             this.clientOwner.grafo.grafo.add(currentVertice);
             board[i][j+1].verticeName=currentVertice;
             board[i][j].verticeName=currentVertice;
@@ -530,9 +559,12 @@ public class ClientWindow extends javax.swing.JFrame {
             this.clientOwner.LogicBoard[i][j+1]=5;
             
             ArrayList<Point> p=new ArrayList<>();
+            ArrayList<ImageIcon> I=new ArrayList<>();
+            I.add(currentImage);
+            I.add(currentImage2);
             p.add(new Point(i,j));
             p.add(new Point(i,j+1));
-            Vertice currentVertice = new Vertice(5,p);
+            Vertice currentVertice = new Vertice(5,p,I);
             this.clientOwner.grafo.grafo.add(currentVertice);
             board[i][j+1].verticeName=currentVertice;
             board[i][j].verticeName=currentVertice;
@@ -1189,49 +1221,35 @@ public class ClientWindow extends javax.swing.JFrame {
                         .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane2)
                             .addComponent(EnemyBoard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
                         .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelLayout.createSequentialGroup()
-                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(panelLayout.createSequentialGroup()
-                                        .addGap(34, 34, 34)
-                                        .addComponent(jButton6)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(MultiAmount))
-                                    .addGroup(panelLayout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jToggleButton3)
-                                            .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addGroup(panelLayout.createSequentialGroup()
-                                                    .addGap(19, 19, 19)
-                                                    .addComponent(jButton5)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                    .addComponent(TorpedoAmount))
-                                                .addComponent(jToggleButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(TorpedoAttack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(jToggleButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                                .addGap(0, 12, Short.MAX_VALUE))
+                                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(MultiAmount))
+                            .addComponent(jToggleButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(panelLayout.createSequentialGroup()
+                                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(TorpedoAmount))
+                                .addComponent(jToggleButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(TorpedoAttack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jToggleButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jToggleButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(panelLayout.createSequentialGroup()
-                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(panelLayout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jToggleButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addGroup(panelLayout.createSequentialGroup()
-                                                    .addComponent(jButton7)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                    .addComponent(BombAmount))
-                                                .addGroup(panelLayout.createSequentialGroup()
-                                                    .addComponent(jButton8)
-                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                    .addComponent(TrumpedoAmount)))))
-                                    .addGroup(panelLayout.createSequentialGroup()
-                                        .addGap(34, 34, 34)
-                                        .addComponent(jButton10)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(ShipAmount)))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(BombAmount))
+                            .addGroup(panelLayout.createSequentialGroup()
+                                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(ShipAmount))
+                            .addGroup(panelLayout.createSequentialGroup()
+                                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(TrumpedoAmount)))
+                        .addGap(0, 12, Short.MAX_VALUE))))
         );
         panelLayout.setVerticalGroup(
             panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1367,12 +1385,54 @@ public class ClientWindow extends javax.swing.JFrame {
                 this.enemyBoard[j][i].setIcon( new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/tile.png"));
             }
         }
-        for(Point p:this.clientOwner.hitsP1){
-            this.enemyBoard[p.x][p.y].setIcon(new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/explosion2.png"));
-            //this.enemyBoard[p.x][p.y].repaint();
-            //System.out.println("hit");
+        
+        for(Vertice v:this.clientOwner.disconexosP1){
+            switch (v.dato) {
+                case 2:
+                    int cont=0;
+                    for(Point p2:v.point){
+                        this.clientOwner.window.enemyBoard[p2.x][p2.y].setIcon(v.images.get(cont));
+                        cont++;
+                    }   
+                    break;
+                case 3:
+                    cont=0;
+                    for(Point p2:v.point){
+                        this.clientOwner.window.enemyBoard[p2.x][p2.y].setIcon(v.images.get(cont));
+                        cont++;
+                    }   
+                    break;
+                case 4:
+                    cont=0;
+                    for(Point p2:v.point){
+                        this.clientOwner.window.enemyBoard[p2.x][p2.y].setIcon(v.images.get(cont));
+                        cont++;
+                    }  
+                    break;
+                case 5:
+                    cont=0;
+                    for(Point p2:v.point){
+                        this.clientOwner.window.enemyBoard[p2.x][p2.y].setIcon(v.images.get(cont));
+                        cont++;
+                    }  
+                    break;
+                case 6:
+                    cont=0;
+                    for(Point p2:v.point){
+                        this.clientOwner.window.enemyBoard[p2.x][p2.y].setIcon(v.images.get(cont));
+                    }   
+                    break;
+                default:
+                    break;
+            }
+            
         }
-        //this.EnemyBoard.repaint();
+        
+        for(Point p:this.clientOwner.hitsP1){
+            this.enemyBoard[p.x][p.y].setIcon(new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/explosion2.png"));   
+        }
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void ConnectionModeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConnectionModeActionPerformed
@@ -1409,11 +1469,53 @@ public class ClientWindow extends javax.swing.JFrame {
                 this.enemyBoard[j][i].setIcon( new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/tile.png"));
             }
         }
+        
+        for(Vertice v:this.clientOwner.disconexosP2){
+            switch (v.dato) {
+                case 2:
+                    int cont=0;
+                    for(Point p2:v.point){
+                        this.clientOwner.window.enemyBoard[p2.x][p2.y].setIcon(v.images.get(cont));
+                        cont++;
+                    }   
+                    break;
+                case 3:
+                    cont=0;
+                    for(Point p2:v.point){
+                        this.clientOwner.window.enemyBoard[p2.x][p2.y].setIcon(v.images.get(cont));
+                        cont++;
+                    }   
+                    break;
+                case 4:
+                    cont=0;
+                    for(Point p2:v.point){
+                        this.clientOwner.window.enemyBoard[p2.x][p2.y].setIcon(v.images.get(cont));
+                        cont++;
+                    }  
+                    break;
+                case 5:
+                    cont=0;
+                    for(Point p2:v.point){
+                        this.clientOwner.window.enemyBoard[p2.x][p2.y].setIcon(v.images.get(cont));
+                        cont++;
+                    }  
+                    break;
+                case 6:
+                    cont=0;
+                    for(Point p2:v.point){
+                        this.clientOwner.window.enemyBoard[p2.x][p2.y].setIcon(v.images.get(cont));
+                    }   
+                    break;
+                default:
+                    break;
+            }
+            
+        }
+        
         for(Point p:this.clientOwner.hitsP2){
             this.enemyBoard[p.x][p.y].setIcon(new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/explosion2.png"));
-            //this.enemyBoard[p.x][p.y].repaint();
         }
-        //this.EnemyBoard.repaint();
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -1425,11 +1527,53 @@ public class ClientWindow extends javax.swing.JFrame {
                 this.enemyBoard[j][i].setIcon( new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/tile.png"));
             }
         }
+        
+        for(Vertice v:this.clientOwner.disconexosP3){
+            switch (v.dato) {
+                case 2:
+                    int cont=0;
+                    for(Point p2:v.point){
+                        this.clientOwner.window.enemyBoard[p2.x][p2.y].setIcon(v.images.get(cont));
+                        cont++;
+                    }   
+                    break;
+                case 3:
+                    cont=0;
+                    for(Point p2:v.point){
+                        this.clientOwner.window.enemyBoard[p2.x][p2.y].setIcon(v.images.get(cont));
+                        cont++;
+                    }   
+                    break;
+                case 4:
+                    cont=0;
+                    for(Point p2:v.point){
+                        this.clientOwner.window.enemyBoard[p2.x][p2.y].setIcon(v.images.get(cont));
+                        cont++;
+                    }  
+                    break;
+                case 5:
+                    cont=0;
+                    for(Point p2:v.point){
+                        this.clientOwner.window.enemyBoard[p2.x][p2.y].setIcon(v.images.get(cont));
+                        cont++;
+                    }  
+                    break;
+                case 6:
+                    cont=0;
+                    for(Point p2:v.point){
+                        this.clientOwner.window.enemyBoard[p2.x][p2.y].setIcon(v.images.get(cont));
+                    }   
+                    break;
+                default:
+                    break;
+            }
+            
+        }
+        
         for(Point p:this.clientOwner.hitsP3){
             this.enemyBoard[p.x][p.y].setIcon(new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/explosion2.png"));
-            //this.enemyBoard[p.x][p.y].repaint();
         }
-        //this.EnemyBoard.repaint();
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -1440,6 +1584,49 @@ public class ClientWindow extends javax.swing.JFrame {
                 this.enemyBoard[j][i].setIcon( new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/tile.png"));
             }
         }
+        
+        for(Vertice v:this.clientOwner.disconexosP4){
+            switch (v.dato) {
+                case 2:
+                    int cont=0;
+                    for(Point p2:v.point){
+                        this.clientOwner.window.enemyBoard[p2.x][p2.y].setIcon(v.images.get(cont));
+                        cont++;
+                    }   
+                    break;
+                case 3:
+                    cont=0;
+                    for(Point p2:v.point){
+                        this.clientOwner.window.enemyBoard[p2.x][p2.y].setIcon(v.images.get(cont));
+                        cont++;
+                    }   
+                    break;
+                case 4:
+                    cont=0;
+                    for(Point p2:v.point){
+                        this.clientOwner.window.enemyBoard[p2.x][p2.y].setIcon(v.images.get(cont));
+                        cont++;
+                    }  
+                    break;
+                case 5:
+                    cont=0;
+                    for(Point p2:v.point){
+                        this.clientOwner.window.enemyBoard[p2.x][p2.y].setIcon(v.images.get(cont));
+                        cont++;
+                    }  
+                    break;
+                case 6:
+                    cont=0;
+                    for(Point p2:v.point){
+                        this.clientOwner.window.enemyBoard[p2.x][p2.y].setIcon(v.images.get(cont));
+                    }   
+                    break;
+                default:
+                    break;
+            }
+            
+        }
+        
         for(Point p:this.clientOwner.hitsP4){
             this.enemyBoard[p.x][p.y].setIcon(new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/explosion2.png"));
             //this.enemyBoard[p.x][p.y].repaint();

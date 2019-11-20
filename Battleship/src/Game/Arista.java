@@ -12,14 +12,14 @@ import java.io.Serializable;
  * @author sebasgamboa
  */
 public class Arista implements Serializable{
-    public int dato;
+    public Vertice dato;
     public int peso;
     public int startX;
     public int startY;
     public int endX;
     public int endY;
     
-    public Arista(int dato,int sX,int sY,int eX,int eY){
+    public Arista(Vertice dato,int sX,int sY,int eX,int eY){
         this.dato=dato;
         this.startX=sX;
         this.startY=sY;

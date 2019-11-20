@@ -9,6 +9,7 @@ import Game.ArmoryThread;
 import Game.Grafo;
 import Game.MineThread;
 import Game.TempleThread;
+import Game.Vertice;
 import Packages.Package;
 import java.awt.Point;
 import java.io.IOException;
@@ -57,6 +58,10 @@ public class Client implements Serializable{
     public ArrayList<Point> hitsP2=new ArrayList<>();
     public ArrayList<Point> hitsP3=new ArrayList<>();
     public ArrayList<Point> hitsP4=new ArrayList<>();
+    public ArrayList<Vertice> disconexosP1=new ArrayList<>();
+    public ArrayList<Vertice> disconexosP2=new ArrayList<>();
+    public ArrayList<Vertice> disconexosP3=new ArrayList<>();
+    public ArrayList<Vertice> disconexosP4=new ArrayList<>();
     public boolean UsusarioVivo=true;
     public ClientWindow window = new ClientWindow(this);
     
