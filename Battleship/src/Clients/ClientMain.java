@@ -25,5 +25,5 @@ public class ClientMain {
             Logger.getLogger(ClientMain.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-} 
+}
 
