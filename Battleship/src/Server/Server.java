@@ -32,7 +32,7 @@ public class Server implements Serializable{
         return _instancia;
     }
     
-    public ServerWindow window = new ServerWindow();    
+    public ServerWindow window = new ServerWindow(this);    
     public ArrayList<ClientListener> listeners = new ArrayList();
     public Game game;
     
@@ -40,6 +40,7 @@ public class Server implements Serializable{
     public Server() {
         game=new Game(this);
         ConnectionController controller = new ConnectionController();
+        controller.setServer(this);
         controller.start();
         window.setVisible(true);
         window.getTextArea().append("Servidor activo, esperando clientes...\n");
@@ -64,6 +65,22 @@ public class Server implements Serializable{
         }
     }
     
+    public void enviarPaqueteMenosA(Package paq,int id) {
+        int cont=0;
+        for (ClientListener listener: listeners) {
+            if (cont==id) {
+                continue;
+            }
+            try {
+                ObjectOutputStream out = new ObjectOutputStream(listener.socket.getOutputStream());
+                out.writeObject(paq);
+            } catch (IOException ex) {
+                Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            cont++;
+        }
+    }
+    
     public void enviarPaqueteA(Package paq,int id) {
         ClientListener listener= listeners.get(id);
         try {
@@ -76,46 +93,86 @@ public class Server implements Serializable{
     
     public ArrayList<BoardLabel> getDiscoveries(Point p,int target){
         ArrayList<BoardLabel> labels=new ArrayList<>();
-        if(target==1){
-            labels.add(this.game.LabelsP1[p.x-1][p.y+1]);
-            labels.add(this.game.LabelsP1[p.x][p.y+1]);
-            labels.add(this.game.LabelsP1[p.x+1][p.y+1]);
-            labels.add(this.game.LabelsP1[p.x+1][p.y]);
-            labels.add(this.game.LabelsP1[p.x+1][p.y-1]);
-            labels.add(this.game.LabelsP1[p.x][p.y-1]);
-            labels.add(this.game.LabelsP1[p.x-1][p.y-1]);
-            labels.add(this.game.LabelsP1[p.x-1][p.y]);
-        }
-        else if(target==2){
-            
-            labels.add(this.game.LabelsP2[p.x-1][p.y+1]);
-            labels.add(this.game.LabelsP2[p.x][p.y+1]);
-            labels.add(this.game.LabelsP2[p.x+1][p.y+1]);
-            labels.add(this.game.LabelsP2[p.x+1][p.y]);
-            labels.add(this.game.LabelsP2[p.x+1][p.y-1]);
-            labels.add(this.game.LabelsP2[p.x][p.y-1]);
-            labels.add(this.game.LabelsP2[p.x-1][p.y-1]);
-            labels.add(this.game.LabelsP2[p.x-1][p.y]);
-        }
-        else if(target==3){
-            labels.add(this.game.LabelsP2[p.x-1][p.y+1]);
-            labels.add(this.game.LabelsP2[p.x][p.y+1]);
-            labels.add(this.game.LabelsP2[p.x+1][p.y+1]);
-            labels.add(this.game.LabelsP2[p.x+1][p.y]);
-            labels.add(this.game.LabelsP2[p.x+1][p.y-1]);
-            labels.add(this.game.LabelsP2[p.x][p.y-1]);
-            labels.add(this.game.LabelsP2[p.x-1][p.y-1]);
-            labels.add(this.game.LabelsP2[p.x-1][p.y]);
-        }
-        else if(target==4){
-            labels.add(this.game.LabelsP2[p.x-1][p.y+1]);
-            labels.add(this.game.LabelsP2[p.x][p.y+1]);
-            labels.add(this.game.LabelsP2[p.x+1][p.y+1]);
-            labels.add(this.game.LabelsP2[p.x+1][p.y]);
-            labels.add(this.game.LabelsP2[p.x+1][p.y-1]);
-            labels.add(this.game.LabelsP2[p.x][p.y-1]);
-            labels.add(this.game.LabelsP2[p.x-1][p.y-1]);
-            labels.add(this.game.LabelsP2[p.x-1][p.y]);
+        switch (target) {
+            case 1:
+                if(p.x-1>=0&&p.y+1<20)
+                    labels.add(this.game.LabelsP1[p.x-1][p.y+1]);
+                if(p.y+1<20)
+                    labels.add(this.game.LabelsP1[p.x][p.y+1]);
+                if(p.x-1<20&&p.y+1<20)
+                    labels.add(this.game.LabelsP1[p.x+1][p.y+1]);
+                if(p.x+1<20)
+                    labels.add(this.game.LabelsP1[p.x+1][p.y]);
+                if(p.x+1<20&&p.y-1>=0)
+                    labels.add(this.game.LabelsP1[p.x+1][p.y-1]);
+                if(p.y-1>=0)
+                    labels.add(this.game.LabelsP1[p.x][p.y-1]);
+                if(p.x-1>=0&&p.y-1>=0)
+                    labels.add(this.game.LabelsP1[p.x-1][p.y-1]);
+                if(p.x-1>=0)
+                    labels.add(this.game.LabelsP1[p.x-1][p.y]);
+                
+                break;
+            case 2:
+                if(p.x-1>=0&&p.y+1<20)
+                    labels.add(this.game.LabelsP2[p.x-1][p.y+1]);
+                if(p.y+1<20)
+                    labels.add(this.game.LabelsP2[p.x][p.y+1]);
+                if(p.x-1<20&&p.y+1<20)
+                    labels.add(this.game.LabelsP2[p.x+1][p.y+1]);
+                if(p.x+1<20)
+                    labels.add(this.game.LabelsP2[p.x+1][p.y]);
+                if(p.x+1<20&&p.y-1>=0)
+                    labels.add(this.game.LabelsP2[p.x+1][p.y-1]);
+                if(p.y-1>=0)
+                    labels.add(this.game.LabelsP2[p.x][p.y-1]);
+                if(p.x-1>=0&&p.y-1>=0)
+                    labels.add(this.game.LabelsP2[p.x-1][p.y-1]);
+                if(p.x-1>=0)
+                    labels.add(this.game.LabelsP2[p.x-1][p.y]);
+                
+                break;
+                
+            case 3:
+                if(p.x-1>=0&&p.y+1<20)
+                    labels.add(this.game.LabelsP3[p.x-1][p.y+1]);
+                if(p.y+1<20)
+                    labels.add(this.game.LabelsP3[p.x][p.y+1]);
+                if(p.x-1<20&&p.y+1<20)
+                    labels.add(this.game.LabelsP3[p.x+1][p.y+1]);
+                if(p.x+1<20)
+                    labels.add(this.game.LabelsP3[p.x+1][p.y]);
+                if(p.x+1<20&&p.y-1>=0)
+                    labels.add(this.game.LabelsP3[p.x+1][p.y-1]);
+                if(p.y-1>=0)
+                    labels.add(this.game.LabelsP3[p.x][p.y-1]);
+                if(p.x-1>=0&&p.y-1>=0)
+                    labels.add(this.game.LabelsP3[p.x-1][p.y-1]);
+                if(p.x-1>=0)
+                    labels.add(this.game.LabelsP3[p.x-1][p.y]);
+                
+                break;
+            case 4:
+                if(p.x-1>=0&&p.y+1<20)
+                    labels.add(this.game.LabelsP4[p.x-1][p.y+1]);
+                if(p.y+1<20)
+                    labels.add(this.game.LabelsP4[p.x][p.y+1]);
+                if(p.x-1<20&&p.y+1<20)
+                    labels.add(this.game.LabelsP4[p.x+1][p.y+1]);
+                if(p.x+1<20)
+                    labels.add(this.game.LabelsP4[p.x+1][p.y]);
+                if(p.x+1<20&&p.y-1>=0)
+                    labels.add(this.game.LabelsP4[p.x+1][p.y-1]);
+                if(p.y-1>=0)
+                    labels.add(this.game.LabelsP4[p.x][p.y-1]);
+                if(p.x-1>=0&&p.y-1>=0)
+                    labels.add(this.game.LabelsP4[p.x-1][p.y-1]);
+                if(p.x-1>=0)
+                    labels.add(this.game.LabelsP4[p.x-1][p.y]);
+                
+                break;
+            default:
+                break;
         }
         
         return labels;

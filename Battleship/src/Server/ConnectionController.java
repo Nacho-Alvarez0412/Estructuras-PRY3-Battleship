@@ -18,6 +18,11 @@ import java.util.logging.Logger;
  */
 public class ConnectionController extends Thread {
     
+    public Server server;
+    
+    public void setServer(Server s){
+        this.server=s;
+    }
    
     
     @Override
@@ -28,7 +33,7 @@ public class ConnectionController extends Thread {
             while (true) {
                 if(Server.instancia().window.numberOfPlayers>Server.instancia().listeners.size()){
                     Socket socket = serverSocket.accept();
-                    ClientListener listener = new ClientListener(socket);
+                    ClientListener listener = new ClientListener(socket,this.server);
                     Server.instancia().addClient(listener);
                     IDPackage paq=new IDPackage(cont);
                     Server.instancia().enviarPaqueteA(paq, cont-1);

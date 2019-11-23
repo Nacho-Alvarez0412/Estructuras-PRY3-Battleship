@@ -51,6 +51,7 @@ public class Client implements Serializable{
     public boolean shipsE=false;
     public boolean canComodin=false;  
     public boolean comodinOn=false;
+    public int comodinNum;
     public int[][] LogicBoard=new int[20][20];
     public Grafo grafo=new Grafo();
     public int verticesDead=0;

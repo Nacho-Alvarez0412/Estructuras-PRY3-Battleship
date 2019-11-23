@@ -13,6 +13,7 @@ import Game.TempleThread;
 import Game.Vertice;
 import Packages.AttackPackage;
 import Packages.ChatPackage;
+import Packages.ComodinPackage;
 import Packages.GrafoPackage;
 import Packages.LabelsPackage;
 import Packages.LogicBoardPackage;
@@ -297,6 +298,8 @@ public class ClientWindow extends javax.swing.JFrame {
 
         int i = targetLabel.i;
         int j = targetLabel.j;
+        
+        if(i+1==20) return;
 
         if(currentImage.equals(armory2x1.getIcon())&&this.clientOwner.money>=1500){
             String Weapon=JOptionPane.showInputDialog("Enter a weapon to fabricate:");
@@ -584,7 +587,7 @@ public class ClientWindow extends javax.swing.JFrame {
         points.add(p);
         AttackPackage paq=new AttackPackage(points,this.enemyTarget,"torpedo",this.clientOwner.id);
         try {
-            Client.instancia().enviarPaquete(paq);
+            this.clientOwner.enviarPaquete(paq);
             this.clientOwner.torpedos-=1;
             this.clientOwner.window.TorpedoAmount.setText(Integer.toString(this.clientOwner.torpedos));
             
@@ -600,7 +603,7 @@ public class ClientWindow extends javax.swing.JFrame {
         points.add(p);
         AttackPackage paq=new AttackPackage(points,this.enemyTarget,"multi",this.clientOwner.id);
         try {
-            Client.instancia().enviarPaquete(paq);
+            this.clientOwner.enviarPaquete(paq);
             this.clientOwner.multi-=1;
             this.clientOwner.window.MultiAmount.setText(Integer.toString(this.clientOwner.multi));
         } catch (IOException ex) {
@@ -620,31 +623,38 @@ public class ClientWindow extends javax.swing.JFrame {
             for(BoardLabel bl:clicks){
                 Point p=new Point(bl.i,bl.j);
                 points.add(p);
-                Random r=new Random();
-                int rand=r.nextInt(4);
-                if(rand==0){
-                    Point p2=new Point(bl.i+1,bl.j);
-                    points.add(p2);
+                Random randomGenerator=new Random();
+                int rand=randomGenerator.nextInt(4);
+                switch (rand) {
+                    case 0:
+                        if(bl.i+1<20){
+                            Point p2=new Point(bl.i+1,bl.j);
+                            points.add(p2);
+                        }   break;
+                    case 1:
+                        if(bl.i-1>=0){
+                            Point p2=new Point(bl.i-1,bl.j);
+                            points.add(p2);
+                        }   break;
+                    case 3:
+                        if(bl.j+1<20){
+                            Point p2=new Point(bl.i,bl.j+1);
+                            points.add(p2);}
+                        break;
+                    case 4:
+                        if(bl.j-1>=0){
+                            Point p2=new Point(bl.i,bl.j-1);
+                            points.add(p2);
+                        }   break;
+                    default:
+                        break;
                 }
-                else if(rand==1){
-                    Point p2=new Point(bl.i-1,bl.j);
-                    points.add(p2);
-                }
-                else if(rand==3){
-                    Point p2=new Point(bl.i,bl.j+1);
-                    points.add(p2);
-                }
-                else if(rand==4){
-                    Point p2=new Point(bl.i,bl.j-1);
-                    points.add(p2);
-                }
-                
             }
             clicks.clear();
             System.out.println("sending bombs");
             AttackPackage paq=new AttackPackage(points,this.enemyTarget,"bomb",this.clientOwner.id);
             try {
-                Client.instancia().enviarPaquete(paq);
+                this.clientOwner.enviarPaquete(paq);
                 this.clientOwner.bombs-=1;
             this.clientOwner.window.BombAmount.setText(Integer.toString(this.clientOwner.bombs));
             } catch (IOException ex) {
@@ -668,7 +678,7 @@ public class ClientWindow extends javax.swing.JFrame {
             System.out.println("sending Trumpedos");
             AttackPackage paq=new AttackPackage(points,this.enemyTarget,"Trumpedo",this.clientOwner.id);
             try {
-                Client.instancia().enviarPaquete(paq);
+                this.clientOwner.enviarPaquete(paq);
                 this.clientOwner.trumpedos-=1;
                 this.clientOwner.window.TrumpedoAmount.setText(Integer.toString(this.clientOwner.trumpedos));
             } catch (IOException ex) {
@@ -697,7 +707,6 @@ public class ClientWindow extends javax.swing.JFrame {
     public JButton getComodin() {
         return Comodin;
     }
-    
     
     
  
@@ -744,10 +753,10 @@ public class ClientWindow extends javax.swing.JFrame {
         BoardField = new javax.swing.JPanel();
         ReadyButton = new javax.swing.JButton();
         EnemyBoard = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        P1 = new javax.swing.JButton();
+        P2 = new javax.swing.JButton();
+        P3 = new javax.swing.JButton();
+        P4 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         Money = new javax.swing.JLabel();
         ConnectionMode = new javax.swing.JToggleButton();
@@ -998,31 +1007,31 @@ public class ClientWindow extends javax.swing.JFrame {
             .addGap(0, 500, Short.MAX_VALUE)
         );
 
-        jButton1.setText("Player 1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        P1.setText("Player 1");
+        P1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                P1ActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Player 2");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        P2.setText("Player 2");
+        P2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                P2ActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Player 3");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        P3.setText("Player 3");
+        P3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                P3ActionPerformed(evt);
             }
         });
 
-        jButton4.setText("Player 4");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        P4.setText("Player 4");
+        P4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                P4ActionPerformed(evt);
             }
         });
 
@@ -1122,7 +1131,7 @@ public class ClientWindow extends javax.swing.JFrame {
 
         TrumpedoAmount.setText("0");
 
-        jButton9.setText("Remolinos");
+        jButton9.setText("Whirpools");
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton9ActionPerformed(evt);
@@ -1206,13 +1215,13 @@ public class ClientWindow extends javax.swing.JFrame {
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelLayout.createSequentialGroup()
                         .addGap(54, 54, 54)
-                        .addComponent(jButton1)
+                        .addComponent(P1)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2)
+                        .addComponent(P2)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton3)
+                        .addComponent(P3)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton4)
+                        .addComponent(P4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 147, Short.MAX_VALUE)
                         .addComponent(EndTurn)
                         .addGap(36, 36, 36))
@@ -1305,10 +1314,10 @@ public class ClientWindow extends javax.swing.JFrame {
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jButton3)
-                                    .addComponent(jButton4)
-                                    .addComponent(jButton2)
-                                    .addComponent(jButton1)
+                                    .addComponent(P3)
+                                    .addComponent(P4)
+                                    .addComponent(P2)
+                                    .addComponent(P1)
                                     .addComponent(EndTurn))
                                 .addGap(83, 83, 83))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelLayout.createSequentialGroup()
@@ -1377,7 +1386,7 @@ public class ClientWindow extends javax.swing.JFrame {
         
     }//GEN-LAST:event_ReadyButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void P1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_P1ActionPerformed
         // TODO add your handling code here:
         this.enemyTarget=1;
         for(int i=0;i<20;i++){
@@ -1388,6 +1397,11 @@ public class ClientWindow extends javax.swing.JFrame {
         
         for(Vertice v:this.clientOwner.disconexosP1){
             switch (v.dato) {
+                case 1:
+                    for(Point p2:v.point){
+                        this.clientOwner.window.enemyBoard[p2.x][p2.y].setIcon(v.images.get(0));
+                    }
+                    break;
                 case 2:
                     int cont=0;
                     for(Point p2:v.point){
@@ -1433,7 +1447,7 @@ public class ClientWindow extends javax.swing.JFrame {
         }
         
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_P1ActionPerformed
 
     private void ConnectionModeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConnectionModeActionPerformed
         // TODO add your handling code here:
@@ -1461,7 +1475,7 @@ public class ClientWindow extends javax.swing.JFrame {
         this.torpedoState=!this.torpedoState;
     }//GEN-LAST:event_TorpedoAttackActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void P2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_P2ActionPerformed
         // TODO add your handling code here:
         this.enemyTarget=2;
         for(int i=0;i<20;i++){
@@ -1472,6 +1486,11 @@ public class ClientWindow extends javax.swing.JFrame {
         
         for(Vertice v:this.clientOwner.disconexosP2){
             switch (v.dato) {
+                case 1:
+                    for(Point p2:v.point){
+                        this.clientOwner.window.enemyBoard[p2.x][p2.y].setIcon(v.images.get(0));
+                    }
+                    break;
                 case 2:
                     int cont=0;
                     for(Point p2:v.point){
@@ -1516,9 +1535,9 @@ public class ClientWindow extends javax.swing.JFrame {
             this.enemyBoard[p.x][p.y].setIcon(new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/explosion2.png"));
         }
         
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_P2ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void P3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_P3ActionPerformed
         // TODO add your handling code here:
         this.enemyTarget=3;
         for(int i=0;i<20;i++){
@@ -1530,6 +1549,11 @@ public class ClientWindow extends javax.swing.JFrame {
         
         for(Vertice v:this.clientOwner.disconexosP3){
             switch (v.dato) {
+                case 1:
+                    for(Point p2:v.point){
+                        this.clientOwner.window.enemyBoard[p2.x][p2.y].setIcon(v.images.get(0));
+                    }
+                    break;
                 case 2:
                     int cont=0;
                     for(Point p2:v.point){
@@ -1574,9 +1598,9 @@ public class ClientWindow extends javax.swing.JFrame {
             this.enemyBoard[p.x][p.y].setIcon(new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/explosion2.png"));
         }
         
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_P3ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void P4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_P4ActionPerformed
         // TODO add your handling code here:
         this.enemyTarget=4;
         for(int i=0;i<20;i++){
@@ -1587,6 +1611,11 @@ public class ClientWindow extends javax.swing.JFrame {
         
         for(Vertice v:this.clientOwner.disconexosP4){
             switch (v.dato) {
+                case 1:
+                    for(Point p2:v.point){
+                        this.clientOwner.window.enemyBoard[p2.x][p2.y].setIcon(v.images.get(0));
+                    }
+                    break;
                 case 2:
                     int cont=0;
                     for(Point p2:v.point){
@@ -1632,7 +1661,7 @@ public class ClientWindow extends javax.swing.JFrame {
             //this.enemyBoard[p.x][p.y].repaint();
         }
         //this.EnemyBoard.repaint();
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_P4ActionPerformed
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         // TODO add your handling code here:
@@ -1714,9 +1743,28 @@ public class ClientWindow extends javax.swing.JFrame {
         if(this.clientOwner.canComodin){
             this.clientOwner.comodinOn=true;
             this.clientOwner.canComodin=false;
+            this.clientOwner.comodinNum=5;
+            ComodinPackage paq=new ComodinPackage(this.clientOwner.id);
+            try {
+                this.clientOwner.enviarPaquete(paq);
+            } catch (IOException ex) {
+                Logger.getLogger(ClientWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_ComodinActionPerformed
 
+    
+    public void resetComodin(){
+        this.clientOwner.comodinOn=false;
+        this.Comodin.setEnabled(false);
+        ComodinPackage paq=new ComodinPackage(this.clientOwner.id);
+        try {
+            this.clientOwner.enviarPaquete(paq);
+        } catch (IOException ex) {
+            Logger.getLogger(ClientWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     private void tradeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tradeActionPerformed
         // TODO add your handling code here:
         String[] options = {"Player 4", "Player 3", "Player 2", "Player 1"};
@@ -1828,6 +1876,24 @@ public class ClientWindow extends javax.swing.JFrame {
     public JLabel getMoney() {
         return Money;
     }
+
+    public JButton getP1() {
+        return P1;
+    }
+
+    public JButton getP2() {
+        return P2;
+    }
+
+    public JButton getP3() {
+        return P3;
+    }
+
+    public JButton getP4() {
+        return P4;
+    }
+    
+    
     
     
     
@@ -1852,6 +1918,10 @@ public class ClientWindow extends javax.swing.JFrame {
     private javax.swing.JLabel Mine;
     private javax.swing.JLabel Money;
     private javax.swing.JLabel MultiAmount;
+    private javax.swing.JButton P1;
+    private javax.swing.JButton P2;
+    private javax.swing.JButton P3;
+    private javax.swing.JButton P4;
     private javax.swing.JButton ReadyButton;
     private javax.swing.JLabel ShipAmount;
     private javax.swing.JLabel Temple;
@@ -1862,11 +1932,7 @@ public class ClientWindow extends javax.swing.JFrame {
     private javax.swing.JLabel armory2x1;
     private javax.swing.JLabel connector1x1;
     private javax.swing.JLabel energysource2x2;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;

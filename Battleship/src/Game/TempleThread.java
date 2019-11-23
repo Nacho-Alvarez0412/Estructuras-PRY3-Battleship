@@ -26,7 +26,7 @@ public class TempleThread extends Thread implements Serializable{
     public void run(){
         while(vivo){
             try {
-                sleep(300000);
+                sleep(10000);
                 this.client.window.getComodin().setEnabled(true);
                 this.client.canComodin=true;
             } catch (InterruptedException ex) {

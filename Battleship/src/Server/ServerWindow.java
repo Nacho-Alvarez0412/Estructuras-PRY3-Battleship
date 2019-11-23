@@ -19,8 +19,14 @@ public class ServerWindow extends javax.swing.JFrame implements Serializable{
     /**
      * Creates new form ServerWindow
      */
-    public ServerWindow() {
+    
+    public Server server;
+    
+    
+    public ServerWindow(Server s) {
         initComponents();
+        this.server=s;
+        
     }
     
     public int numberOfPlayers=4;
@@ -117,8 +123,9 @@ public class ServerWindow extends javax.swing.JFrame implements Serializable{
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        Server.instancia().game.init(this.server.listeners);
         Server.instancia().game.start();
-        int i=1;
+        //int i=1;
         //Server.instancia().enviarPaquete(new TurnMesagePackage(i));
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -152,7 +159,7 @@ public class ServerWindow extends javax.swing.JFrame implements Serializable{
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ServerWindow().setVisible(true);
+                //new ServerWindow().setVisible(true);
             }
         });
     }

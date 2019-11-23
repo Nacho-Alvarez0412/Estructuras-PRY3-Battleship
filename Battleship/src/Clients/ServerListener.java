@@ -9,6 +9,7 @@ import Game.Arista;
 import Game.Vertice;
 import Packages.AristasPackage;
 import Packages.AttackReceivedPackage;
+import Packages.BitacoraTextPackage;
 import Packages.Package;
 import Packages.ChatPackage;
 import Packages.DeadPackage;
@@ -73,10 +74,26 @@ public class ServerListener extends Thread {
                         String res=AR.message;
                         if(AR.target==this.client.id){
                             for(Point p:AR.attacks){
-                                if(this.client.LogicBoard[p.x][p.y]!=0&&this.client.LogicBoard[p.x][p.y]!=7){
+                                if(this.client.LogicBoard[p.x][p.y]!=0&&this.client.LogicBoard[p.x][p.y]!=7&&
+                                        !this.client.comodinOn){
+                                    this.client.LogicBoard[p.x][p.y]=0;
                                     this.client.window.board[p.x][p.y].setIcon(
                                             new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/explosion2.png"));
-                                    res+=" en ("+p.x+","+p.y+") acertado";
+                                    String res2="Atack in ("+p.x+","+p.y+") landed";
+                                    BitacoraTextPackage BTP=new BitacoraTextPackage(res2);
+                                    if(AR.origin==1){
+                                        this.client.window.getP1().doClick();
+                                    }
+                                    else if(AR.origin==2){
+                                        this.client.window.getP2().doClick();
+                                    }
+                                    else if(AR.origin==3){
+                                        this.client.window.getP3().doClick();
+                                    }
+                                    else if(AR.origin==4){
+                                        this.client.window.getP4().doClick();
+                                    }
+                                    this.client.enviarPaquete(BTP);
                                     AR.hitLanded=true;
                                     hitsPackage paq2=new hitsPackage(AR.attacks,AR.target,AR.origin);
                                     this.client.enviarPaquete(paq2);
@@ -85,9 +102,12 @@ public class ServerListener extends Thread {
                                         this.client.window.board[p.x][p.y].verticeName.vivo=false;
                                         System.out.println("ded");
                                         this.client.verticesDead+=1;
-                                        if(this.client.window.board[p.x][p.y].verticeName.dato==1){
+                                        System.out.println(this.client.window.board[p.x][p.y].verticeName.dato);
+                                        if(this.client.window.board[p.x][p.y].verticeName.dato==1||this.client.window.board[p.x][p.y].verticeName.dato==6){
                                             ArrayList<Vertice> v=new ArrayList<>();
+                                            System.out.println("entre");
                                             for(Arista a:this.client.window.board[p.x][p.y].verticeName.aristas){
+                                                System.out.println("x2");
                                                 v.add(a.dato);
                                             }
                                             AristasPackage arpaq = new AristasPackage(v,AR.origin,this.client.id);
@@ -101,9 +121,20 @@ public class ServerListener extends Thread {
                                         DeadPackage dead=new DeadPackage(this.client.id);
                                         client.enviarPaquete(dead);
                                     }
+                                }else if(this.client.comodinOn){
+                                    this.client.comodinNum-=1;
+                                    if(this.client.comodinNum==0){
+                                        this.client.window.resetComodin();
+                                    }
+                                    String res2="Atack in ("+p.x+","+p.y+") landed, but has shield on";
+                                    BitacoraTextPackage BTP=new BitacoraTextPackage(res2);
+                                    this.client.enviarPaquete(BTP);
+                                    AR.hitLanded=false;
                                 }
                                 else{
-                                    res+=" en ("+p.x+","+p.y+") fallido";
+                                    String res2=" Atack in ("+p.x+","+p.y+") failed";
+                                    BitacoraTextPackage BTP=new BitacoraTextPackage(res2);
+                                    this.client.enviarPaquete(BTP);
                                     AR.hitLanded=false;
                                 }
                              }
@@ -122,37 +153,43 @@ public class ServerListener extends Thread {
                         if(s.origin==this.client.id){
                             for(BoardLabel bl:s.discoveries){
                                 //System.out.println("si");
-                                if(bl.getIcon()!=null){
+                                if(bl.getIcon()!=null&&bl.j<20&&bl.i<20){
                                     this.client.window.enemyBoard[bl.i][bl.j].setIcon(bl.getIcon());
                                 }
                             }
                             this.client.window.enemyBoard[s.point.x][s.point.y].setIcon(new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/ship.png") {});
                         }
+                        break;
                         
                     case "hits":
                         hitsPackage H=(hitsPackage) paq;
-                        if(H.target==1){
-                            for(Point hit: H.points){
-                                this.client.hitsP1.add(hit);
-                            }
-                        }
-                        else if(H.target==2){
-                            System.out.println("entre");
-                            for(Point hit: H.points){
-                                this.client.hitsP2.add(hit);
-                            }
-                        }
-                        else if(H.target==3){
-                            for(Point hit: H.points){
-                                this.client.hitsP3.add(hit);
-                            }
-                        }
-                        else if(H.target==4){
-                            for(Point hit: H.points){
-                                this.client.hitsP4.add(hit);
-                            }
+                        switch (H.target) {
+                            case 1:
+                                for(Point hit: H.points){
+                                    this.client.hitsP1.add(hit);
+                                }
+                                break;
+                            case 2:
+                                System.out.println("entre");
+                                for(Point hit: H.points){
+                                    this.client.hitsP2.add(hit);
+                                }
+                                break;
+                            case 3:
+                                for(Point hit: H.points){
+                                    this.client.hitsP3.add(hit);
+                                }
+                                break;
+                            case 4:
+                                for(Point hit: H.points){
+                                    this.client.hitsP4.add(hit);
+                                }
+                                break;
+                            default:
+                                break;
                         }
                         break;
+
                         
                     case "trade":
                         TradeClass TC=(TradeClass) paq;
@@ -223,25 +260,65 @@ public class ServerListener extends Thread {
                         
                     case "aristas":
                         AristasPackage AP = (AristasPackage) paq;
+                        //ArrayList<Vertice> ve=new ArrayList<>();
                         for(Vertice v:AP.vertices){
-                            if(AP.origin==1){
-                                this.client.disconexosP1.add(v);
+                            switch (AP.origin) {
+                                case 1:
+                                    this.client.disconexosP1.add(v);
+                                    break;
+                                case 2:
+                                    this.client.disconexosP2.add(v);
+                                    break;
+                                case 3:
+                                    this.client.disconexosP3.add(v);
+                                    break;
+                                case 4:
+                                    this.client.disconexosP4.add(v);
+                                    break;
+                                default:
+                                    break;
                             }
-                            else if(AP.origin==2){
-                                this.client.disconexosP2.add(v);
-                            }
-                            else if(AP.origin==3){
-                                this.client.disconexosP3.add(v);
-                            }
-                            else if(AP.origin==4){
-                                this.client.disconexosP4.add(v);
+                            System.out.println("next");
+                            System.out.println(v.dato);
+                            System.out.println("yes yes");
+                            for(Arista a:v.aristas){
+                                addDisconexo(a.dato,AP.origin);
                             }
                         }
+                        break;
+                        
+                    case "bitacora":
+                        BitacoraTextPackage BTP =(BitacoraTextPackage) paq;
+                        this.client.window.setBitacoraText(BTP.text);
                         break;
                 }
             }
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(ServerListener.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void addDisconexo(Vertice v,int origin){
+        switch (origin) {
+            case 1:
+                this.client.disconexosP1.add(v);
+                break;
+            case 2:
+                this.client.disconexosP2.add(v);
+                break;
+            case 3:
+                this.client.disconexosP3.add(v);
+                break;
+            case 4:
+                this.client.disconexosP4.add(v);
+                break;
+            default:
+                break;
+        }
+        if(v.aristas!=null){
+            for(Arista ve:v.aristas){
+                addDisconexo(ve.dato,origin);
+            }
         }
     }
 }

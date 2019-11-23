@@ -9,6 +9,7 @@ import Clients.BoardLabel;
 import Packages.AttackReceivedPackage;
 import Packages.TurnMesagePackage;
 import Packages.TurnPackage;
+import Server.ClientListener;
 import Server.Server;
 import java.awt.Point;
 import java.io.Serializable;
@@ -58,11 +59,22 @@ public class Game extends Thread implements Serializable{
     public BoardLabel[][] LabelsP3=new BoardLabel[20][20];
     public BoardLabel[][] LabelsP4=new BoardLabel[20][20];
     
+    public boolean P1Comodin=false;
+    public boolean P2Comodin=false;
+    public boolean P3Comodin=false;
+    public boolean P4Comodin=false;
+    
+    public ArrayList<ClientListener> clients;
+    
     public boolean userTurn;
 
     public Game(Server server) {
         this.server = server;
         userTurn = false;
+    }
+    
+    public void init(ArrayList<ClientListener> c){
+        this.clients=c;
     }
     
     public void changeTurn(){
@@ -134,21 +146,22 @@ public class Game extends Thread implements Serializable{
                             server.enviarPaquete(paq2);
                         }else{
                             System.out.println("me pegaron");
-                            this.LogicBoardPlayer1[p.x][p.y]=0;
-                            
-                            hitLanded=true;
-                            if(tipo=="multi"){
-                                ArrayList<Point> points2=new ArrayList<>();
-                                for(int i=0;i<4;i++){
-                                    Random randomGenerator = new Random();
-                                    int x = randomGenerator.nextInt(20);
-                                    int y = randomGenerator.nextInt(20);
-                                    points2.add(new Point(x,y));
-                                }
+                            if(!this.P1Comodin){
+                                this.LogicBoardPlayer1[p.x][p.y]=0;
+                                hitLanded=true;
+                                if(tipo=="multi"){
+                                    ArrayList<Point> points2=new ArrayList<>();
+                                    for(int i=0;i<4;i++){
+                                        Random randomGenerator = new Random();
+                                        int x = randomGenerator.nextInt(20);
+                                        int y = randomGenerator.nextInt(20);
+                                        points2.add(new Point(x,y));
+                                    }
 
-                                this.Attack(points2, target, tipo,origen);
-                                AttackReceivedPackage paq2=new AttackReceivedPackage(points2,target,"Attack to player "+target,origen,hitLanded);
-                                server.enviarPaquete(paq2);
+                                    this.Attack(points2, target, tipo,origen);
+                                    AttackReceivedPackage paq2=new AttackReceivedPackage(points2,target,"Attack to player "+target,origen,hitLanded);
+                                    server.enviarPaquete(paq2);
+                                }
                             }
                         }
                     }
@@ -175,20 +188,22 @@ public class Game extends Thread implements Serializable{
                             server.enviarPaquete(paq2);
                         }else{
                             System.out.println("me pegaron");
-                            this.LogicBoardPlayer2[p.x][p.y]=0;
-                            hitLanded=true;
-                            if(tipo=="multi"){
-                                ArrayList<Point> points2=new ArrayList<>();
-                                for(int i=0;i<4;i++){
-                                    Random randomGenerator = new Random();
-                                    int x = randomGenerator.nextInt(20);
-                                    int y = randomGenerator.nextInt(20);
-                                    points2.add(new Point(x,y));
-                                }
+                            if(!this.P2Comodin){
+                                this.LogicBoardPlayer2[p.x][p.y]=0;
+                                hitLanded=true;
+                                if(tipo=="multi"){
+                                    ArrayList<Point> points2=new ArrayList<>();
+                                    for(int i=0;i<4;i++){
+                                        Random randomGenerator = new Random();
+                                        int x = randomGenerator.nextInt(20);
+                                        int y = randomGenerator.nextInt(20);
+                                        points2.add(new Point(x,y));
+                                    }
 
-                                this.Attack(points2, target, tipo,origen);
-                                AttackReceivedPackage paq2=new AttackReceivedPackage(points2,target,"Attack to player "+target,origen,hitLanded);
-                                server.enviarPaquete(paq2);
+                                    this.Attack(points2, target, tipo,origen);
+                                    AttackReceivedPackage paq2=new AttackReceivedPackage(points2,target,"Attack to player "+target,origen,hitLanded);
+                                    server.enviarPaquete(paq2);
+                                }
                             }
                         }
                     }
@@ -215,20 +230,22 @@ public class Game extends Thread implements Serializable{
                             server.enviarPaquete(paq2);
                         }else{
                             System.out.println("me pegaron");
-                            this.LogicBoardPlayer3[p.x][p.y]=0;
-                            hitLanded=true;
-                            if(tipo=="multi"){
-                                ArrayList<Point> points2=new ArrayList<>();
-                                for(int i=0;i<4;i++){
-                                    Random randomGenerator = new Random();
-                                    int x = randomGenerator.nextInt(20);
-                                    int y = randomGenerator.nextInt(20);
-                                    points2.add(new Point(x,y));
-                                }
+                            if(!this.P3Comodin){
+                                this.LogicBoardPlayer3[p.x][p.y]=0;
+                                hitLanded=true;
+                                if(tipo=="multi"){
+                                    ArrayList<Point> points2=new ArrayList<>();
+                                    for(int i=0;i<4;i++){
+                                        Random randomGenerator = new Random();
+                                        int x = randomGenerator.nextInt(20);
+                                        int y = randomGenerator.nextInt(20);
+                                        points2.add(new Point(x,y));
+                                    }
 
-                                this.Attack(points2, target, tipo,origen);
-                                AttackReceivedPackage paq2=new AttackReceivedPackage(points2,target,"Attack to player "+target,origen,hitLanded);
-                                server.enviarPaquete(paq2);
+                                    this.Attack(points2, target, tipo,origen);
+                                    AttackReceivedPackage paq2=new AttackReceivedPackage(points2,target,"Attack to player "+target,origen,hitLanded);
+                                    server.enviarPaquete(paq2);
+                                }
                             }
                         }
                     }
@@ -255,20 +272,22 @@ public class Game extends Thread implements Serializable{
                             server.enviarPaquete(paq2);
                         }else{
                             System.out.println("me pegaron");
-                            this.LogicBoardPlayer4[p.x][p.y]=0;
-                            hitLanded=true;
-                            if(tipo=="multi"){
-                                ArrayList<Point> points2=new ArrayList<>();
-                                for(int i=0;i<4;i++){
-                                    Random randomGenerator = new Random();
-                                    int x = randomGenerator.nextInt(20);
-                                    int y = randomGenerator.nextInt(20);
-                                    points2.add(new Point(x,y));
-                                }
+                            if(!this.P4Comodin){
+                                this.LogicBoardPlayer4[p.x][p.y]=0;
+                                hitLanded=true;
+                                if(tipo=="multi"){
+                                    ArrayList<Point> points2=new ArrayList<>();
+                                    for(int i=0;i<4;i++){
+                                        Random randomGenerator = new Random();
+                                        int x = randomGenerator.nextInt(20);
+                                        int y = randomGenerator.nextInt(20);
+                                        points2.add(new Point(x,y));
+                                    }
 
-                                this.Attack(points2, target, tipo,origen);
-                                AttackReceivedPackage paq2=new AttackReceivedPackage(points2,target,"Attack to player "+target,origen,hitLanded);
-                                server.enviarPaquete(paq2);
+                                    this.Attack(points2, target, tipo,origen);
+                                    AttackReceivedPackage paq2=new AttackReceivedPackage(points2,target,"Attack to player "+target,origen,hitLanded);
+                                    server.enviarPaquete(paq2);
+                                }
                             }
                         }
                     }
