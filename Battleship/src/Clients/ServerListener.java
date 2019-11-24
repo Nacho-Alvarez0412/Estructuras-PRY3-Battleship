@@ -8,6 +8,7 @@ package Clients;
 import Game.Arista;
 import Game.Vertice;
 import Packages.AristasPackage;
+import Packages.AttackPackage;
 import Packages.AttackReceivedPackage;
 import Packages.BitacoraTextPackage;
 import Packages.Package;
@@ -15,6 +16,7 @@ import Packages.ChatPackage;
 import Packages.DeadPackage;
 import Packages.GrafoPackage;
 import Packages.IDPackage;
+import Packages.MoneyPackage;
 import Packages.ShipPackage;
 import Packages.TradeAcceptPackage;
 import Packages.TradeClass;
@@ -78,21 +80,10 @@ public class ServerListener extends Thread {
                                         !this.client.comodinOn){
                                     this.client.LogicBoard[p.x][p.y]=0;
                                     this.client.window.board[p.x][p.y].setIcon(
-                                            new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/explosion2.png"));
+                                            new ImageIcon(getClass().getResource("/Images/explosion2.png")));
                                     String res2="Atack in ("+p.x+","+p.y+") landed";
                                     BitacoraTextPackage BTP=new BitacoraTextPackage(res2);
-                                    if(AR.origin==1){
-                                        this.client.window.getP1().doClick();
-                                    }
-                                    else if(AR.origin==2){
-                                        this.client.window.getP2().doClick();
-                                    }
-                                    else if(AR.origin==3){
-                                        this.client.window.getP3().doClick();
-                                    }
-                                    else if(AR.origin==4){
-                                        this.client.window.getP4().doClick();
-                                    }
+                                    
                                     this.client.enviarPaquete(BTP);
                                     AR.hitLanded=true;
                                     hitsPackage paq2=new hitsPackage(AR.attacks,AR.target,AR.origin);
@@ -103,6 +94,22 @@ public class ServerListener extends Thread {
                                         System.out.println("ded");
                                         this.client.verticesDead+=1;
                                         System.out.println(this.client.window.board[p.x][p.y].verticeName.dato);
+                                        
+                                        if(this.client.window.board[p.x][p.y].verticeName.dato==6){
+                                            MoneyPackage monPaq = new MoneyPackage(AR.origin,12000);
+                                            this.client.enviarPaquete(monPaq);
+                                        }
+                                        
+                                        for(Point xy : this.client.window.board[p.x][p.y].verticeName.point){
+                                            ArrayList<Point> OwnTargets = addPoints(xy);
+                                            AttackPackage ATP=new AttackPackage(OwnTargets,this.client.id,"Explosion",this.client.id);
+                                            try {
+                                                this.client.enviarPaquete(ATP);
+                                            } catch (IOException ex) {
+                                                Logger.getLogger(ClientWindow.class.getName()).log(Level.SEVERE, null, ex);
+                                            }
+                                        }
+                                        
                                         if(this.client.window.board[p.x][p.y].verticeName.dato==1||this.client.window.board[p.x][p.y].verticeName.dato==6){
                                             ArrayList<Vertice> v=new ArrayList<>();
                                             System.out.println("entre");
@@ -139,6 +146,24 @@ public class ServerListener extends Thread {
                                 }
                              }
                         }
+                        if(AR.origin==this.client.id){
+                            switch (AR.target) {
+                                case 1:
+                                    this.client.window.getP1().doClick();
+                                    break;
+                                case 2:
+                                    this.client.window.getP2().doClick();
+                                    break;
+                                case 3:
+                                    this.client.window.getP3().doClick();
+                                    break;
+                                case 4:
+                                    this.client.window.getP4().doClick();
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
                         
                         this.client.window.setBitacoraText(res);
                         break;
@@ -157,7 +182,7 @@ public class ServerListener extends Thread {
                                     this.client.window.enemyBoard[bl.i][bl.j].setIcon(bl.getIcon());
                                 }
                             }
-                            this.client.window.enemyBoard[s.point.x][s.point.y].setIcon(new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/ship.png") {});
+                            this.client.window.enemyBoard[s.point.x][s.point.y].setIcon(new ImageIcon(getClass().getResource("/Images/ship.png")));
                         }
                         break;
                         
@@ -216,6 +241,10 @@ public class ServerListener extends Thread {
                                     this.client.ships+=1;
                                     this.client.window.getShipAmount().setText(Integer.toString(this.client.ships));
                                     break;
+                                case "acero":
+                                    this.client.acero+=1;
+                                    this.client.window.getAceroAmount().setText(Integer.toString(this.client.acero));
+                                    break;
                                 default:
                                     break;
                             }
@@ -252,6 +281,10 @@ public class ServerListener extends Thread {
                                 case "ship":
                                     this.client.ships-=1;
                                     this.client.window.getShipAmount().setText(Integer.toString(this.client.ships));
+                                    break;
+                                case "acero":
+                                    this.client.acero-=1;
+                                    this.client.window.getAceroAmount().setText(Integer.toString(this.client.acero));
                                     break;
                                 default:
                                     break;
@@ -291,6 +324,12 @@ public class ServerListener extends Thread {
                         BitacoraTextPackage BTP =(BitacoraTextPackage) paq;
                         this.client.window.setBitacoraText(BTP.text);
                         break;
+                        
+                    case "money":
+                        MoneyPackage MP = (MoneyPackage) paq;
+                        this.client.money+= MP.money;
+                        this.client.window.getMoney().setText(Integer.toString(this.client.money));
+                        break;
                 }
             }
         } catch (IOException | ClassNotFoundException ex) {
@@ -321,4 +360,62 @@ public class ServerListener extends Thread {
             }
         }
     }
+    
+    public ArrayList<Point> addPoints(Point p){
+        ArrayList<Point> points = new ArrayList<>();
+        points.add(new Point(p.x,p.y));
+        
+        if(p.x-1>=0&&p.y+1<20)
+            points.add(new Point(p.x-1,p.y+1));
+        if(p.y+1<20)
+            points.add(new Point(p.x,p.y+1));
+        if(p.x-1>=0&&p.y+1<20)
+            points.add(new Point(p.x-1,p.y+1));
+        if(p.x+1<20)
+            points.add(new Point(p.x+1,p.y));
+        if(p.x+1<20&&p.y-1>=0)
+            points.add(new Point(p.x+1,p.y-1));
+        if(p.y-1>=0)
+            points.add(new Point(p.x,p.y-1));
+        if(p.x-1>=0&&p.y-1>=0)
+            points.add(new Point(p.x-1,p.y-1));
+        if(p.x-1>=0)
+            points.add(new Point(p.x-1,p.y));
+        if(p.x+2<20)
+            points.add(new Point(p.x+2,p.y));
+        if(p.x+2<20&&p.y-1>=0)
+            points.add(new Point(p.x+2,p.y-1));
+        if(p.x+2<20&&p.y-2>=0)
+            points.add(new Point(p.x+2,p.y-2));
+        if(p.x+1<20&&p.y-2>=0)
+            points.add(new Point(p.x+1,p.y-2));
+        if(p.y-2>=0)
+            points.add(new Point(p.x,p.y-2));
+        if(p.x-1>=0&&p.y-2>=0)
+            points.add(new Point(p.x-1,p.y-2));
+        if(p.x-2>=0&&p.y-2>=0)
+            points.add(new Point(p.x-2,p.y-2));
+        if(p.x-2>=0&&p.y-1>=0)
+            points.add(new Point(p.x-2,p.y-1));
+        if(p.x-2>=0)
+            points.add(new Point(p.x-2,p.y));
+        if(p.x-2>=0&&p.y+1<20)
+            points.add(new Point(p.x-2,p.y+1));
+        if(p.x-2>=0&&p.y+2<20)
+            points.add(new Point(p.x-2,p.y+2));
+        if(p.x-1>=0&&p.y+2<20)
+            points.add(new Point(p.x-1,p.y));
+        if(p.y+2<20)
+            points.add(new Point(p.x,p.y+2));
+        if(p.x+1<20&&p.y+2<20)
+            points.add(new Point(p.x+1,p.y+2));
+        if(p.x+2<20&&p.y+2<20)
+            points.add(new Point(p.x+2,p.y+2));
+        if(p.x+2<20&&p.y+1<20)
+            points.add(new Point(p.x+2,p.y+1));
+        
+        
+        return points;
+    }
+    
 }

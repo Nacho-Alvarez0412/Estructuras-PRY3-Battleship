@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
 /**
  *
  * @author sebasgamboa
@@ -44,6 +45,11 @@ public class Server implements Serializable{
         controller.start();
         window.setVisible(true);
         window.getTextArea().append("Servidor activo, esperando clientes...\n");
+        /*try {
+            MainMusic();
+        } catch (IOException | UnsupportedAudioFileException | LineUnavailableException ex) {
+            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
     }
     
     public void addClient(ClientListener listener) {
@@ -91,6 +97,7 @@ public class Server implements Serializable{
         }
     }
     
+    
     public ArrayList<BoardLabel> getDiscoveries(Point p,int target){
         ArrayList<BoardLabel> labels=new ArrayList<>();
         switch (target) {
@@ -99,7 +106,7 @@ public class Server implements Serializable{
                     labels.add(this.game.LabelsP1[p.x-1][p.y+1]);
                 if(p.y+1<20)
                     labels.add(this.game.LabelsP1[p.x][p.y+1]);
-                if(p.x-1<20&&p.y+1<20)
+                if(p.x-1>=0&&p.y+1<20)
                     labels.add(this.game.LabelsP1[p.x+1][p.y+1]);
                 if(p.x+1<20)
                     labels.add(this.game.LabelsP1[p.x+1][p.y]);
@@ -111,6 +118,39 @@ public class Server implements Serializable{
                     labels.add(this.game.LabelsP1[p.x-1][p.y-1]);
                 if(p.x-1>=0)
                     labels.add(this.game.LabelsP1[p.x-1][p.y]);
+                if(p.x+2<20)
+                    labels.add(this.game.LabelsP1[p.x+2][p.y]);
+                if(p.x+2<20&&p.y-1>=0)
+                    labels.add(this.game.LabelsP1[p.x+2][p.y-1]);
+                if(p.x+2<20&&p.y-2>=0)
+                    labels.add(this.game.LabelsP1[p.x+2][p.y-2]);
+                if(p.x+1<20&&p.y-2>=0)
+                    labels.add(this.game.LabelsP1[p.x+1][p.y-2]);
+                if(p.y-2>=0)
+                    labels.add(this.game.LabelsP1[p.x][p.y-2]);
+                if(p.x-1>=0&&p.y-2>=0)
+                    labels.add(this.game.LabelsP1[p.x-1][p.y-2]);
+                if(p.x-2>=0&&p.y-2>=0)
+                    labels.add(this.game.LabelsP1[p.x-2][p.y-2]);
+                if(p.x-2>=0&&p.y-1>=0)
+                    labels.add(this.game.LabelsP1[p.x-2][p.y-1]);
+                if(p.x-2>=0)
+                    labels.add(this.game.LabelsP1[p.x-2][p.y]);
+                if(p.x-2>=0&&p.y+1<20)
+                    labels.add(this.game.LabelsP1[p.x-2][p.y+1]);
+                if(p.x-2>=0&&p.y+2<20)
+                    labels.add(this.game.LabelsP1[p.x-2][p.y+2]);
+                if(p.x-1>=0&&p.y+2<20)
+                    labels.add(this.game.LabelsP1[p.x-1][p.y+2]);
+                if(p.y+2<20)
+                    labels.add(this.game.LabelsP1[p.x][p.y+2]);
+                if(p.x+1<20&&p.y+2<20)
+                    labels.add(this.game.LabelsP1[p.x+1][p.y+2]);
+                if(p.x+2<20&&p.y+2<20)
+                    labels.add(this.game.LabelsP1[p.x+2][p.y+2]);
+                if(p.x+2<20&&p.y+1<20)
+                    labels.add(this.game.LabelsP1[p.x+2][p.y+1]);
+                
                 
                 break;
             case 2:
@@ -118,7 +158,7 @@ public class Server implements Serializable{
                     labels.add(this.game.LabelsP2[p.x-1][p.y+1]);
                 if(p.y+1<20)
                     labels.add(this.game.LabelsP2[p.x][p.y+1]);
-                if(p.x-1<20&&p.y+1<20)
+                if(p.x-1>=0&&p.y+1<20)
                     labels.add(this.game.LabelsP2[p.x+1][p.y+1]);
                 if(p.x+1<20)
                     labels.add(this.game.LabelsP2[p.x+1][p.y]);
@@ -130,6 +170,38 @@ public class Server implements Serializable{
                     labels.add(this.game.LabelsP2[p.x-1][p.y-1]);
                 if(p.x-1>=0)
                     labels.add(this.game.LabelsP2[p.x-1][p.y]);
+                if(p.x+2<20)
+                    labels.add(this.game.LabelsP2[p.x+2][p.y]);
+                if(p.x+2<20&&p.y-1>=0)
+                    labels.add(this.game.LabelsP2[p.x+2][p.y-1]);
+                if(p.x+2<20&&p.y-2>=0)
+                    labels.add(this.game.LabelsP2[p.x+2][p.y-2]);
+                if(p.x+1<20&&p.y-2>=0)
+                    labels.add(this.game.LabelsP2[p.x+1][p.y-2]);
+                if(p.y-2>=0)
+                    labels.add(this.game.LabelsP2[p.x][p.y-2]);
+                if(p.x-1>=0&&p.y-2>=0)
+                    labels.add(this.game.LabelsP2[p.x-1][p.y-2]);
+                if(p.x-2>=0&&p.y-2>=0)
+                    labels.add(this.game.LabelsP2[p.x-2][p.y-2]);
+                if(p.x-2>=0&&p.y-1>=0)
+                    labels.add(this.game.LabelsP2[p.x-2][p.y-1]);
+                if(p.x-2>=0)
+                    labels.add(this.game.LabelsP2[p.x-2][p.y]);
+                if(p.x-2>=0&&p.y+1<20)
+                    labels.add(this.game.LabelsP2[p.x-2][p.y+1]);
+                if(p.x-2>=0&&p.y+2<20)
+                    labels.add(this.game.LabelsP2[p.x-2][p.y+2]);
+                if(p.x-1>=0&&p.y+2<20)
+                    labels.add(this.game.LabelsP2[p.x-1][p.y+2]);
+                if(p.y+2<20)
+                    labels.add(this.game.LabelsP2[p.x][p.y+2]);
+                if(p.x+1<20&&p.y+2<20)
+                    labels.add(this.game.LabelsP2[p.x+1][p.y+2]);
+                if(p.x+2<20&&p.y+2<20)
+                    labels.add(this.game.LabelsP2[p.x+2][p.y+2]);
+                if(p.x+2<20&&p.y+1<20)
+                    labels.add(this.game.LabelsP2[p.x+2][p.y+1]);
                 
                 break;
                 
@@ -138,7 +210,7 @@ public class Server implements Serializable{
                     labels.add(this.game.LabelsP3[p.x-1][p.y+1]);
                 if(p.y+1<20)
                     labels.add(this.game.LabelsP3[p.x][p.y+1]);
-                if(p.x-1<20&&p.y+1<20)
+                if(p.x-1>=0&&p.y+1<20)
                     labels.add(this.game.LabelsP3[p.x+1][p.y+1]);
                 if(p.x+1<20)
                     labels.add(this.game.LabelsP3[p.x+1][p.y]);
@@ -150,6 +222,38 @@ public class Server implements Serializable{
                     labels.add(this.game.LabelsP3[p.x-1][p.y-1]);
                 if(p.x-1>=0)
                     labels.add(this.game.LabelsP3[p.x-1][p.y]);
+                if(p.x+2<20)
+                    labels.add(this.game.LabelsP3[p.x+2][p.y]);
+                if(p.x+2<20&&p.y-1>=0)
+                    labels.add(this.game.LabelsP3[p.x+2][p.y-1]);
+                if(p.x+2<20&&p.y-2>=0)
+                    labels.add(this.game.LabelsP3[p.x+2][p.y-2]);
+                if(p.x+1<20&&p.y-2>=0)
+                    labels.add(this.game.LabelsP3[p.x+1][p.y-2]);
+                if(p.y-2>=0)
+                    labels.add(this.game.LabelsP3[p.x][p.y-2]);
+                if(p.x-1>=0&&p.y-2>=0)
+                    labels.add(this.game.LabelsP3[p.x-1][p.y-2]);
+                if(p.x-2>=0&&p.y-2>=0)
+                    labels.add(this.game.LabelsP3[p.x-2][p.y-2]);
+                if(p.x-2>=0&&p.y-1>=0)
+                    labels.add(this.game.LabelsP3[p.x-2][p.y-1]);
+                if(p.x-2>=0)
+                    labels.add(this.game.LabelsP3[p.x-2][p.y]);
+                if(p.x-2>=0&&p.y+1<20)
+                    labels.add(this.game.LabelsP3[p.x-2][p.y+1]);
+                if(p.x-2>=0&&p.y+2<20)
+                    labels.add(this.game.LabelsP3[p.x-2][p.y+2]);
+                if(p.x-1>=0&&p.y+2<20)
+                    labels.add(this.game.LabelsP3[p.x-1][p.y+2]);
+                if(p.y+2<20)
+                    labels.add(this.game.LabelsP3[p.x][p.y+2]);
+                if(p.x+1<20&&p.y+2<20)
+                    labels.add(this.game.LabelsP3[p.x+1][p.y+2]);
+                if(p.x+2<20&&p.y+2<20)
+                    labels.add(this.game.LabelsP3[p.x+2][p.y+2]);
+                if(p.x+2<20&&p.y+1<20)
+                    labels.add(this.game.LabelsP3[p.x+2][p.y+1]);
                 
                 break;
             case 4:
@@ -157,7 +261,7 @@ public class Server implements Serializable{
                     labels.add(this.game.LabelsP4[p.x-1][p.y+1]);
                 if(p.y+1<20)
                     labels.add(this.game.LabelsP4[p.x][p.y+1]);
-                if(p.x-1<20&&p.y+1<20)
+                if(p.x-1>=0&&p.y+1<20)
                     labels.add(this.game.LabelsP4[p.x+1][p.y+1]);
                 if(p.x+1<20)
                     labels.add(this.game.LabelsP4[p.x+1][p.y]);
@@ -169,6 +273,38 @@ public class Server implements Serializable{
                     labels.add(this.game.LabelsP4[p.x-1][p.y-1]);
                 if(p.x-1>=0)
                     labels.add(this.game.LabelsP4[p.x-1][p.y]);
+                if(p.x+2<20)
+                    labels.add(this.game.LabelsP4[p.x+2][p.y]);
+                if(p.x+2<20&&p.y-1>=0)
+                    labels.add(this.game.LabelsP4[p.x+2][p.y-1]);
+                if(p.x+2<20&&p.y-2>=0)
+                    labels.add(this.game.LabelsP4[p.x+2][p.y-2]);
+                if(p.x+1<20&&p.y-2>=0)
+                    labels.add(this.game.LabelsP4[p.x+1][p.y-2]);
+                if(p.y-2>=0)
+                    labels.add(this.game.LabelsP4[p.x][p.y-2]);
+                if(p.x-1>=0&&p.y-2>=0)
+                    labels.add(this.game.LabelsP4[p.x-1][p.y-2]);
+                if(p.x-2>=0&&p.y-2>=0)
+                    labels.add(this.game.LabelsP4[p.x-2][p.y-2]);
+                if(p.x-2>=0&&p.y-1>=0)
+                    labels.add(this.game.LabelsP4[p.x-2][p.y-1]);
+                if(p.x-2>=0)
+                    labels.add(this.game.LabelsP4[p.x-2][p.y]);
+                if(p.x-2>=0&&p.y+1<20)
+                    labels.add(this.game.LabelsP4[p.x-2][p.y+1]);
+                if(p.x-2>=0&&p.y+2<20)
+                    labels.add(this.game.LabelsP4[p.x-2][p.y+2]);
+                if(p.x-1>=0&&p.y+2<20)
+                    labels.add(this.game.LabelsP4[p.x-1][p.y+2]);
+                if(p.y+2<20)
+                    labels.add(this.game.LabelsP4[p.x][p.y+2]);
+                if(p.x+1<20&&p.y+2<20)
+                    labels.add(this.game.LabelsP4[p.x+1][p.y+2]);
+                if(p.x+2<20&&p.y+2<20)
+                    labels.add(this.game.LabelsP4[p.x+2][p.y+2]);
+                if(p.x+2<20&&p.y+1<20)
+                    labels.add(this.game.LabelsP4[p.x+2][p.y+1]);
                 
                 break;
             default:

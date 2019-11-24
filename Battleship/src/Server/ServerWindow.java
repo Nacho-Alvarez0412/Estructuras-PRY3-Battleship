@@ -5,8 +5,16 @@
  */
 package Server;
 
-import Packages.TurnMesagePackage;
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JComboBox;
 import javax.swing.JTextArea;
 
@@ -123,10 +131,14 @@ public class ServerWindow extends javax.swing.JFrame implements Serializable{
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        try {
+            MainMusic(); 
+        } catch (IOException | UnsupportedAudioFileException | LineUnavailableException ex) {
+            Logger.getLogger(ServerWindow.class.getName()).log(Level.SEVERE, null, ex);
+        }
         Server.instancia().game.init(this.server.listeners);
         Server.instancia().game.start();
-        //int i=1;
-        //Server.instancia().enviarPaquete(new TurnMesagePackage(i));
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -173,6 +185,16 @@ public class ServerWindow extends javax.swing.JFrame implements Serializable{
     }
     
     
+    public void MainMusic() throws IOException, UnsupportedAudioFileException, LineUnavailableException{
+            
+        
+        AudioInputStream audioIn = null;  
+        audioIn = AudioSystem.getAudioInputStream(new File("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/BattleshipMusic.wav").toURI().toURL());
+
+        Clip clip = AudioSystem.getClip();
+        clip.open(audioIn);
+        clip.start();                                                                                                     
+    }
 
     
     

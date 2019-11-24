@@ -19,6 +19,7 @@ import Packages.DeadPackage;
 import Packages.GrafoPackage;
 import Packages.LabelsPackage;
 import Packages.LogicBoardPackage;
+import Packages.MoneyPackage;
 import java.net.*; 
 import java.io.*; 
 import Packages.Package;
@@ -190,6 +191,12 @@ public class ClientListener extends Thread
                     case "bitacora":
                         BitacoraTextPackage BTP =(BitacoraTextPackage) paq;
                         this.server.enviarPaquete(BTP);
+                        break;
+                        
+                    case "money":
+                        MoneyPackage MP = (MoneyPackage) paq;
+                        this.server.enviarPaqueteA(MP, MP.target-1);
+                        break;
 
                 }
             }

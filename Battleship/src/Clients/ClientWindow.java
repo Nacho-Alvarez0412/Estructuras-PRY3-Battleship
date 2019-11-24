@@ -27,10 +27,16 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
 import static java.lang.Thread.sleep;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -141,15 +147,35 @@ public class ClientWindow extends javax.swing.JFrame {
             public void mousePressed(MouseEvent e) {
                 if(clientOwner.window.torpedoState&&clientOwner.torpedos>0){
                     sendTorpedo(e);
+                    try {
+                        attackMusic(getClass().getResource("/Music/AirImpact.wav"));
+                    } catch (IOException | UnsupportedAudioFileException | LineUnavailableException ex) {
+                        Logger.getLogger(ClientWindow.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
                 else if(clientOwner.window.multiState&&clientOwner.multi>0){
                     sendMulti(e);
+                    try {
+                        attackMusic(getClass().getResource("/Music/AirImpact.wav"));
+                    } catch (IOException | UnsupportedAudioFileException | LineUnavailableException ex) {
+                        Logger.getLogger(ClientWindow.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
                 else if(clientOwner.window.bombState&&clientOwner.bombs>0){
                     sendBomb(e);
+                    try {
+                        attackMusic(getClass().getResource("/Music/AirImpact.wav"));
+                    } catch (IOException | UnsupportedAudioFileException | LineUnavailableException ex) {
+                        Logger.getLogger(ClientWindow.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
                 else if(clientOwner.window.trumpedoState&&clientOwner.trumpedos>0){
                     sendTrumpedo(e);
+                    try {
+                        attackMusic(getClass().getResource("/Music/AirImpact.wav"));
+                    } catch (IOException | UnsupportedAudioFileException | LineUnavailableException ex) {
+                        Logger.getLogger(ClientWindow.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
                 else if(clientOwner.window.shipState&&clientOwner.ships>0){
                     try {
@@ -168,8 +194,8 @@ public class ClientWindow extends javax.swing.JFrame {
         this.BoardField.setBackground(new Color(0, 0, 0, 0));
         this.BoardField.setOpaque(true);
         
-        ImageIcon tileIcon = new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/tile.png");
-        ImageIcon remIcon = new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/remolino.png");
+        ImageIcon tileIcon = new ImageIcon(getClass().getResource("/Images/tile.png"));
+        ImageIcon remIcon = new ImageIcon(getClass().getResource("/Images/remolino.png"));
         
         
  
@@ -226,33 +252,33 @@ public class ClientWindow extends javax.swing.JFrame {
         currentImage = (ImageIcon) label.getIcon();
 
         if(label.equals(armory2x1)){
-            currentImage2=new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/ArmoryIzquierda.png");
+            currentImage2=new ImageIcon(getClass().getResource("/Images/ArmoryIzquierda.png"));
         }
         else if(label.equals(mine2x1)){
-            currentImage2=new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/GoldmineIzquierda.jpg");
+            currentImage2=new ImageIcon(getClass().getResource("/Images/GoldmineIzquierda.jpg"));
         }
         else if(label.equals(temple2x1)){
-            currentImage2=new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/TempleIzquierda.png");
+            currentImage2=new ImageIcon(getClass().getResource("/Images/TempleIzquierda.png"));
         }
         else if(label.equals(mercado2x1)){
-            currentImage2=new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/MarketDerecha.jpg");
+            currentImage2=new ImageIcon(getClass().getResource("/Images/MarketDerecha.jpg"));
         }
         else if(label.equals(energysource2x2)){
-            currentImage2=new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/energy downL.jpeg");
-            currentImage3=new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/energy downR.jpeg");
-            currentImage4=new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/energy upR.jpeg");
+            currentImage2=new ImageIcon(getClass().getResource("/Images/energy downL.jpeg"));
+            currentImage3=new ImageIcon(getClass().getResource("/Images/energy downR.jpeg"));
+            currentImage4=new ImageIcon(getClass().getResource("/Images/energy upR.jpeg"));
         }
         else if(label.equals(mine1x2)){
-            currentImage2=new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/MineDown.jpeg");
+            currentImage2=new ImageIcon(getClass().getResource("/Images/MineDown.jpeg"));
         }
         else if(label.equals(temple1x2)){
-            currentImage2=new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/TempleDown.jpeg");
+            currentImage2=new ImageIcon(getClass().getResource("/Images/TempleDown.jpeg"));
         }
         else if(label.equals(mercado1x2)){
-            currentImage2=new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/MarketUp.jpeg");
+            currentImage2=new ImageIcon(getClass().getResource("/Images/MarketUp.jpeg"));
         }
         else if(label.equals(armory1x2)){
-            currentImage2=new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/Armorydown.jpeg");
+            currentImage2=new ImageIcon(getClass().getResource("/Images/Armorydown.jpeg"));
         }
         
         connectionStart = null;
@@ -783,6 +809,7 @@ public class ClientWindow extends javax.swing.JFrame {
         AceroAmount = new javax.swing.JLabel();
         Comodin = new javax.swing.JButton();
         trade = new javax.swing.JButton();
+        Sell = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -1173,6 +1200,13 @@ public class ClientWindow extends javax.swing.JFrame {
             }
         });
 
+        Sell.setText("Sell");
+        Sell.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SellActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
         panel.setLayout(panelLayout);
         panelLayout.setHorizontalGroup(
@@ -1201,17 +1235,20 @@ public class ClientWindow extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(Money)))
                                 .addGap(18, 18, 18)
-                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(panelLayout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(AceroAmount))
-                                    .addGroup(panelLayout.createSequentialGroup()
+                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
                                         .addComponent(jButton9)
                                         .addGap(18, 18, 18)
                                         .addComponent(Comodin, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(trade, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                        .addGap(18, 18, 18))
+                                    .addGroup(panelLayout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(AceroAmount)
+                                        .addGap(176, 176, 176)))
+                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(trade, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
+                                    .addComponent(Sell, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelLayout.createSequentialGroup()
                         .addGap(54, 54, 54)
@@ -1308,9 +1345,9 @@ public class ClientWindow extends javax.swing.JFrame {
                                 .addComponent(jButton9)
                                 .addComponent(Comodin))
                             .addComponent(trade))
-                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1318,10 +1355,9 @@ public class ClientWindow extends javax.swing.JFrame {
                                     .addComponent(P4)
                                     .addComponent(P2)
                                     .addComponent(P1)
-                                    .addComponent(EndTurn))
-                                .addGap(83, 83, 83))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
+                                    .addComponent(EndTurn)))
+                            .addGroup(panelLayout.createSequentialGroup()
+                                .addGap(12, 12, 12)
                                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel1)
                                     .addComponent(Money)
@@ -1333,11 +1369,10 @@ public class ClientWindow extends javax.swing.JFrame {
                                     .addGroup(panelLayout.createSequentialGroup()
                                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(MessageInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(72, 72, 72))))
-                    .addGroup(panelLayout.createSequentialGroup()
-                        .addComponent(Container, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                                        .addComponent(MessageInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(Sell)))
+                    .addComponent(Container, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         Container.getAccessibleContext().setAccessibleDescription("");
@@ -1391,7 +1426,7 @@ public class ClientWindow extends javax.swing.JFrame {
         this.enemyTarget=1;
         for(int i=0;i<20;i++){
             for(int j=0;j<20;j++){
-                this.enemyBoard[j][i].setIcon( new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/tile.png"));
+                this.enemyBoard[j][i].setIcon( new ImageIcon(getClass().getResource("/Images/tile.png")));
             }
         }
         
@@ -1443,7 +1478,7 @@ public class ClientWindow extends javax.swing.JFrame {
         }
         
         for(Point p:this.clientOwner.hitsP1){
-            this.enemyBoard[p.x][p.y].setIcon(new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/explosion2.png"));   
+            this.enemyBoard[p.x][p.y].setIcon(new ImageIcon(getClass().getResource("/Images/explosion2.png")));   
         }
         
         
@@ -1480,7 +1515,7 @@ public class ClientWindow extends javax.swing.JFrame {
         this.enemyTarget=2;
         for(int i=0;i<20;i++){
             for(int j=0;j<20;j++){
-                this.enemyBoard[j][i].setIcon( new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/tile.png"));
+                this.enemyBoard[j][i].setIcon( new ImageIcon(getClass().getResource("/Images/tile.png")));
             }
         }
         
@@ -1532,7 +1567,7 @@ public class ClientWindow extends javax.swing.JFrame {
         }
         
         for(Point p:this.clientOwner.hitsP2){
-            this.enemyBoard[p.x][p.y].setIcon(new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/explosion2.png"));
+            this.enemyBoard[p.x][p.y].setIcon(new ImageIcon(getClass().getResource("/Images/explosion2.png")));
         }
         
     }//GEN-LAST:event_P2ActionPerformed
@@ -1543,7 +1578,7 @@ public class ClientWindow extends javax.swing.JFrame {
         for(int i=0;i<20;i++){
             for(int j=0;j<20;j++){
                 
-                this.enemyBoard[j][i].setIcon( new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/tile.png"));
+                this.enemyBoard[j][i].setIcon( new ImageIcon(getClass().getResource("/Images/tile.png")));
             }
         }
         
@@ -1595,7 +1630,7 @@ public class ClientWindow extends javax.swing.JFrame {
         }
         
         for(Point p:this.clientOwner.hitsP3){
-            this.enemyBoard[p.x][p.y].setIcon(new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/explosion2.png"));
+            this.enemyBoard[p.x][p.y].setIcon(new ImageIcon(getClass().getResource("/Images/explosion2.png")));
         }
         
     }//GEN-LAST:event_P3ActionPerformed
@@ -1605,7 +1640,7 @@ public class ClientWindow extends javax.swing.JFrame {
         this.enemyTarget=4;
         for(int i=0;i<20;i++){
             for(int j=0;j<20;j++){
-                this.enemyBoard[j][i].setIcon( new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/tile.png"));
+                this.enemyBoard[j][i].setIcon( new ImageIcon(getClass().getResource("/Images/tile.png")));
             }
         }
         
@@ -1657,7 +1692,7 @@ public class ClientWindow extends javax.swing.JFrame {
         }
         
         for(Point p:this.clientOwner.hitsP4){
-            this.enemyBoard[p.x][p.y].setIcon(new ImageIcon("/Users/sebasgamboa/Documents/GitHub/Progra Estructuras/Battle Ship/Battleship/Battleship/src/Images/explosion2.png"));
+            this.enemyBoard[p.x][p.y].setIcon(new ImageIcon(getClass().getResource("/Images/explosion2.png")));
             //this.enemyBoard[p.x][p.y].repaint();
         }
         //this.EnemyBoard.repaint();
@@ -1793,14 +1828,90 @@ public class ClientWindow extends javax.swing.JFrame {
         int input = JOptionPane.showConfirmDialog(this, weapon+" for $"+price+" to Player "+x+"?");
         if(input==0){
             System.out.println("si");
-        }
-        TradeClass t=new TradeClass(weapon,Integer.parseInt(price),x,this.clientOwner.id);
-        try {
-            this.clientOwner.enviarPaquete(t);
-        } catch (IOException ex) {
-            Logger.getLogger(ClientWindow.class.getName()).log(Level.SEVERE, null, ex);
+            TradeClass t=new TradeClass(weapon,Integer.parseInt(price),x,this.clientOwner.id);
+            try {
+                this.clientOwner.enviarPaquete(t);
+            } catch (IOException ex) {
+                Logger.getLogger(ClientWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_tradeActionPerformed
+
+    private void SellActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SellActionPerformed
+        // TODO add your handling code here:
+        int price=0;
+        String weapon=JOptionPane.showInputDialog("What do you want to sell?");
+        if(null!=weapon)switch (weapon) {
+            case "torpedo":
+                price=100;
+                break;
+            case "multi":
+                price=250;
+                break;
+            case "bomb":
+                price=300;
+                break;
+            case "trumpedo":
+                price=500;
+                break;
+            case "ship":
+                price=400;
+                break;
+            case "acero":
+                String amount=JOptionPane.showInputDialog("How much steel do you want to sell?");
+                int am=Integer.parseInt(amount);
+                price=am;
+                break;
+            default:
+                break;
+        }
+        
+        int input = JOptionPane.showConfirmDialog(this, weapon+" for $"+price+"?");
+        if(input==0){
+            System.out.println("si");
+            if(null!=weapon)switch (weapon) {
+                case "torpedo":
+                    this.clientOwner.torpedos-=1;
+                    this.TorpedoAmount.setText(Integer.toString(this.clientOwner.torpedos));
+                    this.clientOwner.money+=price;
+                    this.getMoney().setText(Integer.toString(this.clientOwner.money));
+                    break;
+                case "multi":
+                    this.clientOwner.multi-=1;
+                    this.MultiAmount.setText(Integer.toString(this.clientOwner.multi));
+                    this.clientOwner.money+=price;
+                    this.getMoney().setText(Integer.toString(this.clientOwner.money));
+                    break;
+                case "bomb":
+                    this.clientOwner.bombs-=1;
+                    this.BombAmount.setText(Integer.toString(this.clientOwner.bombs));
+                    this.clientOwner.money+=price;
+                    this.getMoney().setText(Integer.toString(this.clientOwner.money));
+                    break;
+                case "trumpedo":
+                    this.clientOwner.trumpedos-=1;
+                    this.TrumpedoAmount.setText(Integer.toString(this.clientOwner.trumpedos));
+                    this.clientOwner.money+=price;
+                    this.getMoney().setText(Integer.toString(this.clientOwner.money));
+                    break;
+                case "ship":
+                    this.clientOwner.ships-=1;
+                    this.ShipAmount.setText(Integer.toString(this.clientOwner.ships));
+                    this.clientOwner.money+=price;
+                    this.getMoney().setText(Integer.toString(this.clientOwner.money));
+                    break;
+                case "acero":
+                    this.clientOwner.acero-=1;
+                    this.getAceroAmount().setText(Integer.toString(this.clientOwner.acero));
+                    this.clientOwner.money+=price;
+                    this.getMoney().setText(Integer.toString(this.clientOwner.money));
+                    break;
+                default:
+                    break;
+            }
+        }
+        
+    }//GEN-LAST:event_SellActionPerformed
 
     public JButton getEndTurn() {
         return EndTurn;
@@ -1894,7 +2005,15 @@ public class ClientWindow extends javax.swing.JFrame {
     }
     
     
-    
+    public void attackMusic(URL path) throws IOException, UnsupportedAudioFileException, LineUnavailableException{
+             
+        AudioInputStream audioIn = null;  
+        audioIn = AudioSystem.getAudioInputStream(path);
+
+        Clip clip = AudioSystem.getClip();
+        clip.open(audioIn);
+        clip.start();                                                                                                     
+    }
     
     
     private javax.swing.JPanel OceanPanel;
@@ -1923,6 +2042,7 @@ public class ClientWindow extends javax.swing.JFrame {
     private javax.swing.JButton P3;
     private javax.swing.JButton P4;
     private javax.swing.JButton ReadyButton;
+    private javax.swing.JButton Sell;
     private javax.swing.JLabel ShipAmount;
     private javax.swing.JLabel Temple;
     private javax.swing.JLabel TorpedoAmount;
