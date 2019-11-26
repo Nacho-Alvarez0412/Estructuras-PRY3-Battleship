@@ -763,6 +763,7 @@ public class ClientWindow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel28 = new javax.swing.JLabel();
         panel = new javax.swing.JPanel();
         MessageInput = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -805,24 +806,9 @@ public class ClientWindow extends javax.swing.JFrame {
         Money = new javax.swing.JLabel();
         ConnectionMode = new javax.swing.JToggleButton();
         EndTurn = new javax.swing.JButton();
-        TorpedoAttack = new javax.swing.JToggleButton();
-        jButton5 = new javax.swing.JButton();
-        TorpedoAmount = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         Bitacora = new javax.swing.JTextArea();
-        jToggleButton1 = new javax.swing.JToggleButton();
-        jButton6 = new javax.swing.JButton();
-        MultiAmount = new javax.swing.JLabel();
-        jToggleButton2 = new javax.swing.JToggleButton();
-        jButton7 = new javax.swing.JButton();
-        BombAmount = new javax.swing.JLabel();
-        jToggleButton3 = new javax.swing.JToggleButton();
-        jButton8 = new javax.swing.JButton();
-        TrumpedoAmount = new javax.swing.JLabel();
         jButton9 = new javax.swing.JButton();
-        jToggleButton4 = new javax.swing.JToggleButton();
-        jButton10 = new javax.swing.JButton();
-        ShipAmount = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         AceroAmount = new javax.swing.JLabel();
         Comodin = new javax.swing.JButton();
@@ -831,18 +817,57 @@ public class ClientWindow extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        Container1 = new javax.swing.JPanel();
+        TorpedoAttack = new javax.swing.JToggleButton();
+        jButton5 = new javax.swing.JButton();
+        jToggleButton1 = new javax.swing.JToggleButton();
+        jButton6 = new javax.swing.JButton();
+        jToggleButton2 = new javax.swing.JToggleButton();
+        jButton7 = new javax.swing.JButton();
+        jToggleButton3 = new javax.swing.JToggleButton();
+        jButton8 = new javax.swing.JButton();
+        TrumpedoAmount = new javax.swing.JLabel();
+        BombAmount = new javax.swing.JLabel();
+        MultiAmount = new javax.swing.JLabel();
+        TorpedoAmount = new javax.swing.JLabel();
+        jToggleButton4 = new javax.swing.JToggleButton();
+        jButton10 = new javax.swing.JButton();
+        ShipAmount = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
+        jLabel35 = new javax.swing.JLabel();
+        jLabel36 = new javax.swing.JLabel();
+        jLabel37 = new javax.swing.JLabel();
+        jLabel38 = new javax.swing.JLabel();
+        jLabel39 = new javax.swing.JLabel();
+        jLabel40 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+
+        jLabel28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MetallicPanel.jpg"))); // NOI18N
+        jLabel28.setText("jLabel23");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         panel.setBackground(new java.awt.Color(83, 83, 83));
         panel.setPreferredSize(new java.awt.Dimension(1400, 962));
+        panel.setLayout(null);
 
-        MessageInput.setBackground(new java.awt.Color(0, 35, 0));
+        MessageInput.setBackground(new java.awt.Color(63, 82, 50));
         MessageInput.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         MessageInput.setForeground(new java.awt.Color(255, 255, 255));
         MessageInput.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 4));
@@ -851,9 +876,11 @@ public class ClientWindow extends javax.swing.JFrame {
                 MessageInputActionPerformed(evt);
             }
         });
+        panel.add(MessageInput);
+        MessageInput.setBounds(192, 808, 368, 39);
 
         Messages.setEditable(false);
-        Messages.setBackground(new java.awt.Color(0, 35, 0));
+        Messages.setBackground(new java.awt.Color(63, 82, 50));
         Messages.setColumns(20);
         Messages.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         Messages.setForeground(new java.awt.Color(255, 255, 255));
@@ -861,7 +888,10 @@ public class ClientWindow extends javax.swing.JFrame {
         Messages.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 4));
         jScrollPane1.setViewportView(Messages);
 
-        Container.setBackground(new java.awt.Color(0, 35, 0));
+        panel.add(jScrollPane1);
+        jScrollPane1.setBounds(192, 733, 385, 69);
+
+        Container.setBackground(new java.awt.Color(63, 82, 50));
         Container.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 4));
 
         Connector.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/connector.png"))); // NOI18N
@@ -903,43 +933,43 @@ public class ClientWindow extends javax.swing.JFrame {
         mercado1x2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MarketDown.jpeg"))); // NOI18N
 
         jLabel11.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("1x1");
 
         jLabel12.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
         jLabel12.setText("4x4");
 
         jLabel13.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setForeground(new java.awt.Color(0, 0, 0));
         jLabel13.setText("2x1");
 
         jLabel14.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setForeground(new java.awt.Color(0, 0, 0));
         jLabel14.setText("1x2");
 
         jLabel15.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setForeground(new java.awt.Color(0, 0, 0));
         jLabel15.setText("2x1");
 
         jLabel16.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setForeground(new java.awt.Color(0, 0, 0));
         jLabel16.setText("1x2");
 
         jLabel17.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setForeground(new java.awt.Color(0, 0, 0));
         jLabel17.setText("2x1");
 
         jLabel18.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel18.setForeground(new java.awt.Color(0, 0, 0));
         jLabel18.setText("1x2");
 
         jLabel19.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel19.setForeground(new java.awt.Color(0, 0, 0));
         jLabel19.setText("2x1");
 
         jLabel20.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel20.setForeground(new java.awt.Color(0, 0, 0));
         jLabel20.setText("1x2");
 
         javax.swing.GroupLayout ContainerLayout = new javax.swing.GroupLayout(Container);
@@ -1025,7 +1055,7 @@ public class ClientWindow extends javax.swing.JFrame {
             ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ContainerLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(Connector, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Connector, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
                 .addGroup(ContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ContainerLayout.createSequentialGroup()
                         .addGap(38, 38, 38)
@@ -1071,30 +1101,45 @@ public class ClientWindow extends javax.swing.JFrame {
                     .addComponent(mercado2x1)
                     .addComponent(jLabel19)
                     .addComponent(jLabel20))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
-        BoardField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panel.add(Container);
+        Container.setBounds(6, 97, 168, 744);
+        Container.getAccessibleContext().setAccessibleDescription("");
+
+        BoardField.setBackground(new java.awt.Color(171, 227, 245));
+        BoardField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 4));
         BoardField.setPreferredSize(new java.awt.Dimension(500, 500));
 
         javax.swing.GroupLayout BoardFieldLayout = new javax.swing.GroupLayout(BoardField);
         BoardField.setLayout(BoardFieldLayout);
         BoardFieldLayout.setHorizontalGroup(
             BoardFieldLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 498, Short.MAX_VALUE)
+            .addGap(0, 492, Short.MAX_VALUE)
         );
         BoardFieldLayout.setVerticalGroup(
             BoardFieldLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 498, Short.MAX_VALUE)
+            .addGap(0, 492, Short.MAX_VALUE)
         );
 
-        ReadyButton.setText("READY");
+        panel.add(BoardField);
+        BoardField.setBounds(198, 153, 500, 500);
+
+        ReadyButton.setBackground(new java.awt.Color(34, 76, 34));
+        ReadyButton.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        ReadyButton.setForeground(new java.awt.Color(0, 0, 0));
+        ReadyButton.setText("Ready");
+        ReadyButton.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         ReadyButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ReadyButtonActionPerformed(evt);
             }
         });
+        panel.add(ReadyButton);
+        ReadyButton.setBounds(595, 742, 103, 60);
 
+        EnemyBoard.setBackground(new java.awt.Color(171, 227, 245));
         EnemyBoard.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 4));
         EnemyBoard.setPreferredSize(new java.awt.Dimension(500, 500));
 
@@ -1109,52 +1154,78 @@ public class ClientWindow extends javax.swing.JFrame {
             .addGap(0, 492, Short.MAX_VALUE)
         );
 
+        panel.add(EnemyBoard);
+        EnemyBoard.setBounds(736, 153, 500, 500);
+
+        P1.setBackground(new java.awt.Color(179, 82, 50));
         P1.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
-        P1.setForeground(new java.awt.Color(255, 255, 255));
+        P1.setForeground(new java.awt.Color(0, 0, 0));
         P1.setText("Player 1");
+        P1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         P1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 P1ActionPerformed(evt);
             }
         });
+        panel.add(P1);
+        P1.setBounds(720, 678, 107, 45);
 
+        P2.setBackground(new java.awt.Color(179, 82, 50));
         P2.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
-        P2.setForeground(new java.awt.Color(255, 255, 255));
+        P2.setForeground(new java.awt.Color(0, 0, 0));
         P2.setText("Player 2");
+        P2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         P2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 P2ActionPerformed(evt);
             }
         });
+        panel.add(P2);
+        P2.setBounds(845, 678, 119, 45);
 
+        P3.setBackground(new java.awt.Color(179, 82, 50));
         P3.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
-        P3.setForeground(new java.awt.Color(255, 255, 255));
+        P3.setForeground(new java.awt.Color(0, 0, 0));
         P3.setText("Player 3");
+        P3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         P3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 P3ActionPerformed(evt);
             }
         });
+        panel.add(P3);
+        P3.setBounds(976, 678, 123, 45);
 
+        P4.setBackground(new java.awt.Color(179, 82, 50));
         P4.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
-        P4.setForeground(new java.awt.Color(255, 255, 255));
+        P4.setForeground(new java.awt.Color(0, 0, 0));
         P4.setText("Player 4");
+        P4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         P4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 P4ActionPerformed(evt);
             }
         });
+        panel.add(P4);
+        P4.setBounds(1111, 678, 111, 45);
 
-        jLabel1.setFont(new java.awt.Font("Arial Black", 1, 22)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Money:");
+        panel.add(jLabel1);
+        jLabel1.setBounds(198, 121, 70, 26);
 
-        Money.setFont(new java.awt.Font("Arial Black", 1, 22)); // NOI18N
-        Money.setForeground(new java.awt.Color(255, 255, 255));
+        Money.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        Money.setForeground(new java.awt.Color(0, 0, 0));
         Money.setText("4000");
+        panel.add(Money);
+        Money.setBounds(274, 121, 48, 26);
 
+        ConnectionMode.setBackground(new java.awt.Color(34, 76, 34));
         ConnectionMode.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        ConnectionMode.setForeground(new java.awt.Color(0, 0, 0));
         ConnectionMode.setText("Connections");
+        ConnectionMode.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         ConnectionMode.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 ConnectionModeStateChanged(evt);
@@ -1165,39 +1236,24 @@ public class ClientWindow extends javax.swing.JFrame {
                 ConnectionModeActionPerformed(evt);
             }
         });
+        panel.add(ConnectionMode);
+        ConnectionMode.setBounds(192, 661, 127, 30);
 
+        EndTurn.setBackground(new java.awt.Color(179, 82, 50));
+        EndTurn.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        EndTurn.setForeground(new java.awt.Color(0, 0, 0));
         EndTurn.setText("End Turn");
+        EndTurn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         EndTurn.setDefaultCapable(false);
         EndTurn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 EndTurnActionPerformed(evt);
             }
         });
+        panel.add(EndTurn);
+        EndTurn.setBounds(1248, 743, 92, 60);
 
-        TorpedoAttack.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        TorpedoAttack.setForeground(new java.awt.Color(255, 255, 255));
-        TorpedoAttack.setText("Torpedo");
-        TorpedoAttack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TorpedoAttackActionPerformed(evt);
-            }
-        });
-
-        jButton5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(255, 255, 255));
-        jButton5.setText("buy");
-        jButton5.setToolTipText("Cost: 500 Kg");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-
-        TorpedoAmount.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        TorpedoAmount.setForeground(new java.awt.Color(255, 255, 255));
-        TorpedoAmount.setText("0");
-
-        Bitacora.setBackground(new java.awt.Color(0, 35, 0));
+        Bitacora.setBackground(new java.awt.Color(63, 82, 50));
         Bitacora.setColumns(20);
         Bitacora.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         Bitacora.setForeground(new java.awt.Color(255, 255, 255));
@@ -1205,65 +1261,194 @@ public class ClientWindow extends javax.swing.JFrame {
         Bitacora.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 4));
         jScrollPane2.setViewportView(Bitacora);
 
+        panel.add(jScrollPane2);
+        jScrollPane2.setBounds(720, 729, 516, 118);
+
+        jButton9.setBackground(new java.awt.Color(34, 76, 34));
+        jButton9.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        jButton9.setForeground(new java.awt.Color(0, 0, 0));
+        jButton9.setText("Whirpools");
+        jButton9.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+        panel.add(jButton9);
+        jButton9.setBounds(192, 697, 127, 30);
+
+        jLabel2.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("Steel:");
+        panel.add(jLabel2);
+        jLabel2.setBounds(334, 121, 57, 26);
+
+        AceroAmount.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        AceroAmount.setForeground(new java.awt.Color(0, 0, 0));
+        AceroAmount.setText("0");
+        panel.add(AceroAmount);
+        AceroAmount.setBounds(403, 121, 81, 26);
+
+        Comodin.setBackground(new java.awt.Color(34, 76, 34));
+        Comodin.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        Comodin.setForeground(new java.awt.Color(0, 0, 0));
+        Comodin.setText("Wildcard");
+        Comodin.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        Comodin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComodinActionPerformed(evt);
+            }
+        });
+        panel.add(Comodin);
+        Comodin.setBounds(325, 661, 135, 30);
+
+        trade.setBackground(new java.awt.Color(34, 76, 34));
+        trade.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        trade.setForeground(new java.awt.Color(0, 0, 0));
+        trade.setText("Trade");
+        trade.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        trade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tradeActionPerformed(evt);
+            }
+        });
+        panel.add(trade);
+        trade.setBounds(325, 697, 135, 30);
+
+        Sell.setBackground(new java.awt.Color(34, 76, 34));
+        Sell.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
+        Sell.setForeground(new java.awt.Color(0, 0, 0));
+        Sell.setText("Sell");
+        Sell.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        Sell.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SellActionPerformed(evt);
+            }
+        });
+        panel.add(Sell);
+        Sell.setBounds(466, 697, 125, 30);
+
+        jLabel3.setFont(new java.awt.Font("Arial Black", 1, 48)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Control Panel Logo.png"))); // NOI18N
+        panel.add(jLabel3);
+        jLabel3.setBounds(550, 20, 429, 80);
+
+        jLabel4.setFont(new java.awt.Font("Arial Black", 1, 36)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ArmoryLabel.png"))); // NOI18N
+        panel.add(jLabel4);
+        jLabel4.setBounds(1518, 18, 176, 84);
+
+        jLabel5.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Edifications.png"))); // NOI18N
+        panel.add(jLabel5);
+        jLabel5.setBounds(0, 46, 214, 45);
+
+        jLabel7.setFont(new java.awt.Font("Arial Black", 1, 22)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Your Radar.png"))); // NOI18N
+        panel.add(jLabel7);
+        jLabel7.setBounds(490, 104, 198, 43);
+
+        jLabel10.setFont(new java.awt.Font("Arial Black", 1, 22)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Enemy Radar.png"))); // NOI18N
+        panel.add(jLabel10);
+        jLabel10.setBounds(884, 107, 229, 40);
+
+        Container1.setBackground(new java.awt.Color(63, 82, 50));
+        Container1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 4));
+
+        TorpedoAttack.setBackground(new java.awt.Color(105, 105, 105));
+        TorpedoAttack.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        TorpedoAttack.setForeground(new java.awt.Color(0, 0, 0));
+        TorpedoAttack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Torpedo.png"))); // NOI18N
+        TorpedoAttack.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        TorpedoAttack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TorpedoAttackActionPerformed(evt);
+            }
+        });
+
+        jButton5.setBackground(new java.awt.Color(105, 105, 105));
+        jButton5.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jButton5.setForeground(new java.awt.Color(0, 0, 0));
+        jButton5.setText("Buy");
+        jButton5.setToolTipText("Cost: 500 Kg");
+        jButton5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        jToggleButton1.setBackground(new java.awt.Color(105, 105, 105));
         jToggleButton1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jToggleButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jToggleButton1.setText("Multi-shot");
+        jToggleButton1.setForeground(new java.awt.Color(0, 0, 0));
+        jToggleButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Multiple.png"))); // NOI18N
+        jToggleButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton1ActionPerformed(evt);
             }
         });
 
-        jButton6.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(255, 255, 255));
-        jButton6.setText("buy");
+        jButton6.setBackground(new java.awt.Color(105, 105, 105));
+        jButton6.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jButton6.setForeground(new java.awt.Color(0, 0, 0));
+        jButton6.setText("Buy");
         jButton6.setToolTipText("Cost: 1000 Kg");
+        jButton6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
             }
         });
 
-        MultiAmount.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        MultiAmount.setForeground(new java.awt.Color(255, 255, 255));
-        MultiAmount.setText("0");
-
+        jToggleButton2.setBackground(new java.awt.Color(105, 105, 105));
         jToggleButton2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jToggleButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jToggleButton2.setText("Bombs");
+        jToggleButton2.setForeground(new java.awt.Color(0, 0, 0));
+        jToggleButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Bomb.png"))); // NOI18N
+        jToggleButton2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton2ActionPerformed(evt);
             }
         });
 
-        jButton7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButton7.setForeground(new java.awt.Color(255, 255, 255));
-        jButton7.setText("buy");
+        jButton7.setBackground(new java.awt.Color(105, 105, 105));
+        jButton7.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jButton7.setForeground(new java.awt.Color(0, 0, 0));
+        jButton7.setText("Buy");
         jButton7.setToolTipText("Cost: 2000 Kg");
+        jButton7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
             }
         });
 
-        BombAmount.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        BombAmount.setForeground(new java.awt.Color(255, 255, 255));
-        BombAmount.setText("0");
-
+        jToggleButton3.setBackground(new java.awt.Color(105, 105, 105));
         jToggleButton3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jToggleButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jToggleButton3.setText("Trumpedo");
+        jToggleButton3.setForeground(new java.awt.Color(0, 0, 0));
+        jToggleButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Trumpedo.png"))); // NOI18N
+        jToggleButton3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jToggleButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton3ActionPerformed(evt);
             }
         });
 
-        jButton8.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButton8.setForeground(new java.awt.Color(255, 255, 255));
-        jButton8.setText("buy");
+        jButton8.setBackground(new java.awt.Color(105, 105, 105));
+        jButton8.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jButton8.setForeground(new java.awt.Color(0, 0, 0));
+        jButton8.setText("Buy");
         jButton8.setToolTipText("Cost: 5000 Kg");
+        jButton8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton8ActionPerformed(evt);
@@ -1271,30 +1456,38 @@ public class ClientWindow extends javax.swing.JFrame {
         });
 
         TrumpedoAmount.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        TrumpedoAmount.setForeground(new java.awt.Color(255, 255, 255));
+        TrumpedoAmount.setForeground(new java.awt.Color(0, 0, 0));
         TrumpedoAmount.setText("0");
 
-        jButton9.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        jButton9.setText("Whirpools");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
-            }
-        });
+        BombAmount.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        BombAmount.setForeground(new java.awt.Color(0, 0, 0));
+        BombAmount.setText("0");
 
+        MultiAmount.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        MultiAmount.setForeground(new java.awt.Color(0, 0, 0));
+        MultiAmount.setText("0");
+
+        TorpedoAmount.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        TorpedoAmount.setForeground(new java.awt.Color(0, 0, 0));
+        TorpedoAmount.setText("0");
+
+        jToggleButton4.setBackground(new java.awt.Color(105, 105, 105));
         jToggleButton4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jToggleButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jToggleButton4.setText("Ship");
+        jToggleButton4.setForeground(new java.awt.Color(0, 0, 0));
+        jToggleButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ShipDisplay.png"))); // NOI18N
+        jToggleButton4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jToggleButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton4ActionPerformed(evt);
             }
         });
 
-        jButton10.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButton10.setForeground(new java.awt.Color(255, 255, 255));
-        jButton10.setText("buy");
+        jButton10.setBackground(new java.awt.Color(105, 105, 105));
+        jButton10.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jButton10.setForeground(new java.awt.Color(0, 0, 0));
+        jButton10.setText("Buy");
         jButton10.setToolTipText("Cost: 2500 Kg");
+        jButton10.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton10ActionPerformed(evt);
@@ -1302,285 +1495,236 @@ public class ClientWindow extends javax.swing.JFrame {
         });
 
         ShipAmount.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        ShipAmount.setForeground(new java.awt.Color(255, 255, 255));
+        ShipAmount.setForeground(new java.awt.Color(0, 0, 0));
         ShipAmount.setText("0");
 
-        jLabel2.setFont(new java.awt.Font("Arial Black", 1, 22)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Steel:");
+        jLabel6.setFont(new java.awt.Font("Arial Black", 1, 16)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Multiple Shot");
 
-        AceroAmount.setFont(new java.awt.Font("Arial Black", 1, 22)); // NOI18N
-        AceroAmount.setForeground(new java.awt.Color(255, 255, 255));
-        AceroAmount.setText("0");
+        jLabel8.setFont(new java.awt.Font("Arial Black", 1, 16)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("Torpedo");
 
-        Comodin.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        Comodin.setText("Wildcard");
-        Comodin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ComodinActionPerformed(evt);
-            }
-        });
+        jLabel9.setFont(new java.awt.Font("Arial Black", 1, 16)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("Trumpedo");
 
-        trade.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        trade.setText("Trade");
-        trade.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tradeActionPerformed(evt);
-            }
-        });
+        jLabel21.setFont(new java.awt.Font("Arial Black", 1, 16)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel21.setText("Bomb");
 
-        Sell.setFont(new java.awt.Font("Arial Black", 1, 18)); // NOI18N
-        Sell.setText("Sell");
-        Sell.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SellActionPerformed(evt);
-            }
-        });
+        jLabel22.setFont(new java.awt.Font("Arial Black", 1, 16)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel22.setText("Ship");
 
-        jLabel3.setFont(new java.awt.Font("Arial Black", 1, 48)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("Control Room");
-
-        jLabel4.setFont(new java.awt.Font("Arial Black", 1, 36)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Armory");
-
-        jLabel5.setFont(new java.awt.Font("Arial Black", 1, 24)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Edifications");
-
-        jLabel6.setFont(new java.awt.Font("Arial Black", 1, 22)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Enemies");
-
-        jLabel7.setFont(new java.awt.Font("Arial Black", 1, 22)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Your Radar");
-
-        jLabel8.setFont(new java.awt.Font("Arial Black", 1, 22)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Quantity");
-
-        jLabel9.setFont(new java.awt.Font("Arial Black", 1, 22)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Type");
-
-        jLabel10.setFont(new java.awt.Font("Arial Black", 1, 22)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Enemy Radar");
-
-        javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
-        panel.setLayout(panelLayout);
-        panelLayout.setHorizontalGroup(
-            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelLayout.createSequentialGroup()
-                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(Container, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ReadyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(MessageInput, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(121, 121, 121)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+        javax.swing.GroupLayout Container1Layout = new javax.swing.GroupLayout(Container1);
+        Container1.setLayout(Container1Layout);
+        Container1Layout.setHorizontalGroup(
+            Container1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Container1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(Container1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Container1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel6)
+                        .addContainerGap(19, Short.MAX_VALUE))
+                    .addGroup(Container1Layout.createSequentialGroup()
+                        .addGroup(Container1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(Container1Layout.createSequentialGroup()
+                                .addGroup(Container1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(Container1Layout.createSequentialGroup()
+                                        .addGap(64, 64, 64)
+                                        .addComponent(jLabel22))
+                                    .addComponent(jToggleButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(EndTurn, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panelLayout.createSequentialGroup()
-                                .addGap(227, 227, 227)
-                                .addComponent(jLabel7)
-                                .addGap(367, 367, 367)
-                                .addComponent(jLabel10))))
-                    .addGroup(panelLayout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelLayout.createSequentialGroup()
-                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(panelLayout.createSequentialGroup()
-                                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(panelLayout.createSequentialGroup()
-                                                .addGap(24, 24, 24)
-                                                .addComponent(BoardField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(panelLayout.createSequentialGroup()
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(trade, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(38, 38, 38))
-                                    .addGroup(panelLayout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(ConnectionMode)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(Comodin, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(Sell, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jLabel6)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(panelLayout.createSequentialGroup()
-                                        .addComponent(EnemyBoard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(panelLayout.createSequentialGroup()
-                                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addGroup(panelLayout.createSequentialGroup()
-                                                        .addGap(6, 6, 6)
-                                                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                            .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                            .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                                .addGap(18, 18, 18)
-                                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(BombAmount)
-                                                    .addComponent(MultiAmount)))
-                                            .addComponent(jLabel4)
-                                            .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(panelLayout.createSequentialGroup()
-                                                .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(TrumpedoAmount))
-                                            .addGroup(panelLayout.createSequentialGroup()
-                                                .addComponent(jToggleButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(ShipAmount))
-                                            .addGroup(panelLayout.createSequentialGroup()
-                                                .addComponent(TorpedoAttack, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(TorpedoAmount))))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
-                                        .addComponent(P1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(P2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(P3, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(P4, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(562, 562, 562))
-                                    .addGroup(panelLayout.createSequentialGroup()
-                                        .addGap(504, 504, 504)
+                                .addComponent(ShipAmount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(Container1Layout.createSequentialGroup()
+                                .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(TrumpedoAmount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(Container1Layout.createSequentialGroup()
+                                .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(MultiAmount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(Container1Layout.createSequentialGroup()
+                                .addGroup(Container1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel21)
+                                    .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(BombAmount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(Container1Layout.createSequentialGroup()
+                                .addGap(53, 53, 53)
+                                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(Container1Layout.createSequentialGroup()
+                        .addGroup(Container1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(Container1Layout.createSequentialGroup()
+                                .addComponent(TorpedoAttack, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(24, 24, 24)
+                                .addComponent(TorpedoAmount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(Container1Layout.createSequentialGroup()
+                                .addGap(40, 40, 40)
+                                .addGroup(Container1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(6, 6, 6))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Container1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(Container1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Container1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(Container1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Container1Layout.createSequentialGroup()
                                         .addComponent(jLabel9)
-                                        .addGap(31, 31, 31)
-                                        .addComponent(jLabel8))))
-                            .addGroup(panelLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(Money)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(AceroAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(59, 59, 59)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                        .addGap(28, 28, 28))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Container1Layout.createSequentialGroup()
+                                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(39, 39, 39))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Container1Layout.createSequentialGroup()
+                                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(38, 38, 38))))))
         );
-        panelLayout.setVerticalGroup(
-            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelLayout.createSequentialGroup()
-                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelLayout.createSequentialGroup()
-                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel10)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
-                                .addGap(35, 35, 35)
-                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel9)
-                                    .addComponent(jLabel8))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelLayout.createSequentialGroup()
-                                .addComponent(BoardField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(ConnectionMode)
-                                    .addComponent(Comodin)
-                                    .addComponent(Sell))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(trade, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(6, 6, 6)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panelLayout.createSequentialGroup()
-                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
-                                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(TorpedoAttack)
-                                            .addComponent(TorpedoAmount))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(jToggleButton1)
-                                            .addComponent(MultiAmount))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(jToggleButton2)
-                                            .addComponent(BombAmount))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(jToggleButton3)
-                                            .addComponent(TrumpedoAmount))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(jToggleButton4)
-                                            .addComponent(ShipAmount))
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(132, 132, 132))
-                                    .addComponent(EnemyBoard, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(panelLayout.createSequentialGroup()
-                                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                            .addComponent(P1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(P2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(P3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(P4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(panelLayout.createSequentialGroup()
-                                        .addGap(42, 42, 42)
-                                        .addComponent(EndTurn, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                    .addGroup(panelLayout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel1)
-                            .addComponent(Money)
-                            .addComponent(jLabel2)
-                            .addComponent(AceroAmount))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Container, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(ReadyButton, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(MessageInput, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        Container1Layout.setVerticalGroup(
+            Container1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Container1Layout.createSequentialGroup()
+                .addContainerGap(16, Short.MAX_VALUE)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(Container1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(TorpedoAmount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(TorpedoAttack, javax.swing.GroupLayout.PREFERRED_SIZE, 35, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(Container1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(MultiAmount)
+                    .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(jLabel21)
+                .addGap(3, 3, 3)
+                .addGroup(Container1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(BombAmount)
+                    .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(Container1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(TrumpedoAmount)
+                    .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(jLabel22)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(Container1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(ShipAmount)
+                    .addComponent(jToggleButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21))
         );
 
-        Container.getAccessibleContext().setAccessibleDescription("");
+        panel.add(Container1);
+        Container1.setBounds(1240, 108, 176, 623);
+
+        jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MetallicPanel.jpg"))); // NOI18N
+        jLabel23.setText("jLabel23");
+        panel.add(jLabel23);
+        jLabel23.setBounds(0, 440, 200, 450);
+
+        jLabel25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MetallicPanel.jpg"))); // NOI18N
+        jLabel25.setText("jLabel23");
+        panel.add(jLabel25);
+        jLabel25.setBounds(-2, -4, 200, 450);
+
+        jLabel26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MetallicPanel.jpg"))); // NOI18N
+        jLabel26.setText("jLabel23");
+        panel.add(jLabel26);
+        jLabel26.setBounds(190, 0, 460, 150);
+
+        jLabel27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MetallicPanel.jpg"))); // NOI18N
+        jLabel27.setText("jLabel23");
+        panel.add(jLabel27);
+        jLabel27.setBounds(640, 0, 450, 150);
+
+        jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MetallicPanel.jpg"))); // NOI18N
+        jLabel29.setText("jLabel23");
+        panel.add(jLabel29);
+        jLabel29.setBounds(1240, 150, 640, 250);
+
+        jLabel30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MetallicPanel.jpg"))); // NOI18N
+        jLabel30.setText("jLabel23");
+        panel.add(jLabel30);
+        jLabel30.setBounds(700, 150, 40, 150);
+
+        jLabel31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MetallicPanel.jpg"))); // NOI18N
+        jLabel31.setText("jLabel23");
+        panel.add(jLabel31);
+        jLabel31.setBounds(700, 300, 40, 150);
+
+        jLabel32.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MetallicPanel.jpg"))); // NOI18N
+        jLabel32.setText("jLabel23");
+        panel.add(jLabel32);
+        jLabel32.setBounds(700, 450, 40, 150);
+
+        jLabel33.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MetallicPanel.jpg"))); // NOI18N
+        jLabel33.setText("jLabel23");
+        panel.add(jLabel33);
+        jLabel33.setBounds(190, 650, 60, 250);
+
+        jLabel34.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MetallicPanel.jpg"))); // NOI18N
+        jLabel34.setText("jLabel23");
+        panel.add(jLabel34);
+        jLabel34.setBounds(700, 750, 40, 150);
+
+        jLabel35.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MetallicPanel.jpg"))); // NOI18N
+        jLabel35.setText("jLabel23");
+        panel.add(jLabel35);
+        jLabel35.setBounds(250, 650, 450, 250);
+
+        jLabel36.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MetallicPanel.jpg"))); // NOI18N
+        jLabel36.setText("jLabel23");
+        panel.add(jLabel36);
+        jLabel36.setBounds(740, 650, 450, 250);
+
+        jLabel37.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MetallicPanel.jpg"))); // NOI18N
+        jLabel37.setText("jLabel23");
+        panel.add(jLabel37);
+        jLabel37.setBounds(1190, 650, 450, 250);
+
+        jLabel38.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MetallicPanel.jpg"))); // NOI18N
+        jLabel38.setText("jLabel23");
+        panel.add(jLabel38);
+        jLabel38.setBounds(1240, 400, 640, 250);
+
+        jLabel39.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MetallicPanel.jpg"))); // NOI18N
+        jLabel39.setText("jLabel23");
+        panel.add(jLabel39);
+        jLabel39.setBounds(700, 600, 40, 150);
+
+        jLabel40.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/ArmoryLabel.png"))); // NOI18N
+        jLabel40.setText("jLabel40");
+        panel.add(jLabel40);
+        jLabel40.setBounds(1230, 50, 200, 50);
+
+        jLabel24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/MetallicPanel.jpg"))); // NOI18N
+        jLabel24.setText("jLabel23");
+        panel.add(jLabel24);
+        jLabel24.setBounds(1090, 0, 450, 150);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -2232,6 +2376,7 @@ public class ClientWindow extends javax.swing.JFrame {
     private javax.swing.JToggleButton ConnectionMode;
     private javax.swing.JLabel Connector;
     private javax.swing.JPanel Container;
+    private javax.swing.JPanel Container1;
     private javax.swing.JButton EndTurn;
     private javax.swing.JPanel EnemyBoard;
     private javax.swing.JLabel EnergySource;
@@ -2275,8 +2420,28 @@ public class ClientWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
