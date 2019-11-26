@@ -37,7 +37,7 @@ public class ServerWindow extends javax.swing.JFrame implements Serializable{
         this.server=s;
         
     }
-    
+ 
     public int numberOfPlayers=4;
 
     /**

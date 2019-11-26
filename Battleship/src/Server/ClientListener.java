@@ -14,6 +14,7 @@ import Packages.AristasPackage;
 import Packages.AttackPackage;
 import Packages.AttackReceivedPackage;
 import Packages.BitacoraTextPackage;
+import Packages.ClearPackage;
 import Packages.ComodinPackage;
 import Packages.DeadPackage;
 import Packages.GrafoPackage;
@@ -196,6 +197,11 @@ public class ClientListener extends Thread
                     case "money":
                         MoneyPackage MP = (MoneyPackage) paq;
                         this.server.enviarPaqueteA(MP, MP.target-1);
+                        break;
+                        
+                    case "clear":
+                        ClearPackage CLP = (ClearPackage) paq;
+                        this.server.enviarPaquete(CLP);
                         break;
 
                 }

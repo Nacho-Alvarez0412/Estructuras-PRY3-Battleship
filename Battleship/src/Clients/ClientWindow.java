@@ -13,6 +13,7 @@ import Game.TempleThread;
 import Game.Vertice;
 import Packages.AttackPackage;
 import Packages.ChatPackage;
+import Packages.ClearPackage;
 import Packages.ComodinPackage;
 import Packages.GrafoPackage;
 import Packages.LabelsPackage;
@@ -193,10 +194,11 @@ public class ClientWindow extends javax.swing.JFrame {
                 else if(clientOwner.window.shipState&&clientOwner.ships>0){
                     try {
                         sendShip(e);
+                        attackMusic(getClass().getResource("/Music/radar.wav"));
                         TurnPackage paq=new TurnPackage(clientOwner.id);
                         clientOwner.enviarPaquete(paq);
                         EndTurn.setEnabled(false);
-                    } catch (IOException | InterruptedException ex) {
+                    } catch (IOException | InterruptedException | UnsupportedAudioFileException | LineUnavailableException ex) {
                         Logger.getLogger(ClientWindow.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
@@ -327,6 +329,11 @@ public class ClientWindow extends javax.swing.JFrame {
             
      
             connectionStart = null;
+            try {
+                attackMusic(getClass().getResource("/Music/connection.wav"));
+            } catch (IOException | UnsupportedAudioFileException | LineUnavailableException ex) {
+                Logger.getLogger(ClientWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
     
@@ -490,6 +497,12 @@ public class ClientWindow extends javax.swing.JFrame {
 
             }
             this.firstEnergy=false;
+            ClearPackage CP = new ClearPackage(this.clientOwner.id);
+            try {
+                this.clientOwner.enviarPaquete(CP);
+            } catch (IOException ex) {
+                Logger.getLogger(ClientWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         else if(currentImage.equals(connector1x1.getIcon())&&this.clientOwner.money>=100){
             
@@ -1860,7 +1873,9 @@ public class ClientWindow extends javax.swing.JFrame {
         if(this.clientOwner.canComodin){
             this.clientOwner.comodinOn=true;
             this.clientOwner.canComodin=false;
-            this.clientOwner.comodinNum=5;
+            Random randomNum=new Random();
+            int shield=randomNum.nextInt(3)+2;
+            this.clientOwner.comodinNum=shield;
             ComodinPackage paq=new ComodinPackage(this.clientOwner.id);
             try {
                 this.clientOwner.enviarPaquete(paq);

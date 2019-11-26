@@ -13,6 +13,7 @@ import Packages.AttackReceivedPackage;
 import Packages.BitacoraTextPackage;
 import Packages.Package;
 import Packages.ChatPackage;
+import Packages.ClearPackage;
 import Packages.DeadPackage;
 import Packages.GrafoPackage;
 import Packages.IDPackage;
@@ -329,6 +330,26 @@ public class ServerListener extends Thread {
                         MoneyPackage MP = (MoneyPackage) paq;
                         this.client.money+= MP.money;
                         this.client.window.getMoney().setText(Integer.toString(this.client.money));
+                        break;
+                        
+                    case "clear":
+                        ClearPackage CLP = (ClearPackage) paq;
+                        switch(CLP.origin){
+                            case 1:
+                                this.client.disconexosP1.clear();
+                                break;
+                            case 2:
+                                this.client.disconexosP2.clear();
+                                break;
+                            case 3:
+                                this.client.disconexosP3.clear();
+                                break;
+                            case 4:
+                                this.client.disconexosP4.clear();
+                                break;
+                            default:
+                                break;    
+                        }
                         break;
                 }
             }
