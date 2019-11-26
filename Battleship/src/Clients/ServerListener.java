@@ -111,7 +111,7 @@ public class ServerListener extends Thread {
                                             }
                                         }
                                         
-                                        if(this.client.window.board[p.x][p.y].verticeName.dato==1||this.client.window.board[p.x][p.y].verticeName.dato==6){
+                                        if(this.client.window.board[p.x][p.y].verticeName.dato==6){
                                             ArrayList<Vertice> v=new ArrayList<>();
                                             System.out.println("entre");
                                             for(Arista a:this.client.window.board[p.x][p.y].verticeName.aristas){
@@ -121,6 +121,22 @@ public class ServerListener extends Thread {
                                             AristasPackage arpaq = new AristasPackage(v,AR.origin,this.client.id);
                                             this.client.enviarPaquete(arpaq);
                                         }
+                                        else if(this.client.window.board[p.x][p.y].verticeName.dato==1){
+                                            ArrayList<Vertice> v=new ArrayList<>();
+                                            
+                                            for(Arista a:this.client.window.board[p.x][p.y].verticeName.aristas){
+                                                a.dato.connections-=1;
+                                                if(a.dato.connections==0){
+                                                    v.add(a.dato);
+                                                }
+                                            }
+                                            if(!v.isEmpty()){
+                                                AristasPackage arpaq = new AristasPackage(v,AR.origin,this.client.id);
+                                                this.client.enviarPaquete(arpaq);
+                                            }
+                                        }
+                                        
+                                       
                                     }
                                     GrafoPackage gr=new GrafoPackage(this.client.grafo,this.client.id);
                                     this.client.enviarPaquete(gr);

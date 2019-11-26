@@ -126,6 +126,7 @@ public class ClientWindow extends javax.swing.JFrame {
                     addConnector(e);
                 } else {
                     addNewUnit(e);
+                    
                 }
                 
             }
@@ -322,6 +323,7 @@ public class ClientWindow extends javax.swing.JFrame {
                 if(vertice==(connectionStart.verticeName)){
                     vertice.aristas.add(new Arista(clickedLabel.verticeName,connectionStart.i,
                     connectionStart.j,clickedLabel.i,clickedLabel.j));
+                    clickedLabel.verticeName.connections+=1;
                     this.BoardField.getParent().repaint();
                     break;
                 }
@@ -349,9 +351,15 @@ public class ClientWindow extends javax.swing.JFrame {
         int j = targetLabel.j;
         
         if(i+1==20) return;
-
+        
         if(currentImage.equals(armory2x1.getIcon())&&this.clientOwner.money>=1500){
             String Weapon=JOptionPane.showInputDialog("Enter a weapon to fabricate:");
+            
+            try {
+                attackMusic(getClass().getResource("/Music/construction.wav"));
+            } catch (IOException | UnsupportedAudioFileException | LineUnavailableException ex) {
+                Logger.getLogger(ClientWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
             System.out.println(Weapon);
             board[i+1][j].setIcon(currentImage2);
             targetLabel.setIcon(currentImage);
@@ -381,6 +389,12 @@ public class ClientWindow extends javax.swing.JFrame {
             this.clientOwner.window.Money.setText(Integer.toString(this.clientOwner.money));
         }
         else if(currentImage.equals(mine2x1.getIcon())&&this.clientOwner.money>=1000){
+            try {
+                attackMusic(getClass().getResource("/Music/construction.wav"));
+            } catch (IOException | UnsupportedAudioFileException | LineUnavailableException ex) {
+                Logger.getLogger(ClientWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
             board[i+1][j].setIcon(currentImage2);
             targetLabel.setIcon(currentImage);
             
@@ -409,6 +423,13 @@ public class ClientWindow extends javax.swing.JFrame {
             this.clientOwner.window.Money.setText(Integer.toString(this.clientOwner.money));
         }
         else if(currentImage.equals(temple2x1.getIcon())&&this.clientOwner.money>=2500){
+            
+            try {
+                attackMusic(getClass().getResource("/Music/construction.wav"));
+            } catch (IOException | UnsupportedAudioFileException | LineUnavailableException ex) {
+                Logger.getLogger(ClientWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
             board[i+1][j].setIcon(currentImage2);
             targetLabel.setIcon(currentImage);
             
@@ -438,6 +459,13 @@ public class ClientWindow extends javax.swing.JFrame {
 
         }
         else if(currentImage.equals(mercado2x1.getIcon())&&this.clientOwner.money>=2000){
+            
+            try {
+                attackMusic(getClass().getResource("/Music/construction.wav"));
+            } catch (IOException | UnsupportedAudioFileException | LineUnavailableException ex) {
+                Logger.getLogger(ClientWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
             board[i+1][j].setIcon(currentImage2);
             targetLabel.setIcon(currentImage);
             
@@ -462,6 +490,12 @@ public class ClientWindow extends javax.swing.JFrame {
             this.Sell.setEnabled(true);
         }
         else if(currentImage.equals(energysource2x2.getIcon())&&(this.clientOwner.money>=12000||this.firstEnergy)){
+            
+            try {
+                attackMusic(getClass().getResource("/Music/construction.wav"));
+            } catch (IOException | UnsupportedAudioFileException | LineUnavailableException ex) {
+                Logger.getLogger(ClientWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
             board[i][j+1].setIcon(currentImage2);
             board[i+1][j+1].setIcon(currentImage3);
@@ -506,6 +540,12 @@ public class ClientWindow extends javax.swing.JFrame {
         }
         else if(currentImage.equals(connector1x1.getIcon())&&this.clientOwner.money>=100){
             
+            try {
+                attackMusic(getClass().getResource("/Music/construction.wav"));
+            } catch (IOException | UnsupportedAudioFileException | LineUnavailableException ex) {
+                Logger.getLogger(ClientWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
             this.clientOwner.LogicBoard[i][j]=1;
             targetLabel.setIcon(currentImage);
             
@@ -522,6 +562,13 @@ public class ClientWindow extends javax.swing.JFrame {
 
         }else if(currentImage.equals(armory1x2.getIcon())&&this.clientOwner.money>=1500){
             String Weapon=JOptionPane.showInputDialog(this, "Enter a weapon to fabricate:");
+            
+            try {
+                attackMusic(getClass().getResource("/Music/construction.wav"));
+            } catch (IOException | UnsupportedAudioFileException | LineUnavailableException ex) {
+                Logger.getLogger(ClientWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
             System.out.println(Weapon);
             board[i][j+1].setIcon(currentImage2);
             targetLabel.setIcon(currentImage);
@@ -551,6 +598,13 @@ public class ClientWindow extends javax.swing.JFrame {
             this.clientOwner.window.Money.setText(Integer.toString(this.clientOwner.money));
         }
         else if(currentImage.equals(mine1x2.getIcon())&&this.clientOwner.money>=1000){
+            
+            try {
+                attackMusic(getClass().getResource("/Music/construction.wav"));
+            } catch (IOException | UnsupportedAudioFileException | LineUnavailableException ex) {
+                Logger.getLogger(ClientWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
             board[i][j+1].setIcon(currentImage2);
             targetLabel.setIcon(currentImage);
             
@@ -579,6 +633,13 @@ public class ClientWindow extends javax.swing.JFrame {
             this.clientOwner.window.Money.setText(Integer.toString(this.clientOwner.money));
         }
         else if(currentImage.equals(temple1x2.getIcon())&&this.clientOwner.money>=2500){
+            
+            try {
+                attackMusic(getClass().getResource("/Music/construction.wav"));
+            } catch (IOException | UnsupportedAudioFileException | LineUnavailableException ex) {
+                Logger.getLogger(ClientWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
             board[i][j+1].setIcon(currentImage2);
             targetLabel.setIcon(currentImage);
             
@@ -609,6 +670,12 @@ public class ClientWindow extends javax.swing.JFrame {
 
         }
         else if(currentImage.equals(mercado1x2.getIcon())&&this.clientOwner.money>=2000){
+            
+            try {
+                attackMusic(getClass().getResource("/Music/construction.wav"));
+            } catch (IOException | UnsupportedAudioFileException | LineUnavailableException ex) {
+                Logger.getLogger(ClientWindow.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
             board[i][j+1].setIcon(currentImage2);
             targetLabel.setIcon(currentImage);

@@ -31,6 +31,7 @@ public class Vertice implements Serializable{
     public ArrayList<Arista> aristas=new ArrayList<>();
     public boolean vivo=true;
     public int hits;
+    public int connections=0;
     
     
     public Vertice(int dato,ArrayList<Point> p,ArrayList<ImageIcon> II){
@@ -50,5 +51,6 @@ public class Vertice implements Serializable{
                 break;
         }
     }
+    
      
 }
