@@ -149,7 +149,7 @@ public class Game extends Thread implements Serializable{
                             if(!this.P1Comodin){
                                 this.LogicBoardPlayer1[p.x][p.y]=0;
                                 hitLanded=true;
-                                if(tipo=="multi"){
+                                if("multi".equals(tipo)){
                                     ArrayList<Point> points2=new ArrayList<>();
                                     for(int i=0;i<4;i++){
                                         Random randomGenerator = new Random();
@@ -191,7 +191,7 @@ public class Game extends Thread implements Serializable{
                             if(!this.P2Comodin){
                                 this.LogicBoardPlayer2[p.x][p.y]=0;
                                 hitLanded=true;
-                                if(tipo=="multi"){
+                                if("multi".equals(tipo)){
                                     ArrayList<Point> points2=new ArrayList<>();
                                     for(int i=0;i<4;i++){
                                         Random randomGenerator = new Random();
@@ -233,7 +233,7 @@ public class Game extends Thread implements Serializable{
                             if(!this.P3Comodin){
                                 this.LogicBoardPlayer3[p.x][p.y]=0;
                                 hitLanded=true;
-                                if(tipo=="multi"){
+                                if("multi".equals(tipo)){
                                     ArrayList<Point> points2=new ArrayList<>();
                                     for(int i=0;i<4;i++){
                                         Random randomGenerator = new Random();
@@ -275,7 +275,7 @@ public class Game extends Thread implements Serializable{
                             if(!this.P4Comodin){
                                 this.LogicBoardPlayer4[p.x][p.y]=0;
                                 hitLanded=true;
-                                if(tipo=="multi"){
+                                if("multi".equals(tipo)){
                                     ArrayList<Point> points2=new ArrayList<>();
                                     for(int i=0;i<4;i++){
                                         Random randomGenerator = new Random();

@@ -148,6 +148,7 @@ public class ServerListener extends Thread {
                                 }else if(this.client.comodinOn){
                                     this.client.comodinNum-=1;
                                     if(this.client.comodinNum==0){
+                                        JOptionPane.showMessageDialog(this.client.window, "Your shield has been destroyed!");
                                         this.client.window.resetComodin();
                                     }
                                     String res2="Atack in ("+p.x+","+p.y+") landed, but has shield on";
@@ -235,6 +236,7 @@ public class ServerListener extends Thread {
                         
                     case "trade":
                         TradeClass TC=(TradeClass) paq;
+                        boolean isSteel=false;
                         int input = JOptionPane.showConfirmDialog(this.client.window, TC.weapon+" for $"+TC.price+" from Player "+TC.origin+"?");
                         if(input==0){
                             if(null!=TC.weapon)switch (TC.weapon) {
@@ -259,8 +261,9 @@ public class ServerListener extends Thread {
                                     this.client.window.getShipAmount().setText(Integer.toString(this.client.ships));
                                     break;
                                 case "acero":
-                                    this.client.acero+=1;
+                                    this.client.acero+=TC.steel;
                                     this.client.window.getAceroAmount().setText(Integer.toString(this.client.acero));
+                                    isSteel=true;
                                     break;
                                 default:
                                     break;
@@ -268,6 +271,9 @@ public class ServerListener extends Thread {
                             this.client.money-=TC.price;
                             this.client.window.getMoney().setText(Integer.toString(this.client.money));
                             TradeAcceptPackage tap=new TradeAcceptPackage(TC.weapon,TC.price,TC.origin);
+                            if(isSteel){
+                                tap.steel+=TC.steel;
+                            }
                             this.client.enviarPaquete(tap);
                         }
                         break;
@@ -300,7 +306,7 @@ public class ServerListener extends Thread {
                                     this.client.window.getShipAmount().setText(Integer.toString(this.client.ships));
                                     break;
                                 case "acero":
-                                    this.client.acero-=1;
+                                    this.client.acero-=TA.steel;
                                     this.client.window.getAceroAmount().setText(Integer.toString(this.client.acero));
                                     break;
                                 default:

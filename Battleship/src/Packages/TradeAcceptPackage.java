@@ -13,6 +13,7 @@ public class TradeAcceptPackage extends Package{
     public String weapon;
     public int price;
     public int player;
+    public int steel;
     
     public TradeAcceptPackage(String w,int p,int pla){
         super("tradeAccept");

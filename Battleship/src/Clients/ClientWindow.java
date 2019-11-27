@@ -340,6 +340,7 @@ public class ClientWindow extends javax.swing.JFrame {
     }
     
     public boolean firstEnergy=true;
+    public boolean firstMarket=true;
     
     private void addNewUnit(MouseEvent e) {
         if(currentImage == null) return;
@@ -458,7 +459,7 @@ public class ClientWindow extends javax.swing.JFrame {
             this.clientOwner.window.Money.setText(Integer.toString(this.clientOwner.money));
 
         }
-        else if(currentImage.equals(mercado2x1.getIcon())&&this.clientOwner.money>=2000){
+        else if(currentImage.equals(mercado2x1.getIcon())&&(this.clientOwner.money>=2000||this.firstMarket)){
             
             try {
                 attackMusic(getClass().getResource("/Music/construction.wav"));
@@ -484,7 +485,12 @@ public class ClientWindow extends javax.swing.JFrame {
             board[i+1][j].verticeName=currentVertice;
             board[i][j].verticeName=currentVertice;
             
-            this.clientOwner.money-=2000;
+            if(!this.firstMarket){
+                this.clientOwner.money-=2000;
+                this.clientOwner.window.Money.setText(Integer.toString(this.clientOwner.money));
+            }
+            this.firstMarket=false;
+            
             this.clientOwner.window.Money.setText(Integer.toString(this.clientOwner.money));
             this.trade.setEnabled(true);
             this.Sell.setEnabled(true);
@@ -760,12 +766,12 @@ public class ClientWindow extends javax.swing.JFrame {
                             Point p2=new Point(bl.i-1,bl.j);
                             points.add(p2);
                         }   break;
-                    case 3:
+                    case 2:
                         if(bl.j+1<20){
                             Point p2=new Point(bl.i,bl.j+1);
                             points.add(p2);}
                         break;
-                    case 4:
+                    case 3:
                         if(bl.j-1>=0){
                             Point p2=new Point(bl.i,bl.j-1);
                             points.add(p2);
@@ -1825,30 +1831,32 @@ public class ClientWindow extends javax.swing.JFrame {
     private void SellActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SellActionPerformed
         // TODO add your handling code here:
         int price=0;
+        int steelAM=0;
         String weapon=JOptionPane.showInputDialog("What do you want to sell?");
         if(null!=weapon)switch (weapon) {
             case "torpedo":
-            price=100;
-            break;
+                price=100;
+                break;
             case "multi":
-            price=250;
-            break;
+                price=250;
+                break;
             case "bomb":
-            price=300;
-            break;
+                price=300;
+                break;
             case "trumpedo":
-            price=500;
-            break;
+                price=500;
+                break;
             case "ship":
-            price=400;
-            break;
+                price=400;
+                break;
             case "acero":
-            String amount=JOptionPane.showInputDialog("How much steel do you want to sell?");
-            int am=Integer.parseInt(amount);
-            price=am;
-            break;
+                String amount=JOptionPane.showInputDialog("How much steel do you want to sell?");
+                int am=Integer.parseInt(amount);
+                price=am;
+                steelAM=am;
+                break;
             default:
-            break;
+                break;
         }
 
         int input = JOptionPane.showConfirmDialog(this, weapon+" for $"+price+"?");
@@ -1886,7 +1894,7 @@ public class ClientWindow extends javax.swing.JFrame {
                 this.getMoney().setText(Integer.toString(this.clientOwner.money));
                 break;
                 case "acero":
-                this.clientOwner.acero-=1;
+                this.clientOwner.acero-=steelAM;
                 this.getAceroAmount().setText(Integer.toString(this.clientOwner.acero));
                 this.clientOwner.money+=price;
                 this.getMoney().setText(Integer.toString(this.clientOwner.money));
@@ -1921,12 +1929,22 @@ public class ClientWindow extends javax.swing.JFrame {
             break;
         }
         System.out.println(x);
+        int steel=0;
+        boolean isSteel=false;
         String weapon=JOptionPane.showInputDialog("What do you want to sell?");
+        if("acero".equals(weapon)){
+            String in=JOptionPane.showInputDialog("How much steel do you want to sell?");
+            steel=Integer.parseInt(in);
+            isSteel=true;
+        }
         String price=JOptionPane.showInputDialog("How much do you want for this?");
         int input = JOptionPane.showConfirmDialog(this, weapon+" for $"+price+" to Player "+x+"?");
         if(input==0){
             System.out.println("si");
             TradeClass t=new TradeClass(weapon,Integer.parseInt(price),x,this.clientOwner.id);
+            if(isSteel){
+                t.steel+=steel;
+            }
             try {
                 this.clientOwner.enviarPaquete(t);
             } catch (IOException ex) {
@@ -1943,6 +1961,8 @@ public class ClientWindow extends javax.swing.JFrame {
             Random randomNum=new Random();
             int shield=randomNum.nextInt(3)+2;
             this.clientOwner.comodinNum=shield;
+            String message="You have a shield for "+ shield+" turns!";
+            JOptionPane.showMessageDialog(this, message);
             ComodinPackage paq=new ComodinPackage(this.clientOwner.id);
             try {
                 this.clientOwner.enviarPaquete(paq);

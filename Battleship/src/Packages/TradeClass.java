@@ -14,6 +14,7 @@ public class TradeClass extends Package{
     public int price;
     public int player;
     public int origin;
+    public int steel;
     
     public TradeClass(String w,int p,int pla,int o){
         super("trade");
@@ -22,4 +23,5 @@ public class TradeClass extends Package{
         this.player=pla;
         this.origin=o;
     }
+    
 }
