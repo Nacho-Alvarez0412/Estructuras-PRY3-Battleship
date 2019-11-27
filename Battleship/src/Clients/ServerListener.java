@@ -87,7 +87,9 @@ public class ServerListener extends Thread {
                                     
                                     this.client.enviarPaquete(BTP);
                                     AR.hitLanded=true;
-                                    hitsPackage paq2=new hitsPackage(AR.attacks,AR.target,AR.origin);
+                                    ArrayList<Point> onlyHit=new ArrayList<>();
+                                    onlyHit.add(p);
+                                    hitsPackage paq2=new hitsPackage(onlyHit,AR.target,AR.origin);
                                     this.client.enviarPaquete(paq2);
                                     this.client.window.board[p.x][p.y].verticeName.hits-=1;
                                     if(this.client.window.board[p.x][p.y].verticeName.hits==0){
@@ -144,6 +146,7 @@ public class ServerListener extends Thread {
                                         this.client.UsusarioVivo=false;
                                         DeadPackage dead=new DeadPackage(this.client.id);
                                         client.enviarPaquete(dead);
+                                        JOptionPane.showMessageDialog(this.client.window, "You have died!");
                                     }
                                 }else if(this.client.comodinOn){
                                     this.client.comodinNum-=1;
